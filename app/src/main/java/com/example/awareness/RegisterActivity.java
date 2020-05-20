@@ -36,8 +36,8 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText editTextName, editTextEmail, editTextMobile,
-            editTextyear, editTextdu,editTextPass,editTextRoom;
-    private AutoCompleteTextView editTextHostel,editTextBranch;
+            editTextyear, editTextdu,editTextPass,editTextRoom,editTextBranch;
+    private AutoCompleteTextView editTextHostel;
     private Spinner editTextMess;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Register");
@@ -66,12 +66,18 @@ public class RegisterActivity extends AppCompatActivity {
         String[] clg_branches = getResources().getStringArray(R.array.branches);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, clg_branches);
         editTextBranch = findViewById(R.id.input_department);
-        editTextBranch.setThreshold(1);
-        editTextBranch.setAdapter(adapter);
+
 
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("Mess");
+        final ArrayAdapter<String> autoComplete = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item);
+        autoComplete.add("SC");
+        autoComplete.add("ST");
+        autoComplete.add("General");
+        autoComplete.add("OBC");
+        autoComplete.add("Minority");
+        autoComplete.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
+        editTextMess.setAdapter(autoComplete);
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
