@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Awareness</string>
+
+    <string-array name="branches">
+        <item>Electrical</item>
+        <item>Electronics</item>
+        <item>Computer Science</item>
+        <item>Civil</item>"
+    </string-array>
+</resources>
