@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <LinearLayout
         android:orientation="vertical"
