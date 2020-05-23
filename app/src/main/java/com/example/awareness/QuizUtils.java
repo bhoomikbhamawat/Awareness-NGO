@@ -1,22 +1,21 @@
 package com.example.awareness;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.awareness.Question;
-import com.example.awareness.R;
 import com.example.awareness.ui.learningactivity.LearningActivity;
-import com.example.awareness.ui.learningactivity.LearningAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,14 +44,18 @@ public class QuizUtils {
     private static int questionPosition;
     private static List<Question> questions = new ArrayList<>();
     @SuppressLint("StaticFieldLeak")
-    private static TextView questionNumber,question;
+    private static TextView questionNumber, question;
     @SuppressLint("StaticFieldLeak")
-    private static RadioButton option1,option2,option3,option4;
+    private static RadioButton option1, option2, option3, option4;
     @SuppressLint("StaticFieldLeak")
-    private static Button checkNext;
+    private static Button checkNext,previous;
     @SuppressLint("StaticFieldLeak")
     private static RadioGroup radioGroup;
-    private static boolean nextQuestion = false;
+    @SuppressLint("StaticFieldLeak")
+    private static ProgressBar progressBar;
+    @SuppressLint("StaticFieldLeak")
+    private static LinearLayout mainContent;
+    private static boolean done = false;
 
     public static void createQuiz(final int moduleNumber) {
 
@@ -63,7 +66,12 @@ public class QuizUtils {
         option3 = quizBottomSheet.findViewById(R.id.option3);
         option4 = quizBottomSheet.findViewById(R.id.option4);
         checkNext = quizBottomSheet.findViewById(R.id.check_next);
+        previous = quizBottomSheet.findViewById(R.id.previous);
         radioGroup = quizBottomSheet.findViewById(R.id.radio_group);
+        progressBar = quizBottomSheet.findViewById(R.id.progress_circle);
+        mainContent = quizBottomSheet.findViewById(R.id.main_content);
+        mainContent.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         radioGroup.clearCheck();
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -85,14 +93,16 @@ public class QuizUtils {
                     }
                     Collections.sort(questions, new SortbyQuestionNumber());
 
-                    if(moduleNumber == Constants.User.accessModule ) {
-                        questionPosition = Constants.User.accessQuestion - 1;
-                    }else{
+                    if (moduleNumber == Constants.User.accessModule) {
+                        questionPosition = accessQuestion - 1;
+                    } else {
                         questionPosition = 0;
                     }
 
                     if (questionPosition < questions.size()) {
                         setQuestion(questionPosition);
+                        progressBar.setVisibility(View.GONE);
+                        mainContent.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -101,44 +111,68 @@ public class QuizUtils {
         checkNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nextQuestion) {
-
-                    radioGroup.clearCheck();
-                    questionPosition++;
-                    setQuestion(questionPosition);
-                    nextQuestion = false;
+                if (done) {
                     checkNext.setText("Submit");
-                } else if (checkNext.getText().toString().equals("Next Module")) {
-                    quizBottomSheetDialog.cancel();
+                    done = false;
+                    quizBottomSheetDialog.dismiss();
                 } else {
+                    Handler handler = new Handler();
+
                     if (isCorrect(questions.get(questionPosition).getAnswer())) {
 
-                        // Todo: UI after true
-                        if (questionPosition + 1 == questions.size()) {
-                            nextQuestion = false;
-                            accessModule ++;
-                            progressLink = false;
-                            progressPdf = false;
-                            accessQuestion = 1;
-                            updateProgress();
-                            LearningActivity.learningAdapter.notifyDataSetChanged();
-                            checkNext.setText("Next Module");
+                        final RadioButton correctAnswer = quizBottomSheet.findViewById(radioGroup.getCheckedRadioButtonId());
+                        correctAnswer.setBackgroundColor(Color.GREEN);
+
+                        if (questionPosition == questions.size() - 1) {
+
+                            if (moduleNumber == accessModule) {
+                                accessModule++;
+                                progressLink = false;
+                                progressPdf = false;
+                                accessQuestion = 1;
+                                updateProgress();
+                                LearningActivity.learningAdapter.notifyDataSetChanged();
+                            }
+
+                            done = true;
+                            checkNext.setText("Done");
                         } else {
-                            nextQuestion = true;
-                            accessQuestion++;
-                            updateProgress();
-                            checkNext.setText("Next");
+                            if (moduleNumber == accessModule) {
+                                accessQuestion++;
+                                updateProgress();
+                            }
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    questionPosition++;
+                                    setQuestion(questionPosition);
+                                }
+                            }, 500);
                         }
                     } else {
-                        nextQuestion = false;
-                        // Todo: UI after false
-                        radioGroup.clearCheck();
+                        if (radioGroup.getCheckedRadioButtonId() != -1) {
+                            final RadioButton incorrectAnswer = quizBottomSheet.findViewById(radioGroup.getCheckedRadioButtonId());
+                            incorrectAnswer.setBackgroundColor(Color.RED);
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    radioGroup.clearCheck();
+                                    incorrectAnswer.setBackgroundColor(Color.TRANSPARENT);
+                                }
+                            }, 500);
+                        }
                     }
-
                 }
             }
         });
 
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questionPosition--;
+                setQuestion(questionPosition);
+            }
+        });
     }
 
     private static boolean isCorrect(int answer) {
@@ -149,24 +183,34 @@ public class QuizUtils {
     }
 
     private static void setQuestion(int questionPosition) {
+        if(questionPosition == 0){
+            previous.setVisibility(View.INVISIBLE);
+        }else {
+            previous.setVisibility(View.VISIBLE);
+        }
         questionNumber.setText(questions.get(questionPosition).getQuestionNumber() + "/" + questions.size());
+        radioGroup.clearCheck();
 
         question.setText(questions.get(questionPosition).getQuestion());
         option1.setText(questions.get(questionPosition).getOption1());
+        option1.setBackgroundColor(Color.TRANSPARENT);
         option2.setText(questions.get(questionPosition).getOption2());
+        option2.setBackgroundColor(Color.TRANSPARENT);
         option3.setText(questions.get(questionPosition).getOption3());
+        option3.setBackgroundColor(Color.TRANSPARENT);
         option4.setText(questions.get(questionPosition).getOption4());
+        option4.setBackgroundColor(Color.TRANSPARENT);
     }
 
-    private static void updateProgress(){
+    private static void updateProgress() {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         // Todo: userID?
         String userID = "0123456789";
-        Map<String,Object> newProgress = new HashMap<>();
-        newProgress.put(ACCESS_MODULE,accessModule);
-        newProgress.put(PROGRESS_LINK,progressLink);
-        newProgress.put(PROGRESS_PDF,progressPdf);
-        newProgress.put(ACCESS_QUESTION,accessQuestion);
+        Map<String, Object> newProgress = new HashMap<>();
+        newProgress.put(ACCESS_MODULE, accessModule);
+        newProgress.put(PROGRESS_LINK, progressLink);
+        newProgress.put(PROGRESS_PDF, progressPdf);
+        newProgress.put(ACCESS_QUESTION, accessQuestion);
 
         firestore.collection("users").document(userID).update(newProgress);
     }
@@ -177,5 +221,4 @@ public class QuizUtils {
             return a.getQuestionNumber() - b.getQuestionNumber();
         }
     }
-
 }
