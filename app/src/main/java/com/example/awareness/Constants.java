@@ -8,6 +8,8 @@ public class Constants {
     public static final String isactive = "isactiveKey";
     public static final String PREF_NAME = "LoggedInPref";
     public static String name_all = "nameKey";
+
+
     public  static final String KEY_ACTION = "action";
     public static final String APP_SCRIPT_WEB_APP_URL =   "https://script.google.com/macros/s/AKfycbx8CDXxPYSGA7lEokuAyzdMIoSih6hLrDoykl7M00frHGVyBxQ/exec";
     // public static final String APP_SCRIPT_WEB_APP_URL =   "https://script.google.com/macros/s/AKfycbxOJ_pvdpMzI8AbD8EYBSUIxr1FcZKhjbbHflPPxtBGIKUyvt2P/exec";
@@ -25,4 +27,14 @@ public class Constants {
     public static final String KEY_GramPanchayat = "uGramPanchayat";
     public static final String KEY_Samiti= "uSamiti";
 
-}
+  public static class User {
+        public static final String ACCESS_MODULE = "access_module";
+        public static final String ACCESS_QUESTION = "access_question";
+        public static final String PROGRESS_LINK = "progress_Link";
+        public static final String PROGRESS_PDF = "progress_Pdf";
+
+        public static int accessModule;
+        public static int accessQuestion;
+        public static boolean progressLink;
+        public static boolean progressPdf;
+    }}
