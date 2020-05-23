@@ -27,4 +27,12 @@ public class Dashboard extends AppCompatActivity {
     public void learningSection(View view) {
         startActivity(new Intent(this, LearningActivity.class));
     }
+
+    public void Formstudents(View view) {
+        startActivity(new Intent(this, LearningActivity.class));
+    }
+
+    public void FormKit(View view) {
+        startActivity(new Intent(this, FormKit.class));
+    }
 }
