@@ -35,12 +35,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Department"/>
-        <AutoCompleteTextView
+            android:text="Gender"/>
+        <EditText
             android:id="@+id/input_department"
             android:layout_width="match_parent"
             android:ems="10"
-            android:hint="Department"
+            android:hint="Gender"
+            android:inputType="text"
             android:layout_height="wrap_content"/>
 
 
@@ -49,14 +50,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:text="Insitute Roll No." />
+            android:text="Age" />
 
         <EditText
             android:id="@+id/input_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Roll No."
+            android:hint="Age"
             android:inputType="number" />
 
         <TextView
@@ -64,14 +65,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:text="MESS" />
+            android:text="Caste" />
 
         <Spinner
             android:id="@+id/input_mess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Mess"
+            android:hint="Caste"
             />
 
         <TextView
@@ -79,12 +80,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Room"/>
+            android:text="Hemlet"/>
         <EditText android:id="@+id/input_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Room" />
+            android:hint="Hemlet" />
 
         <TextView
             android:layout_width="match_parent"
