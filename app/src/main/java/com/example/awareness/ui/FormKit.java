@@ -1,5 +1,6 @@
 package com.example.awareness.ui;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,6 +56,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.awareness.Constants;
 import com.example.awareness.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
@@ -104,14 +106,15 @@ public class FormKit extends AppCompatActivity {
     int mYear, mMonth, mDay, mHour, mMinute;
     //private EditText subjectEditBox;
     //private EditText issueBox;
-    private LinearLayout hiddenPanel;
+//    private LinearLayout hiddenPanel;
     ConstraintLayout layout_formkit;
     String mDateTime = "";
     TextView dateTime;
-    LinearLayout setDateTime;
-    private Animation bottomUp,bottomDown;
+//    private Animation bottomUp,bottomDown;
     private TextView removeImage;
     private ArrayList<String> UserImage;
+    View uploadImageLayout;
+    BottomSheetDialog uploadImageDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +133,6 @@ public class FormKit extends AppCompatActivity {
         //anonymousCheckbox = findViewById(R.id.anonymous_checkbox);
         removeImage = findViewById(R.id.remove_image);
         dateTime = findViewById(R.id.event_date_time);
-        setDateTime = findViewById(R.id.set_date_time);
         final Spinner categorySpinner = findViewById(R.id.category_spinner);
         final Spinner SamitiSpinner = findViewById(R.id.Samiti_spinner);
         //ImageButton anonymousHelp = (ImageButton) findViewById(R.id.anonymous_help);
@@ -138,21 +140,25 @@ public class FormKit extends AppCompatActivity {
         Name_kp = findViewById(R.id.name_kp);
         //complaineeEmailaddress = view.findViewById(R.id.complainee_emailaddress);
 
-        bottomUp = AnimationUtils.loadAnimation(FormKit.this,
-                R.anim.bottom_up);
-        bottomDown = AnimationUtils.loadAnimation(FormKit.this,R.anim.bottom_down);
-        hiddenPanel = (LinearLayout)findViewById(R.id.upload_image);
-        View outsideCard = hiddenPanel.findViewById(R.id.outside_card);
+//        bottomUp = AnimationUtils.loadAnimation(FormKit.this,
+//                R.anim.bottom_up);
+//        bottomDown = AnimationUtils.loadAnimation(FormKit.this,R.anim.bottom_down);
+//        hiddenPanel = (LinearLayout)findViewById(R.id.upload_image);
+
+        uploadImageLayout = getLayoutInflater().inflate(R.layout.uploadimage_dialog_layout,null,false);
+        uploadImageDialog = new BottomSheetDialog(this);
+        uploadImageDialog.setContentView(uploadImageLayout);
+//        View outsideCard = hiddenPanel.findViewById(R.id.outside_card);
         addImage = findViewById(R.id.add_image);
         sendButton = findViewById(R.id.send_button);
-        outsideCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hiddenPanel.startAnimation(bottomDown);
-                hiddenPanel.setVisibility(View.GONE);
-
-            }
-        });
+//        outsideCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hiddenPanel.startAnimation(bottomDown);
+//                hiddenPanel.setVisibility(View.GONE);
+//
+//            }
+//        });
 
 
         UserImage = new ArrayList<>();
@@ -199,7 +205,7 @@ public class FormKit extends AppCompatActivity {
         hostels.add("सायरा");
 
         // Setting up adapters to spinners
-        ArrayAdapter<String> complaintsAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, complaints) {
+        ArrayAdapter<String> complaintsAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, complaints) {
             @Override
             public boolean isEnabled(int position) {
                 if (position == 0) {
@@ -208,6 +214,14 @@ public class FormKit extends AppCompatActivity {
                 } else {
                     return true;
                 }
+            }
+
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                view.setPadding(0, view.getPaddingTop(), 0, view.getPaddingBottom());
+                return view;
             }
 
             @Override
@@ -233,7 +247,7 @@ public class FormKit extends AppCompatActivity {
         complaintsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(complaintsAdapter);
 
-        ArrayAdapter<String> hostelAdapter = new ArrayAdapter(FormKit.this, android.R.layout.simple_spinner_item, hostels) {
+        ArrayAdapter<String> hostelAdapter = new ArrayAdapter<String>(FormKit.this, android.R.layout.simple_spinner_item, hostels) {
             @Override
             public boolean isEnabled(int position) {
                 if (position == 0) {
@@ -243,6 +257,14 @@ public class FormKit extends AppCompatActivity {
                 } else {
                     return true;
                 }
+            }
+
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                view.setPadding(0, view.getPaddingTop(), 0, view.getPaddingBottom());
+                return view;
             }
 
             @Override
@@ -308,7 +330,7 @@ public class FormKit extends AppCompatActivity {
         // Adding & Removing Image
         getCurrentTime();
 
-        setDateTime.setOnClickListener(new View.OnClickListener() {
+        dateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(FormKit.this, new DatePickerDialog.OnDateSetListener() {
@@ -346,24 +368,27 @@ public class FormKit extends AppCompatActivity {
             public void onClick(View v) {
                 if (uploadedImageContainer.getChildCount() < 5) {
 
-                    if(hiddenPanel.getVisibility() == View.VISIBLE){
-                        hiddenPanel.startAnimation(bottomDown);
-                        hiddenPanel.setVisibility(View.GONE);
-                    }else {
-
-                        hiddenPanel.startAnimation(bottomUp);
-                        hiddenPanel.setVisibility(View.VISIBLE);
-
-                    }
-                    hiddenPanel.findViewById(R.id.attachimage).setOnClickListener(new View.OnClickListener() {
+//                    if(hiddenPanel.getVisibility() == View.VISIBLE){
+//                        hiddenPanel.startAnimation(bottomDown);
+//                        hiddenPanel.setVisibility(View.GONE);
+//                    }else {
+//
+//                        hiddenPanel.startAnimation(bottomUp);
+//                        hiddenPanel.setVisibility(View.VISIBLE);
+//
+//                    }
+                    uploadImageDialog.show();
+                    uploadImageLayout.findViewById(R.id.attachimage).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            uploadImageDialog.dismiss();
                             attachImage();
                         }
                     });
-                    hiddenPanel.findViewById(R.id.captureimage).setOnClickListener(new View.OnClickListener() {
+                    uploadImageLayout.findViewById(R.id.captureimage).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            uploadImageDialog.dismiss();
                             captureImage();
                         }
                     });
@@ -734,8 +759,8 @@ public class FormKit extends AppCompatActivity {
             removeImage.setVisibility(View.VISIBLE);
         }
 
-        hiddenPanel.startAnimation(bottomDown);
-        hiddenPanel.setVisibility(View.GONE);
+//        hiddenPanel.startAnimation(bottomDown);
+//        hiddenPanel.setVisibility(View.GONE);
 
     }
 

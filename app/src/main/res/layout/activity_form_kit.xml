@@ -11,8 +11,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp"
-        android:nestedScrollingEnabled="false">
+        android:nestedScrollingEnabled="false"
+        android:padding="4dp"
+        android:scrollbars="none">
 
 
         <LinearLayout
@@ -20,200 +21,235 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                app:cardCornerRadius="8dp">
+
+                <TextView
+                    android:id="@+id/name_kp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="Rama Sinha" />
+            </androidx.cardview.widget.CardView>
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="8dp"
+                android:layout_margin="4dp"
                 app:cardCornerRadius="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="4dp">
 
 
-                        <TextView
-                            android:id="@+id/name_kp"
-                            android:layout_width="match_parent"
-                            android:gravity="center"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="16dp"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                             tools:text="Rama Sinha" />
-
-
-
-
-                    <View
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height=".5dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@color/grey" />
+                        android:layout_height="wrap_content">
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/name_kit"
-                        android:layout_margin="4dp"
-                        android:hint="नाम"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
-                        android:textSize="16sp"></EditText>
-
-                    <LinearLayout
-                        android:id="@+id/set_date_time"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_event_black_24dp" />
-
-                        <TextView
-                            android:id="@+id/event_date_time"
+                        <EditText
+                            android:id="@+id/name_kit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:gravity="center_vertical"
-                            android:hint="Date"
+                            android:hint="नाम"
                             android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                    </LinearLayout>
-
-                    <EditText
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/age_kit"
-                        android:layout_margin="4dp"
-                        android:hint="उम्र"
-                        android:inputType="number"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
-                        android:textSize="16sp"></EditText>
+                        android:layout_height="wrap_content">
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:hint="राजस्व गाँव"
-                        android:id="@+id/RajasavGaav_kit"
-                        android:inputType="text"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
-                        android:textSize="16sp"></EditText>
-
+                        <EditText
+                            android:id="@+id/age_kit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="उम्र"
+                            android:inputType="number"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:paddingStart="4dp"
                         android:paddingEnd="4dp"
                         android:text="जाति"
-                        android:textSize="16sp" />
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12dp" />
 
                     <Spinner
                         android:id="@+id/category_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="4dp"
                         android:spinnerMode="dialog" />
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height=".5dp"
+                        android:layout_height="1dp"
                         android:layout_marginStart="4dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
                         android:layout_marginEnd="4dp"
-                        android:background="@color/grey" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
-                        android:text="पंचायत समिति"
-                        android:textSize="16sp" />
+                        android:layout_marginBottom="8dp"
+                        android:background="#757575" />
 
 
-                    <Spinner
-                        android:id="@+id/Samiti_spinner"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:spinnerMode="dialog" />
+                        android:layout_height="wrap_content">
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:id="@+id/Falla_kit"
-                        android:hint="फला"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
-                        android:textSize="16sp"></EditText>
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:id="@+id/place_kit"
-                        android:hint="स्थान"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
-                        android:textSize="16sp"></EditText>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:hint="गाँव"
-                        android:id="@+id/village_kit"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
-                        android:textSize="16sp"></EditText>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:hint="जिला- उदयपुर"
-                        android:id="@+id/district_kit"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
-                        android:textSize="16sp"></TextView>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:hint="ग्राम पंचायत"
-                        android:id="@+id/panchayat_kit"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
-                        android:textSize="16sp"></EditText>
+                        <EditText
+                            android:id="@+id/RajasavGaav_kit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="राजस्व गाँव"
+                            android:inputType="text"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="2dp"
+                android:layout_margin="4dp"
+                app:cardCornerRadius="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
+                        android:text="पंचायत समिति"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp" />
+
+
+                    <Spinner
+                        android:id="@+id/Samiti_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="4dp"
+                        android:spinnerMode="dialog" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="#757575" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/panchayat_kit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="ग्राम पंचायत"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/Falla_kit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="फला"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/place_kit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="स्थान"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/village_kit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="गाँव"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
+                        android:text="जिला"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp" />
+
+
+                    <TextView
+                        android:id="@+id/district_kit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="उदयपुर"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="4dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="#757575" />
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
                 app:cardCornerRadius="8dp">
 
                 <LinearLayout
@@ -232,14 +268,14 @@
                             android:layout_height="200dp"
                             android:orientation="horizontal">
 
-                                                <ImageButton
-                                                    android:id="@+id/add_image"
-                                                    android:layout_width="100dp"
-                                                    android:layout_height="200dp"
-                                                    android:layout_gravity="center"
-                                                    android:layout_margin="4dp"
-                                                    android:layout_marginTop="4dp"
-                                                    android:src="@drawable/ic_add_box_black_24dp" />
+                            <ImageButton
+                                android:id="@+id/add_image"
+                                android:layout_width="100dp"
+                                android:layout_height="200dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="4dp"
+                                android:layout_marginTop="4dp"
+                                android:src="@drawable/ic_add_box_black_24dp" />
 
 
                         </LinearLayout>
@@ -257,16 +293,33 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:id="@+id/send_button"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Send"
-                android:textSize="26dp"
-                android:layout_gravity="center"></Button>
+                android:orientation="horizontal"
+                android:padding="8dp">
 
+                <Button
+                    android:id="@+id/event_date_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableStart="@drawable/ic_event_black_24dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:hint="Date"
+                    android:textSize="16sp" />
 
+                <Button
+                    android:id="@+id/send_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Send"
+                    android:textSize="26dp" />
+            </LinearLayout>
 
         </LinearLayout>
 

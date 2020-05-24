@@ -2,12 +2,18 @@ package com.example.awareness.ui.learningactivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
@@ -39,9 +45,12 @@ import static com.example.awareness.Constants.User;
 public class LearningActivity extends AppCompatActivity {
 
     List<Module> modules = new ArrayList<>();
+    @SuppressLint("StaticFieldLeak")
     public static LearningAdapter learningAdapter;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    @SuppressLint("StaticFieldLeak")
     public static View quizBottomSheet;
+    @SuppressLint("StaticFieldLeak")
     public static BottomSheetDialog quizBottomSheetDialog;
 
 
@@ -54,6 +63,7 @@ public class LearningActivity extends AppCompatActivity {
          quizBottomSheet = getLayoutInflater().inflate(R.layout.test_layout,null,false);
         quizBottomSheetDialog = new BottomSheetDialog(this);
         quizBottomSheetDialog.setContentView(quizBottomSheet);
+
 
         learningRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         learningAdapter = new LearningAdapter(this,modules);
