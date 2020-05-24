@@ -28,6 +28,7 @@ import java.util.Objects;
 import static com.example.awareness.Constants.User;
 import static com.example.awareness.ui.learningactivity.LearningActivity.learningAdapter;
 import static com.example.awareness.ui.learningactivity.LearningActivity.modules;
+import static com.example.awareness.ui.learningactivity.LearningActivity.progressBar;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -68,7 +69,12 @@ public class Dashboard extends AppCompatActivity {
                         modules.add(new Module(Integer.parseInt(document.getId()) , document.getString("Topic"), attachments));
                     }
                     Collections.sort(modules, new SortbyModuleNumber());
-                    learningAdapter.notifyDataSetChanged();
+                    try {
+                        learningAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
+                    }catch (Exception e){
+                        Log.e("TAGG",e.toString());
+                    }
 
                 }else{
                     Log.e("TAGG", "Error getting modules",task.getException());

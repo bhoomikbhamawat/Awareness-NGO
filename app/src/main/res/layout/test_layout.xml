@@ -36,6 +36,7 @@
                             android:id="@+id/option1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:minHeight="48dp"
                             android:gravity="center_vertical"
                             tools:text="Option 1" />
 
@@ -43,6 +44,7 @@
                             android:id="@+id/option2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:minHeight="48dp"
                             android:gravity="center_vertical"
                             tools:text="Option 2" />
 
@@ -50,6 +52,7 @@
                             android:id="@+id/option3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:minHeight="48dp"
                             android:gravity="center_vertical"
                             tools:text="Option 3" />
 
@@ -57,6 +60,7 @@
                             android:id="@+id/option4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:minHeight="48dp"
                             android:gravity="center_vertical"
                             tools:text="Option 4" />
                     </RadioGroup>
@@ -82,7 +86,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/colorPrimary"
                             tools:text="1/5" />
 
                         <Button

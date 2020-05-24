@@ -122,7 +122,7 @@ public class QuizUtils {
                     if (isCorrect(questions.get(questionPosition).getAnswer())) {
 
                         final RadioButton correctAnswer = quizBottomSheet.findViewById(radioGroup.getCheckedRadioButtonId());
-                        correctAnswer.setBackgroundColor(Color.GREEN);
+                        correctAnswer.setBackgroundResource(R.drawable.correct_answer);
 
                         if (questionPosition == questions.size() - 1) {
 
@@ -153,7 +153,7 @@ public class QuizUtils {
                     } else {
                         if (radioGroup.getCheckedRadioButtonId() != -1) {
                             final RadioButton incorrectAnswer = quizBottomSheet.findViewById(radioGroup.getCheckedRadioButtonId());
-                            incorrectAnswer.setBackgroundColor(Color.RED);
+                            incorrectAnswer.setBackgroundResource(R.drawable.wrong_answer);
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

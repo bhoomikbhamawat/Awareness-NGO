@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ProgressBar;
 
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
@@ -51,12 +52,17 @@ public class LearningActivity extends AppCompatActivity {
     public static View quizBottomSheet;
     @SuppressLint("StaticFieldLeak")
     public static BottomSheetDialog quizBottomSheetDialog;
+    @SuppressLint("StaticFieldLeak")
+    public static ProgressBar progressBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning);
+
+        progressBar = findViewById(R.id.progress_circle);
+        progressBar.setVisibility(View.VISIBLE);
 
         RecyclerView learningRecyclerView = findViewById(R.id.learning_recyclerview);
         quizBottomSheet = getLayoutInflater().inflate(R.layout.test_layout, null, false);
@@ -67,6 +73,9 @@ public class LearningActivity extends AppCompatActivity {
         learningRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         learningAdapter = new LearningAdapter(this, modules);
         learningRecyclerView.setAdapter(learningAdapter);
+        if(modules.size() > 0){
+            progressBar.setVisibility(View.GONE);
+        }
 
 //        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
 //                .setPersistenceEnabled(true)
