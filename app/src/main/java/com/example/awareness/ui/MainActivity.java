@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(name.equals("")) {
 
-            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+            Intent i = new Intent(MainActivity.this, Dashboard.class);
 //                    Intent i = new Intent(MainActivity.this, TestActivity.class);
 
             startActivity(i);
