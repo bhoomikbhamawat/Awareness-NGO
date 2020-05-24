@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,7 +55,7 @@ public class QuizUtils {
     @SuppressLint("StaticFieldLeak")
     private static ProgressBar progressBar;
     @SuppressLint("StaticFieldLeak")
-    private static LinearLayout mainContent;
+    private static ScrollView mainContent;
     private static boolean done = false;
 
     public static void createQuiz(final int moduleNumber) {
