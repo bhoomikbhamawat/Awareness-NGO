@@ -19,6 +19,7 @@ public class Constants {
     public static final String KEY_Name_kp = "uNamekp";
     public static final String KEY_uName = "uName";
     public static final String KEY_Age = "uAge";
+    public static final String KEY_Date = "uDate";
     public static final String KEY_Category = "uCategory";
     public static final String KEY_Place = "uPlace";
     public static final String KEY_Fala = "uFala";

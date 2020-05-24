@@ -8,7 +8,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,13 +33,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -55,9 +60,14 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.Normalizer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -66,6 +76,7 @@ import static com.example.awareness.Constants.ADD_USER_URL;
 import static com.example.awareness.Constants.KEY_ACTION;
 import static com.example.awareness.Constants.KEY_Age;
 import static com.example.awareness.Constants.KEY_Category;
+import static com.example.awareness.Constants.KEY_Date;
 import static com.example.awareness.Constants.KEY_Fala;
 import static com.example.awareness.Constants.KEY_GramPanchayat;
 import static com.example.awareness.Constants.KEY_Name_kp;
@@ -78,8 +89,9 @@ import static com.example.awareness.Constants.KEY_uName;
 public class FormKit extends AppCompatActivity {
 
 
-    private Toolbar toolbar;
-    private ImageButton sendButton, addImage;
+    //private Toolbar toolbar;
+    private ImageButton  addImage;
+    private Button sendButton;
     private LinearLayout uploadedImageContainer;
     private String Samiti;
    // private String ComplaineeName;
@@ -89,10 +101,14 @@ public class FormKit extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int CAPTURE_IMAGE_REQUEST = 2;
     private static final int CAMERA_PERMISSION_REQUEST = 3;
+    int mYear, mMonth, mDay, mHour, mMinute;
     //private EditText subjectEditBox;
     //private EditText issueBox;
     private LinearLayout hiddenPanel;
     ConstraintLayout layout_formkit;
+    String mDateTime = "";
+    TextView dateTime;
+    LinearLayout setDateTime;
     private Animation bottomUp,bottomDown;
     private TextView removeImage;
     private ArrayList<String> UserImage;
@@ -101,7 +117,7 @@ public class FormKit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_kit);
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        //toolbar = (Toolbar)findViewById(R.id.toolbar);
         layout_formkit = findViewById(R.id.layout_formkit);
         Village_kit=findViewById(R.id.village_kit);
         Panchayat_kit=findViewById(R.id.panchayat_kit);
@@ -113,6 +129,8 @@ public class FormKit extends AppCompatActivity {
         uploadedImageContainer = findViewById(R.id.uploaded_image_container);
         //anonymousCheckbox = findViewById(R.id.anonymous_checkbox);
         removeImage = findViewById(R.id.remove_image);
+        dateTime = findViewById(R.id.event_date_time);
+        setDateTime = findViewById(R.id.set_date_time);
         final Spinner categorySpinner = findViewById(R.id.category_spinner);
         final Spinner SamitiSpinner = findViewById(R.id.Samiti_spinner);
         //ImageButton anonymousHelp = (ImageButton) findViewById(R.id.anonymous_help);
@@ -125,8 +143,8 @@ public class FormKit extends AppCompatActivity {
         bottomDown = AnimationUtils.loadAnimation(FormKit.this,R.anim.bottom_down);
         hiddenPanel = (LinearLayout)findViewById(R.id.upload_image);
         View outsideCard = hiddenPanel.findViewById(R.id.outside_card);
-
-
+        addImage = findViewById(R.id.add_image);
+        sendButton = findViewById(R.id.send_button);
         outsideCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,15 +173,15 @@ public class FormKit extends AppCompatActivity {
         LayoutParam.gravity = Gravity.END;
         LayoutParam.setMarginEnd(endMargin);
 
-        sendButton = new ImageButton(getApplicationContext());
+        /*sendButton = new ImageButton(getApplicationContext());
         sendButton.setLayoutParams(LayoutParam);
         sendButton.setImageDrawable(getApplication().getResources().getDrawable(R.drawable.ic_send_black_24dp));
-        sendButton.setBackgroundResource(typedValue.resourceId);
+        sendButton.setBackgroundResource(typedValue.resourceId);*/
 
-        addImage = new ImageButton(getApplicationContext());
+       /* addImage = new ImageButton(getApplicationContext());
         addImage.setLayoutParams(LayoutParam);
         addImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_attachment_black_24dp));
-        addImage.setBackgroundResource(typedValue.resourceId);
+        addImage.setBackgroundResource(typedValue.resourceId);*/
 
         // List for complainttype & hostel
         List<String> complaints = new ArrayList<>();
@@ -288,10 +306,45 @@ public class FormKit extends AppCompatActivity {
 
 
         // Adding & Removing Image
+        getCurrentTime();
+
+        setDateTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(FormKit.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        mYear = year;
+                        mMonth = month;
+                        mDay = dayOfMonth;
+
+                        mDateTime = mYear + "-" + mMonth + "-" + mDay;
+                        Date date = null;
+                        String date6 = "";
+                        try {
+                            Locale hindi = new Locale ( "hi" , "IN" );
+                            SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy", hindi);
+
+                            date = new SimpleDateFormat("yyyy-mm-dd").parse(mDateTime);
+                           // String date5 = sdf.format(mDateTime);
+                            date6 = sdf.format(date);
+                         //   Log.d("datehindi",date5);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        //dateTime.setText(new SimpleDateFormat("E, dd MMM ").format(date));
+                        dateTime.setText(date6);
+                    }
+                }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (uploadedImageContainer.getChildCount() < 4) {
+                if (uploadedImageContainer.getChildCount() < 5) {
 
                     if(hiddenPanel.getVisibility() == View.VISIBLE){
                         hiddenPanel.startAnimation(bottomDown);
@@ -343,7 +396,7 @@ public class FormKit extends AppCompatActivity {
                     uploadedImageContainer.removeViewAt(i);
                 }
                 UserImage.clear();
-                uploadedImageContainer.setVisibility(View.GONE);
+                //uploadedImageContainer.setVisibility(View.GONE);
                 removeImage.setVisibility(View.GONE);
             }
         });
@@ -382,6 +435,14 @@ public class FormKit extends AppCompatActivity {
 
                         Log.e("ComplainFragment", "Snackbar: कृपया नाम भरे", e);
                         Toast.makeText(FormKit.this, "कृपया नाम भरे", Toast.LENGTH_SHORT).show();
+                    }
+                }else if (mDateTime.isEmpty()) {
+                    try {
+                        Snackbar.make(layout_formkit, "कृपया समय भरें", Snackbar.LENGTH_SHORT).show();
+                    } catch (NullPointerException e) {
+
+                        Log.e("ComplainFragment", "Snackbar: कृपया समय भरे", e);
+                        Toast.makeText(FormKit.this, "कृपया समय भरे", Toast.LENGTH_SHORT).show();
                     }
                 } else if (TextUtils.isEmpty(Age_kit.getText())) {
                     try {
@@ -475,9 +536,11 @@ public class FormKit extends AppCompatActivity {
                                     Map<String, String> params = new HashMap<String, String>();
                                     params.put(KEY_ACTION, "insert");
                                     params.put(KEY_Name_kp, "Bhoomik");
+
                                    // params.put(KEY_Complaint_Emailid, ComplaineeEmailaddress);
                                     params.put(KEY_uName, uName);
                                     params.put(KEY_Age, uAge);
+                                    params.put(KEY_Date, mDateTime);
                                     params.put(KEY_Category, Category1);
                                     params.put(KEY_Place, finalUPlace);
                                     params.put(KEY_Fala, uFalla);
@@ -485,6 +548,8 @@ public class FormKit extends AppCompatActivity {
                                     params.put(KEY_Rajasav, finalURajasava);
                                     params.put(KEY_GramPanchayat, uPanchayat);
                                     params.put(KEY_Samiti, Samiti1);
+                                    Log.d("12301001",uName+uAge+Category1+finalUPlace+uFalla+uVillage+finalURajasava+uPanchayat+Samiti1);
+                                    Log.d("imageuser",UserImage.toString());
                                     if (UserImage != null) {
                                         for (int i = 0; i < UserImage.size(); i++) {
                                             params.put(Constants.KEY_LOST_IMAGE + i, UserImage.get(i));
@@ -585,7 +650,7 @@ public class FormKit extends AppCompatActivity {
             ClipData mClipData = data.getClipData();
 
 
-            if (mClipData != null && mClipData.getItemCount() > 1 && mClipData.getItemCount() < 5 - uploadedImageContainer.getChildCount()) {
+            if (mClipData != null && mClipData.getItemCount() > 1 && mClipData.getItemCount() < 6 - uploadedImageContainer.getChildCount()) {
 
                 for (int i = 0; i < mClipData.getItemCount(); i++) {
                     ImageView image = new ImageView(FormKit.this);
@@ -696,6 +761,15 @@ public class FormKit extends AppCompatActivity {
 
     }
 
+    public void getCurrentTime() {
+        Calendar calendar = Calendar.getInstance();
+        mYear = calendar.get(Calendar.YEAR);
+        mMonth = calendar.get(Calendar.MONTH);
+        mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        mHour = 18;
+        mMinute = 00;
+    }
+
     private String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -704,31 +778,5 @@ public class FormKit extends AppCompatActivity {
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-
-        toolbar.setTitle("Complain");
-        //        toolbar.setNavigationIcon(null);
-//        ((HomeActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
-//        ((HomeActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((HomeActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        toolbar.addView(sendButton);
-        toolbar.addView(addImage);
-
-
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        toolbar.removeView(sendButton);
-        toolbar.removeView(addImage);
-        toolbar.setTitle(R.string.app_name);
-
-
-    }
 }
