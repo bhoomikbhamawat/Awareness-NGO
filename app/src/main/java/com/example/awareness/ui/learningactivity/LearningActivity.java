@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ProgressBar;
 
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
@@ -44,14 +45,15 @@ import static com.example.awareness.Constants.User;
 
 public class LearningActivity extends AppCompatActivity {
 
-    List<Module> modules = new ArrayList<>();
+    public static List<Module> modules = new ArrayList<>();
     @SuppressLint("StaticFieldLeak")
     public static LearningAdapter learningAdapter;
-    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     @SuppressLint("StaticFieldLeak")
     public static View quizBottomSheet;
     @SuppressLint("StaticFieldLeak")
     public static BottomSheetDialog quizBottomSheetDialog;
+    @SuppressLint("StaticFieldLeak")
+    public static ProgressBar progressBar;
 
 
     @Override
@@ -59,65 +61,27 @@ public class LearningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning);
 
+        progressBar = findViewById(R.id.progress_circle);
+        progressBar.setVisibility(View.VISIBLE);
+
         RecyclerView learningRecyclerView = findViewById(R.id.learning_recyclerview);
-         quizBottomSheet = getLayoutInflater().inflate(R.layout.test_layout,null,false);
+        quizBottomSheet = getLayoutInflater().inflate(R.layout.test_layout, null, false);
         quizBottomSheetDialog = new BottomSheetDialog(this);
         quizBottomSheetDialog.setContentView(quizBottomSheet);
 
 
         learningRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        learningAdapter = new LearningAdapter(this,modules);
+        learningAdapter = new LearningAdapter(this, modules);
         learningRecyclerView.setAdapter(learningAdapter);
+        if(modules.size() > 0){
+            progressBar.setVisibility(View.GONE);
+        }
 
 //        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
 //                .setPersistenceEnabled(true)
 //                .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
 //                .build();
 //        firestore.setFirestoreSettings(settings);
-        // Todo: userID?
-        String userId = "0123456789";
-        firestore.collection("users").document(userId).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()){
-                            DocumentSnapshot document = task.getResult();
-                            if(document!= null){
-                                User.accessModule =  Objects.requireNonNull(document.getLong(ACCESS_MODULE)).intValue();
-                                User.accessQuestion = Objects.requireNonNull(document.getLong(ACCESS_QUESTION)).intValue();
-                                User.progressLink = document.getBoolean(PROGRESS_LINK);
-                                User.progressPdf = document.getBoolean(PROGRESS_PDF);
-                            }
-                        }
-                    }
-                });
 
-        firestore.collection("modules").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())){
-                        Map<String,String> attachments = new HashMap<>();
-                        attachments.put("Link",document.getString("Link"));
-                        attachments.put("Pdf",document.getString("Pdf"));
-
-                        modules.add(new Module(Integer.parseInt(document.getId()) , document.getString("Topic"), attachments));
-                    }
-                    Collections.sort(modules,new SortbyModuleNumber());
-                    learningAdapter.notifyDataSetChanged();
-
-                }else{
-                    Log.e("TAGG", "Error getting modules",task.getException());
-                }
-            }
-        });
-
-    }
-    class SortbyModuleNumber implements Comparator<Module>{
-
-        @Override
-        public int compare(Module a, Module b) {
-            return a.getModuleNumber() - b.getModuleNumber();
-        }
     }
 }
