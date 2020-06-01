@@ -9,6 +9,27 @@ public class Constants {
     public static final String PREF_NAME = "LoggedInPref";
     public static String name_all = "nameKey";
 
+
+    public static class Register{
+
+        public static String Register_Url = "https://script.google.com/macros/s/AKfycbyplmgmCGEXvd7rs8jVnJozsOHRRrmXQyR4RApGI_pz5ysRH_oV/exec";
+        public static final String ADD_USER_URL = Register_Url;
+        public static final String KEY_LOST_IMAGE = "uImage";
+        //public static final String KEY_LIST_IMAGE = "uImageList";
+        public static final String KEY_Name_kp = "uNamekp";
+        public static final String KEY_uName = "uName";
+        public static final String KEY_Age = "uAge";
+        public static final String KEY_Mobile = "uMobile";
+        public static final String KEY_Category = "uCategory";
+        public static final String KEY_City = "uCity";
+        public static final String KEY_Fala = "uFala";
+        public static final String KEY_Village = "uVillage";
+        public static final String KEY_Rajasav = "uRajasav";
+        public static final String KEY_GramPanchayat = "uGramPanchayat";
+        public static final String KEY_Samiti = "uSamiti";
+        public  static final String KEY_ACTION = "action";
+    }
+
     public static class Forms {
 
         public static final int FORM_KIT = 0;

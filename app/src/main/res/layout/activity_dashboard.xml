@@ -13,13 +13,18 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             app:cardCornerRadius="8dp"
+            android:elevation="5dp"
+            android:padding="4dp"
+            app:cardElevation="4dp"
             android:layout_margin="8dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="Learning Section"
                 android:onClick="learningSection"
                 android:textColor="@android:color/black"
@@ -28,13 +33,18 @@
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             app:cardCornerRadius="8dp"
+            android:elevation="5dp"
+            android:padding="4dp"
+            app:cardElevation="4dp"
             android:layout_margin="8dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="10,000 Form"
                 android:onClick="Formstudents"
                 android:textColor="@android:color/black"
@@ -43,14 +53,19 @@
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             app:cardCornerRadius="8dp"
+            android:elevation="5dp"
+            android:padding="4dp"
+            app:cardElevation="4dp"
             android:layout_margin="8dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Kit form"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:onClick="FormKit"
                 android:textColor="@android:color/black"
                 android:background="?attr/selectableItemBackground"

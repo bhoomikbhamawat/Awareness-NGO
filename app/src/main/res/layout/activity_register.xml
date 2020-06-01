@@ -22,12 +22,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Name"/>
+            android:text="नाम"/>
         <EditText android:id="@+id/input_name"
             android:layout_width="match_parent"
             android:ems="10"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:hint="अपना नाम लिखिए" />
 
 
         <TextView
@@ -35,12 +35,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Gender"/>
+            android:text="गाँव"/>
         <EditText
-            android:id="@+id/input_department"
+            android:id="@+id/input_Gaav"
             android:layout_width="match_parent"
             android:ems="10"
-            android:hint="Gender"
+            android:hint="गाँव"
             android:inputType="text"
             android:layout_height="wrap_content"/>
 
@@ -50,14 +50,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:text="Age" />
+            android:text="उम्र" />
 
         <EditText
-            android:id="@+id/input_year"
+            android:id="@+id/input_age_reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Age"
+            android:hint="अपनी उम्र लिखिए"
             android:inputType="number" />
 
         <TextView
@@ -65,14 +65,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:text="Caste" />
+            android:text="जाति" />
 
         <Spinner
-            android:id="@+id/input_mess"
+            android:id="@+id/category_spinner_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Caste"
+            android:hint="जाति"
             />
 
         <TextView
@@ -80,93 +80,88 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Hemlet"/>
-        <EditText android:id="@+id/input_room"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Hemlet" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-
-            android:text="Hostel"/>
-        <AutoCompleteTextView
-            android:id="@+id/input_hostel"
-            android:layout_width="match_parent"
-            android:ems="10"
-            android:hint="Hostel"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Contact Number"/>
+            android:text="फला"/>
 
         <EditText
-            android:id="@+id/input_phone"
+            android:id="@+id/input_faala"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="फला" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="राजस्व गाँव"/>
+
+        <EditText
+            android:id="@+id/input_rajasav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="राजस्व गाँव" />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="मोबाइल न."/>
+
+        <EditText
+            android:id="@+id/input_phone_reg"
             android:layout_width="match_parent"
             android:ems="10"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:hint="Contact Number" />
+            android:hint="अपने मोबाइल नंबर डालिये" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Institute E-Mail Id"/>
-        <EditText android:id="@+id/input_email"
+            android:text="ग्राम पंचायत"/>
+        <EditText android:id="@+id/reg_grampanc"
             android:layout_width="match_parent"
             android:ems="10"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="E-Mail"/>
+            android:hint="ग्राम पंचायत"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Password"/>
-        <EditText android:id="@+id/input_password"
+            android:text="पंचायत समिति"/>
+        <EditText android:id="@+id/reg_samiti"
             android:layout_width="match_parent"
             android:ems="10"
-            android:inputType="textPassword"
             android:layout_height="wrap_content"
-            android:hint="Password" />
-        <EditText android:id="@+id/input_confirm_password"
-            android:layout_width="match_parent"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:layout_height="wrap_content"
-            android:hint="Confirm Password" />
+            android:hint="पंचायत समिति" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Mess Receipt Number"/>
-        <EditText android:id="@+id/input_du_no"
+            android:text="जिला"/>
+        <EditText android:id="@+id/input_city"
             android:layout_width="match_parent"
             android:ems="10"
             android:layout_height="wrap_content"
-            android:hint="DU Number" />
+            android:hint="जिला" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button"
             android:background="@drawable/selector_button"
-            android:text="Register"/>
+            android:text="रजिस्टर करे"/>
 
 
     </LinearLayout>

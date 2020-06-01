@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 if(name.equals("")) {
 
-                    Intent i = new Intent(MainActivity.this, Dashboard.class);
+                    Intent i = new Intent(MainActivity.this, RegisterActivity.class);
 //                    Intent i = new Intent(MainActivity.this, TestActivity.class);
 
                     startActivity(i);

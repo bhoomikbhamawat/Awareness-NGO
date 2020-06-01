@@ -505,7 +505,7 @@ public class Form extends AppCompatActivity {
                     }
                 } else {
                     final AlertDialog.Builder a_builder = new AlertDialog.Builder(Form.this);
-                    a_builder.setMessage("I am aware that if I will misuse this facility by any way I would be deregistered from this app");
+                    a_builder.setMessage("मेरे द्वारा दी गई उपरोक्त सभी जानकारीया सही है |");
                     a_builder.setCancelable(false);
                     a_builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
