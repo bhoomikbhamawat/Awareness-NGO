@@ -61,13 +61,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
+                    android:id="@+id/form_age"
                     android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/age_kit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="उम्र"
                         android:inputType="number"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -75,15 +75,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/form_category_text"
                     android:paddingStart="4dp"
                     android:paddingEnd="4dp"
                     android:text="जाति"
+                    android:visibility="gone"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="12dp" />
 
                 <Spinner
                     android:id="@+id/category_spinner"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:paddingStart="4dp"
                     android:paddingTop="4dp"
@@ -93,6 +96,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:visibility="gone"
+                    android:id="@+id/view_category"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="4dp"

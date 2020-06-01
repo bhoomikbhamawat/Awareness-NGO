@@ -54,6 +54,7 @@ import com.example.awareness.Constants;
 import com.example.awareness.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -91,7 +92,9 @@ public class Form extends AppCompatActivity {
     private Button sendButton;
     private LinearLayout uploadedImageContainer, uploadedImageContainerStudentsList;
     private String Samiti;
+    Spinner categorySpinner;
     private String Category;
+    View categoryview;
     private EditText Name_kit, Panchayat_kit, Village_kit, Place_kit, Age_kit, Falla_kit, Rajasava_kit;
     private TextView Name_kp;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -102,7 +105,7 @@ public class Form extends AppCompatActivity {
     int mYear, mMonth, mDay, mHour, mMinute;
     ScrollView layout_formkit;
     String mDateTime = "";
-    TextView dateTime;
+    TextView dateTime,category_text;
     private TextView removeImage, removeImageStudentsList;
     private ArrayList<String> UserImage, imageStudentsList;
     View uploadImageLayout;
@@ -114,19 +117,30 @@ public class Form extends AppCompatActivity {
         setContentView(R.layout.activity_form);
 
         Intent intent = getIntent();
-        int mode = intent.getIntExtra("mode", -1);
-
+        final int mode = intent.getIntExtra("mode", -1);
+        Age_kit = findViewById(R.id.age_kit);
+        categoryview = findViewById(R.id.view_category);
+        categorySpinner = findViewById(R.id.category_spinner);
+        category_text = findViewById(R.id.form_category_text);
         if (mode == Forms.FORM_STUDENTS) {
             HorizontalScrollView formStudentsExtra = findViewById(R.id.form_students_extra);
             formStudentsExtra.setVisibility(View.VISIBLE);
+            //textInputLayout.setHelperText("प्रशिक्षणार्थियो की संख्या");
             TextView studentsList = findViewById(R.id.students_list);
             studentsList.setVisibility(View.VISIBLE);
+
+            Age_kit.setHint("प्रशिक्षणार्थियो की संख्या");
+
             TextView studentsPhotograph = findViewById(R.id.students_photograph);
             studentsPhotograph.setVisibility(View.VISIBLE);
 
             url = Forms.STUDENTS_FORM_URL;
         }else{
             url = Forms.ADD_USER_URL;
+            Age_kit.setHint("उम्र");
+            categorySpinner.setVisibility(View.VISIBLE);
+            category_text.setVisibility(View.VISIBLE);
+            categoryview.setVisibility(View.VISIBLE);
         }
 
 
@@ -144,7 +158,7 @@ public class Form extends AppCompatActivity {
         addImageStudentsList = findViewById(R.id.add_image_students_list);
         uploadedImageContainerStudentsList = findViewById(R.id.uploaded_image_container_students_list);
         removeImageStudentsList = findViewById(R.id.remove_image_students_list);
-        final Spinner categorySpinner = findViewById(R.id.category_spinner);
+
         final Spinner SamitiSpinner = findViewById(R.id.Samiti_spinner);
         Name_kp = findViewById(R.id.name_kp);
 
@@ -178,13 +192,7 @@ public class Form extends AppCompatActivity {
         addImage.setBackgroundResource(typedValue.resourceId);*/
 
         // List for complainttype & hostel
-        List<String> complaints = new ArrayList<>();
-        complaints.add(0, "जाति");
-        complaints.add("SC");
-        complaints.add("ST");
-        complaints.add("Minority");
-        complaints.add("OBC");
-        complaints.add("General");
+
 
         List<String> hostels = new ArrayList<>();
         hostels.add(0, "पंचायत समिति");
@@ -193,6 +201,13 @@ public class Form extends AppCompatActivity {
         hostels.add("सायरा");
 
         // Setting up adapters to spinners
+        List<String> complaints = new ArrayList<>();
+        complaints.add(0, "जाति");
+        complaints.add("SC");
+        complaints.add("ST");
+        complaints.add("Minority");
+        complaints.add("OBC");
+        complaints.add("General");
         ArrayAdapter<String> complaintsAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, complaints) {
             @Override
             public boolean isEnabled(int position) {
@@ -234,7 +249,18 @@ public class Form extends AppCompatActivity {
         };
         complaintsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(complaintsAdapter);
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                Category = parent.getItemAtPosition(position).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         ArrayAdapter<String> hostelAdapter = new ArrayAdapter<String>(Form.this, android.R.layout.simple_spinner_item, hostels) {
             @Override
             public boolean isEnabled(int position) {
@@ -277,18 +303,7 @@ public class Form extends AppCompatActivity {
         hostelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SamitiSpinner.setAdapter(hostelAdapter);
 
-        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                Category = parent.getItemAtPosition(position).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
         SamitiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                     @Override
                                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -439,14 +454,16 @@ public class Form extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Category.equals("जाति")) {
-                    try {
-                        Snackbar.make(layout_formkit, "Please specify जाति", Snackbar.LENGTH_SHORT).show();
-                    } catch (NullPointerException e) {
+                if (mode != Forms.FORM_STUDENTS) {
+                    if (Category.equals("जाति")){
+                        try {
+                            Snackbar.make(layout_formkit, "Please specify जाति", Snackbar.LENGTH_SHORT).show();
+                        } catch (NullPointerException e) {
 
-                        Log.e("ComplainFragment", "Snackbar: Please specify complain type", e);
-                        Toast.makeText(Form.this, "Please specify जाति", Toast.LENGTH_SHORT).show();
-                    }
+                            Log.e("ComplainFragment", "Snackbar: Please specify complain type", e);
+                            Toast.makeText(Form.this, "Please specify जाति", Toast.LENGTH_SHORT).show();
+                        }
+                }
                 } else if (Samiti.equals("पंचायत समिति")) {
                     try {
                         Snackbar.make(layout_formkit, "Please Select your पंचायत समिति", Snackbar.LENGTH_SHORT).show();
@@ -529,11 +546,15 @@ public class Form extends AppCompatActivity {
                             pdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             pdialog.setMessage("Registering your complain....");
                             pdialog.show();
-                            final String Category1 = Category.trim();
+                            String Category1 = "";
+                            if(mode != Forms.FORM_STUDENTS) {
+                                Category1 = Category.trim();
+                            }
                             final String Samiti1 = Samiti.trim();
 
                             final String finalUPlace = uPlace;
                             final String finalURajasava = uRajasava;
+                            final String finalCategory = Category1;
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                                     new Response.Listener<String>() {
                                         @Override
@@ -571,14 +592,14 @@ public class Form extends AppCompatActivity {
                                     params.put(Forms.KEY_uName, uName);
                                     params.put(Forms.KEY_Age, uAge);
                                     params.put(Forms.KEY_Date, mDateTime);
-                                    params.put(Forms.KEY_Category, Category1);
+                                    params.put(Forms.KEY_Category, finalCategory);
                                     params.put(Forms.KEY_Place, finalUPlace);
                                     params.put(Forms.KEY_Fala, uFalla);
                                     params.put(Forms.KEY_Village, uVillage);
                                     params.put(Forms.KEY_Rajasav, finalURajasava);
                                     params.put(Forms.KEY_GramPanchayat, uPanchayat);
                                     params.put(Forms.KEY_Samiti, Samiti1);
-                                    Log.d("12301001", uName + uAge + Category1 + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
+                                    Log.d("12301001", uName + uAge + finalCategory + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
                                     Log.d("imageuser", UserImage.toString());
                                     if (UserImage != null) {
                                         for (int i = 0; i < UserImage.size(); i++) {
