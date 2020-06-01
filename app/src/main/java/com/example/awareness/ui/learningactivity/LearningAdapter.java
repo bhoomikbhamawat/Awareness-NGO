@@ -116,7 +116,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
             public void onClick(View v) {
                 quizBottomSheetDialog.show();
                 quizBottomSheetDialog.getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
-                QuizUtils.createQuiz(MODULE_NUMBER);
+                QuizUtils.createQuiz(mContext,MODULE_NUMBER);
             }
         });
     }

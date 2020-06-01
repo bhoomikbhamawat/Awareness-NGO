@@ -57,6 +57,8 @@ public class Constants {
     }
 
     public static class User {
+        public static final String USER_NAME = "name";
+        public static final String USER_CONTACT_NUMBER = "contact number";
         public static final String ACCESS_MODULE = "access_module";
         public static final String ACCESS_QUESTION = "access_question";
         public static final String PROGRESS_LINK = "progress_Link";

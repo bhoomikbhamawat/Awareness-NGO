@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+
+        <item
+            android:onClick="certificate"
+            android:title="Certificate"
+            android:visible="false" />
+
+        <item
+            android:onClick="FormStudents"
+            android:title="10,000 Form" />
+        <item
+            android:onClick="FormKit"
+            android:title="Kit Form" />
+        <item
+            android:onClick="about"
+            android:title="About" />
+        <item
+            android:onClick="logout"
+            android:title="Log Out" />
+    </group>
+</menu>

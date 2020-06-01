@@ -1,10 +1,5 @@
 package com.example.awareness.ui;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,6 +22,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -38,11 +36,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.awareness.Constants;
-import com.example.awareness.PersonDetails;
 import com.example.awareness.R;
+import com.example.awareness.ui.learningactivity.LearningActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,11 +54,11 @@ import java.util.List;
 import java.util.Map;
 
 import static com.example.awareness.Constants.Register.Register_Url;
+import static com.example.awareness.Constants.User;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText RegName,RegGaav,RegMobile,RegRajasav,RegAge,RegFaala,RegGramPanch,RegCity,RegSamiti;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Register");
+    private EditText RegName, RegGaav, RegMobile, RegRajasav, RegAge, RegFaala, RegGramPanch, RegCity, RegSamiti;
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private Button buttonSubmit;
     LinearLayout linearLayout;
     private String Category;
@@ -63,27 +66,26 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private DatabaseReference mDatabaseRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         linearLayout = findViewById(R.id.linear_l);
-        RegName =  findViewById(R.id.input_name);
-        RegGaav =  findViewById(R.id.input_Gaav);
-        RegRajasav=  findViewById(R.id.input_rajasav);
-        RegMobile =  findViewById(R.id.input_phone_reg);
+        RegName = findViewById(R.id.input_name);
+        RegGaav = findViewById(R.id.input_Gaav);
+        RegRajasav = findViewById(R.id.input_rajasav);
+        RegMobile = findViewById(R.id.input_phone_reg);
         RegAge = findViewById(R.id.input_age_reg);
-        RegFaala =  findViewById(R.id.input_faala);
-        RegGramPanch =  findViewById(R.id.reg_grampanc);
+        RegFaala = findViewById(R.id.input_faala);
+        RegGramPanch = findViewById(R.id.reg_grampanc);
         RegCity = findViewById(R.id.input_city);
         RegSamiti = findViewById(R.id.reg_samiti);
         final Spinner categorySpinner = findViewById(R.id.category_spinner_register);
         buttonSubmit = findViewById(R.id.button);
 
 
-
-
-        mDatabaseRef= FirebaseDatabase.getInstance().getReference("Mess");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Mess");
 
         List<String> complaints = new ArrayList<>();
         complaints.add(0, "जाति");
@@ -256,7 +258,7 @@ public class RegisterActivity extends AppCompatActivity {
                             final String rCity = RegCity.getText().toString();
                             final String rAge = RegAge.getText().toString();
 
-                            StringRequest stringRequest = new StringRequest(Request.Method.POST, Register_Url,
+                            final StringRequest stringRequest = new StringRequest(Request.Method.POST, Register_Url,
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
@@ -264,17 +266,29 @@ public class RegisterActivity extends AppCompatActivity {
                                             if ((response.toString()).equals("Success")) {
                                                 ////here cloud firestore registration is reqiured
                                                 Snackbar.make(linearLayout, "सफलतापूर्वक किया गया", Snackbar.LENGTH_LONG).show();
-                                                PersonDetails personDetails = new PersonDetails(
-                                                        rname,
-                                                        rmobile,
-                                                        1 + "");
-                                                myRef.child(rname).setValue(personDetails);
+//                                                PersonDetails personDetails = new PersonDetails(
+//                                                        rname,
+//                                                        rmobile,
+//                                                        1 + "");
+                                                Map<String, Object> user = new HashMap<String, Object>() {
+                                                    {
+                                                        put(User.USER_NAME,rname);
+                                                        put(User.ACCESS_MODULE, 1);
+                                                        put(User.ACCESS_QUESTION, 1);
+                                                        put(User.PROGRESS_LINK, false);
+                                                        put(User.PROGRESS_PDF, false);
+
+                                                    }
+
+                                                };
+                                                firestore.collection("users").document(rmobile).set(user);
                                                 SharedPreferences sharedPref = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
                                                 SharedPreferences.Editor editor = sharedPref.edit();
-                                                editor.putString(Constants.name, rname);
-                                                editor.putString(Constants.password, rmobile);
-                                                editor.commit();
-                                                Intent i = new Intent(RegisterActivity.this, Dashboard.class);
+                                                editor.putString(User.USER_CONTACT_NUMBER, rmobile);
+                                                editor.putString(User.USER_NAME, rname);
+                                                editor.apply();
+
+                                                Intent i = new Intent(RegisterActivity.this, LearningActivity.class);
                                                 startActivity(i);
                                                 finish();
                                             }
@@ -304,7 +318,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     // params.put(KEY_Complaint_Emailid, ComplaineeEmailaddress);
                                     params.put(Constants.Register.KEY_uName, rname);
                                     params.put(Constants.Register.KEY_Age, rAge);
-                                   // params.put(Constants.Register.KEY_Date, r);
+                                    // params.put(Constants.Register.KEY_Date, r);
                                     params.put(Constants.Register.KEY_Category, Category1);
                                     //params.put(Constants.Register.KEY_Place, r);
                                     params.put(Constants.Register.KEY_Fala, rFaala);
@@ -315,8 +329,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     params.put(Constants.Register.KEY_Mobile, rmobile);
                                     params.put(Constants.Register.KEY_City, rCity);
 
-                                  //  Log.d("12301001", uName + uAge + Category1 + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
-                                   // Log.d("imageuser", UserImage.toString());
+                                    //  Log.d("12301001", uName + uAge + Category1 + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
+                                    // Log.d("imageuser", UserImage.toString());
 
 
                                     return params;
@@ -331,12 +345,29 @@ public class RegisterActivity extends AppCompatActivity {
 
                             stringRequest.setRetryPolicy(policy);
 
+                            firestore.collection("users").document(rmobile).get()
+                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isSuccessful()){
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document != null) {
+                                            if (document.exists()) {
+                                                pdialog.dismiss();
+                                                Toast.makeText(RegisterActivity.this, "You are already registered. Please login", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                                            } else{
+                                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                                                requestQueue.add(stringRequest);
+                                            }
+                                        }
+                                    }
+                                }
+                            });
 
-                            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                            requestQueue.add(stringRequest);
                             SimpleDateFormat format = new SimpleDateFormat("yyyy/M/d h:mm:ss a");
 
-                           // pdialog.dismiss();
+                            // pdialog.dismiss();
 
                         }
                     });
@@ -354,11 +385,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
 
-
-
-
         });
-
 
 
     }

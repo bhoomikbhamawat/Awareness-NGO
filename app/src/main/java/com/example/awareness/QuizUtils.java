@@ -1,6 +1,8 @@
 package com.example.awareness;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.view.View;
@@ -29,14 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.example.awareness.Constants.User.ACCESS_MODULE;
-import static com.example.awareness.Constants.User.ACCESS_QUESTION;
-import static com.example.awareness.Constants.User.PROGRESS_LINK;
-import static com.example.awareness.Constants.User.PROGRESS_PDF;
-import static com.example.awareness.Constants.User.accessModule;
-import static com.example.awareness.Constants.User.accessQuestion;
-import static com.example.awareness.Constants.User.progressLink;
-import static com.example.awareness.Constants.User.progressPdf;
+import static com.example.awareness.Constants.User;
 import static com.example.awareness.ui.learningactivity.LearningActivity.quizBottomSheet;
 import static com.example.awareness.ui.learningactivity.LearningActivity.quizBottomSheetDialog;
 
@@ -58,7 +53,8 @@ public class QuizUtils {
     private static ScrollView mainContent;
     private static boolean done = false;
 
-    public static void createQuiz(final int moduleNumber) {
+
+    public static void createQuiz(final Context context, final int moduleNumber) {
 
         questionNumber = quizBottomSheet.findViewById(R.id.question_number);
         question = quizBottomSheet.findViewById(R.id.question);
@@ -95,7 +91,7 @@ public class QuizUtils {
                     Collections.sort(questions, new SortbyQuestionNumber());
 
                     if (moduleNumber == Constants.User.accessModule) {
-                        questionPosition = accessQuestion - 1;
+                        questionPosition = User.accessQuestion - 1;
                     } else {
                         questionPosition = 0;
                     }
@@ -126,21 +122,21 @@ public class QuizUtils {
 
                         if (questionPosition == questions.size() - 1) {
 
-                            if (moduleNumber == accessModule) {
-                                accessModule++;
-                                progressLink = false;
-                                progressPdf = false;
-                                accessQuestion = 1;
-                                updateProgress();
+                            if (moduleNumber == User.accessModule) {
+                                User.accessModule++;
+                                User.progressLink = false;
+                                User.progressPdf = false;
+                                User.accessQuestion = 1;
+                                updateProgress(context);
                                 LearningActivity.learningAdapter.notifyDataSetChanged();
                             }
 
                             done = true;
                             checkNext.setText("Done");
                         } else {
-                            if (moduleNumber == accessModule) {
-                                accessQuestion++;
-                                updateProgress();
+                            if (moduleNumber == User.accessModule) {
+                                User.accessQuestion++;
+                                updateProgress(context);
                             }
                             handler.postDelayed(new Runnable() {
                                 @Override
@@ -203,17 +199,17 @@ public class QuizUtils {
         option4.setBackgroundColor(Color.TRANSPARENT);
     }
 
-    private static void updateProgress() {
+    private static void updateProgress(Context context) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        // Todo: userID?
-        String userID = "0123456789";
+        SharedPreferences preferences = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        String userId = preferences.getString(User.USER_CONTACT_NUMBER,null);
         Map<String, Object> newProgress = new HashMap<>();
-        newProgress.put(ACCESS_MODULE, accessModule);
-        newProgress.put(PROGRESS_LINK, progressLink);
-        newProgress.put(PROGRESS_PDF, progressPdf);
-        newProgress.put(ACCESS_QUESTION, accessQuestion);
+        newProgress.put(User.ACCESS_MODULE, User.accessModule);
+        newProgress.put(User.PROGRESS_LINK, User.progressLink);
+        newProgress.put(User.PROGRESS_PDF, User.progressPdf);
+        newProgress.put(User.ACCESS_QUESTION, User.accessQuestion);
 
-        firestore.collection("users").document(userID).update(newProgress);
+        firestore.collection("users").document(userId).update(newProgress);
     }
 
     static class SortbyQuestionNumber implements Comparator<Question> {

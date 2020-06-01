@@ -15,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.VideoView;
 
 import com.example.awareness.Constants;
+import com.example.awareness.Constants.User;
 import com.example.awareness.R;
+import com.example.awareness.ui.learningactivity.LearningActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         fromdown = AnimationUtils.loadAnimation(this,R.anim.fromdown);
         fromleft = AnimationUtils.loadAnimation(this,R.anim.fromleft);
         fromright = AnimationUtils.loadAnimation(this,R.anim.fromright);
-        sharedPreferences = getSharedPreferences(Constants.MY_PREFERENCE, Context.MODE_PRIVATE);
-        final String name = sharedPreferences.getString(Constants.name,"");
+        sharedPreferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        final String name = sharedPreferences.getString(User.USER_NAME,null);
 
 
 
@@ -53,17 +55,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if(name.equals("")) {
+                if(name == null) {
 
-                    Intent i = new Intent(MainActivity.this, Dashboard.class);
+                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
 //                    Intent i = new Intent(MainActivity.this, TestActivity.class);
 
                     startActivity(i);
                     finish();
                 }
                 else {
-                    Constants.name_all=name;
-                    startActivity(new Intent(MainActivity.this, Dashboard.class));
+                    startActivity(new Intent(MainActivity.this, LearningActivity.class));
                     finish();
                 }
             }

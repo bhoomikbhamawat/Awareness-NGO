@@ -1,12 +1,15 @@
 package com.example.awareness.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
@@ -39,50 +42,61 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // Todo: userID?
-        String userId = "0123456789";
-        firestore.collection("users").document(userId).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()){
-                            DocumentSnapshot document = task.getResult();
-                            if(document!= null){
-                                User.accessModule =  Objects.requireNonNull(document.getLong(User.ACCESS_MODULE)).intValue();
-                                User.accessQuestion = Objects.requireNonNull(document.getLong(User.ACCESS_QUESTION)).intValue();
-                                User.progressLink = document.getBoolean(User.PROGRESS_LINK);
-                                User.progressPdf = document.getBoolean(User.PROGRESS_PDF);
+        TextView welcomeText = findViewById(R.id.welcome);
+        SharedPreferences preferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        String name = preferences.getString(User.USER_NAME,null);
+
+        if(name !=null){
+            welcomeText.setText("Welcome " + name);
+        }
+
+        String userId = preferences.getString(User.USER_CONTACT_NUMBER,null);
+        if(userId != null) {
+            firestore.collection("users").document(userId).get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document != null) {
+                                    User.accessModule = Objects.requireNonNull(document.getLong(User.ACCESS_MODULE)).intValue();
+                                    User.accessQuestion = Objects.requireNonNull(document.getLong(User.ACCESS_QUESTION)).intValue();
+                                    User.progressLink = document.getBoolean(User.PROGRESS_LINK);
+                                    User.progressPdf = document.getBoolean(User.PROGRESS_PDF);
+                                }
                             }
                         }
-                    }
-                });
+                    });
 
-        firestore.collection("modules").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())){
-                        Map<String,String> attachments = new HashMap<>();
-                        attachments.put("Link",document.getString("Link"));
-                        attachments.put("Pdf",document.getString("Pdf"));
+            firestore.collection("modules").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        modules.clear();
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            Map<String, String> attachments = new HashMap<>();
+                            attachments.put("Link", document.getString("Link"));
+                            attachments.put("Pdf", document.getString("Pdf"));
 
-                        modules.add(new Module(Integer.parseInt(document.getId()) , document.getString("Topic"), attachments));
-                    }
-                    Collections.sort(modules, new SortbyModuleNumber());
-                    try {
-                        learningAdapter.notifyDataSetChanged();
-                        progressBar.setVisibility(View.GONE);
-                    }catch (Exception e){
-                        Log.e("TAGG",e.toString());
-                    }
+                            modules.add(new Module(Integer.parseInt(document.getId()), document.getString("Topic"), attachments));
+                        }
+                        Collections.sort(modules, new SortbyModuleNumber());
+                        try {
+                            learningAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                        } catch (Exception e) {
+                            Log.e("TAGG", e.toString());
+                        }
 
-                }else{
-                    Log.e("TAGG", "Error getting modules",task.getException());
+                    } else {
+                        Log.e("TAGG", "Error getting modules", task.getException());
+                    }
                 }
-            }
-        });
+            });
+        }
 
     }
+
     static class SortbyModuleNumber implements Comparator<Module> {
 
         @Override
@@ -110,7 +124,7 @@ public class Dashboard extends AppCompatActivity {
 
     public void FormKit(View view) {
         Intent intent = new Intent(this, Form.class);
-        intent.putExtra("mode",Constants.Forms.FORM_KIT);
+        intent.putExtra("mode", Constants.Forms.FORM_KIT);
         startActivity(intent);
     }
 }

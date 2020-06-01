@@ -1,32 +1,35 @@
 package com.example.awareness.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.awareness.Constants;
+import com.example.awareness.Constants.User;
 import com.example.awareness.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.awareness.ui.learningactivity.LearningActivity;
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
 
-    EditText emailText;
-    EditText passwordText;
+    EditText nameText;
+    EditText phoneText;
     Button loginButton;
     TextView signupLink;
 
@@ -36,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        emailText = findViewById(R.id.text_email);
-        passwordText = findViewById(R.id.text_password);
+        nameText = findViewById(R.id.text_email);
+        phoneText = findViewById(R.id.text_password);
 
         loginButton = findViewById(R.id.btn_login);
         signupLink = findViewById(R.id.text_signup);
@@ -83,54 +86,61 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("loading");
         progressDialog.show();
 
-        final String name = emailText.getText().toString();
-        final String password = passwordText.getText().toString();
+        final String name = nameText.getText().toString().trim();
+        final String phone = phoneText.getText().toString().trim();
         //final String emailRefined = emailText.getText().toString().replaceAll("\\W+","");
 
-        FirebaseDatabase LoginReference = FirebaseDatabase.getInstance();
-        DatabaseReference mLoginReference = LoginReference.getReference("Register");
-        mLoginReference.child(name).
-                addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection("users").document(phone).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String value = dataSnapshot.child("mobile").getValue(String.class);
-                        try {
-                            //checking if already registered or not
-                            if(password.equals(value) )
-                            {
-                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                sharedPreferences = getSharedPreferences(Constants.MY_PREFERENCE, Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString(Constants.name, name);
-                                //editor.putString(Constants.email, email);
-                                editor.putString(Constants.password,password);
-                                //editor.putString(Constants.isactive,isactive);
-                                editor.apply();
-                                editor.commit();
-                                progressDialog.dismiss();
-                                onLoginSuccess();
-                            }
-                            else {
-                                Toast.makeText(LoginActivity.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
-                                onLoginFailed();
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+
+                            if (document != null) {
+                                if (document.exists()) {
+                                    String nameFetched = document.getString(Constants.User.USER_NAME);
+                                    if (name.equals(nameFetched)) {
+                                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                        sharedPreferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString(User.USER_NAME, name);
+                                        editor.putString(User.USER_CONTACT_NUMBER, phone);
+                                        editor.apply();
+                                        progressDialog.dismiss();
+                                        onLoginSuccess();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
+                                        progressDialog.dismiss();
+                                        onLoginFailed();
+                                    }
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "This phone number is not registered", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                    onLoginFailed();
+                                }
                             }
                         }
-                        //Exception e - if on firebase it is unable to check as that it is not their
-                        catch (Exception e){
-                            Toast.makeText(LoginActivity.this, "You are not registered with this email id", Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
-                            onLoginFailed();
-                        }
                     }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                        onLoginFailed();
-                        Log.w("registered or not", "loadPost:onCancelled", databaseError.toException());
-                    }
-                });
+                }).addOnCanceledListener(new OnCanceledListener() {
+            @Override
+            public void onCanceled() {
+                Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                onLoginFailed();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, "कुछ गलत हो गया\n" +
+                        "बाद में पुन: प्रयास करें", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                onLoginFailed();
+            }
+        });
+
+
     }
 
     public void onLoginFailed() {
@@ -141,21 +151,22 @@ public class LoginActivity extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String name = emailText.getText().toString();
-        String phone = passwordText.getText().toString();
+        String name = nameText.getText().toString().trim();
+        String phone = phoneText.getText().toString().trim();
 
         if (name.isEmpty()) {
-            emailText.setError("enter a name");
+            nameText.setError("enter a name");
             valid = false;
         } else {
-            emailText.setError(null);
+            nameText.setError(null);
         }
 
-        if (phone.isEmpty() || phone.length() < 4 || phone.length() > 20) {
-            passwordText.setError("between 4 and 20 alphanumeric characters");
+        if (phone.length() < 10) {
+//            phoneText.setError("between 4 and 20 alphanumeric characters");
+            phoneText.setError("Enter valid phone number");
             valid = false;
         } else {
-            passwordText.setError(null);
+            phoneText.setError(null);
         }
 
         return valid;
@@ -168,32 +179,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginSuccess() {
-       // final String email = sharedPreferences.getString(Constants.email,"");
-       // final String email_refined = email.replaceAll("\\W+", "");
-
-        FirebaseDatabase PostReference = FirebaseDatabase.getInstance();
-        DatabaseReference cPostReference = PostReference.getReference("Data");
-        cPostReference.
-                addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        //Saving to internal storage
-
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w("activated or not", "loadPost:onCancelled", databaseError.toException());
-                    }
-                });
         loginButton.setEnabled(true);
 
-        //this is to understand and write why this has done
 
-            Intent i = new Intent(LoginActivity.this, Dashboard.class);
-            i.putExtra("EXTRA", "notopenFragment");
-            startActivity(i);
-            finish();
+        Intent i = new Intent(LoginActivity.this, LearningActivity.class);
+//            i.putExtra("EXTRA", "notopenFragment");
+        startActivity(i);
+        finish();
 
     }
 
