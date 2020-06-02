@@ -16,7 +16,7 @@ import com.example.awareness.R;
 
 public class About extends AppCompatActivity {
 
-    private LinearLayout root;
+    LinearLayout root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +30,14 @@ public class About extends AppCompatActivity {
                 .isRTL(false)
 
 
-                .setDescription(Html.fromHtml("<b>" + "•Sattvik Mess A Team•" + "</b>" + "<br><br><p align=\"right\">•Tanish Jain<br>•Shreya Munshi<br>•Himanshu Bhadera<br>•Dhawal Jain<br>•Bhoomik Bhamavat<br>•Ria Signoria<br>•Shreyash Jain<br><br><b></p>" + "•Sattvik App Team•<br><br>" + "</b>" + "•Chavvi Jain<br>•Shreya Munshi<br>•Himanshu Bhadera<br>•Bhoomik Bhamavat<br>•Anant Gowadiya<br>•Abhinav Dangi<br>Shreyash Jain"))
+                .setDescription(Html.fromHtml("<b>" + "•Developers Team•" + "</b>" + "<br><br><p align=\"right\">•Bhoomik Bhamavat<br>•Monu Kumar<br><br><b></p>" + "•Content Team•<br><br>" + "</b>" + "•Divya Jain<br>•Aditi Jain<br>"))
                 .setImage(R.drawable.girl_photo)
-                .addItem(new Element().setTitle("Version 2.0"))
-
+                .addItem(new Element().setTitle("Version 1.0"))
                 .addGroup("Always ready to help you")
                 .addEmail("sattvikmess@gmail.com")
                 .addWebsite("http://sattvikmess.com/")
-
-
+                .addGitHub("medyo")
                 .addPlayStore("com.jain.shreyash.myapplication")
-
-
                 .addItem(getCopyRightsElement())
                 .create();
 
