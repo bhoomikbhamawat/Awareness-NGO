@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                                         editor.putString(User.USER_NAME, name);
                                         editor.putString(User.USER_CONTACT_NUMBER, phone);
                                         editor.apply();
+                                        Constants.name_all=name;
                                         progressDialog.dismiss();
                                         onLoginSuccess();
                                     } else {

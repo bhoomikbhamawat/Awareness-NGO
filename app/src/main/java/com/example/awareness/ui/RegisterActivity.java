@@ -287,7 +287,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 editor.putString(User.USER_CONTACT_NUMBER, rmobile);
                                                 editor.putString(User.USER_NAME, rname);
                                                 editor.apply();
-
+                                                Constants.name_all = rname;
                                                 Intent i = new Intent(RegisterActivity.this, LearningActivity.class);
                                                 startActivity(i);
                                                 finish();

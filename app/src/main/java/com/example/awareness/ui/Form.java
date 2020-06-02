@@ -40,6 +40,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -105,6 +106,7 @@ public class Form extends AppCompatActivity {
     int mYear, mMonth, mDay, mHour, mMinute;
     ScrollView layout_formkit;
     String mDateTime = "";
+    CardView name_card;
     TextView dateTime,category_text;
     private TextView removeImage, removeImageStudentsList;
     private ArrayList<String> UserImage, imageStudentsList;
@@ -119,16 +121,19 @@ public class Form extends AppCompatActivity {
         Intent intent = getIntent();
         final int mode = intent.getIntExtra("mode", -1);
         Age_kit = findViewById(R.id.age_kit);
+        name_card =findViewById(R.id.card_name);
         categoryview = findViewById(R.id.view_category);
+        Name_kp = findViewById(R.id.name_kp);
         categorySpinner = findViewById(R.id.category_spinner);
         category_text = findViewById(R.id.form_category_text);
+        Name_kit = findViewById(R.id.name_kit);
         if (mode == Forms.FORM_STUDENTS) {
             HorizontalScrollView formStudentsExtra = findViewById(R.id.form_students_extra);
             formStudentsExtra.setVisibility(View.VISIBLE);
             //textInputLayout.setHelperText("प्रशिक्षणार्थियो की संख्या");
             TextView studentsList = findViewById(R.id.students_list);
             studentsList.setVisibility(View.VISIBLE);
-
+           Name_kit.setText(Constants.name_all);
             Age_kit.setHint("प्रशिक्षणार्थियो की संख्या");
 
             TextView studentsPhotograph = findViewById(R.id.students_photograph);
@@ -136,6 +141,8 @@ public class Form extends AppCompatActivity {
 
             url = Forms.STUDENTS_FORM_URL;
         }else{
+            name_card.setVisibility(View.VISIBLE);
+            Name_kp.setText(Constants.name_all);
             url = Forms.ADD_USER_URL;
             Age_kit.setHint("उम्र");
             categorySpinner.setVisibility(View.VISIBLE);
@@ -150,7 +157,7 @@ public class Form extends AppCompatActivity {
         Age_kit = findViewById(R.id.age_kit);
         Falla_kit = findViewById(R.id.Falla_kit);
         Rajasava_kit = findViewById(R.id.RajasavGaav_kit);
-        Name_kit = findViewById(R.id.name_kit);
+
         Place_kit = findViewById(R.id.place_kit);
         uploadedImageContainer = findViewById(R.id.uploaded_image_container);
         removeImage = findViewById(R.id.remove_image);
@@ -160,7 +167,7 @@ public class Form extends AppCompatActivity {
         removeImageStudentsList = findViewById(R.id.remove_image_students_list);
 
         final Spinner SamitiSpinner = findViewById(R.id.Samiti_spinner);
-        Name_kp = findViewById(R.id.name_kp);
+
 
         uploadImageLayout = getLayoutInflater().inflate(R.layout.uploadimage_dialog_layout, null, false);
         uploadImageDialog = new BottomSheetDialog(this);
@@ -472,15 +479,17 @@ public class Form extends AppCompatActivity {
                         Log.e("ComplainFragment", "Snackbar: Please Select your पंचायत समिति", e);
                         Toast.makeText(Form.this, "Please Select your पंचायत समिति", Toast.LENGTH_SHORT).show();
                     }
-                } else if (TextUtils.isEmpty(Name_kit.getText())) {
-                    try {
-                        Snackbar.make(layout_formkit, "कृपया नाम भरें", Snackbar.LENGTH_SHORT).show();
-                    } catch (NullPointerException e) {
+                } else if (mode != Forms.FORM_STUDENTS){
+                    if(TextUtils.isEmpty(Name_kit.getText())) {
+                        try {
+                            Snackbar.make(layout_formkit, "कृपया नाम भरें", Snackbar.LENGTH_SHORT).show();
+                        } catch (NullPointerException e) {
 
-                        Log.e("ComplainFragment", "Snackbar: कृपया नाम भरे", e);
-                        Toast.makeText(Form.this, "कृपया नाम भरे", Toast.LENGTH_SHORT).show();
+                            Log.e("ComplainFragment", "Snackbar: कृपया नाम भरे", e);
+                            Toast.makeText(Form.this, "कृपया नाम भरे", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                } else if (mDateTime.isEmpty()) {
+                }else if (mDateTime.isEmpty()) {
                     try {
                         Snackbar.make(layout_formkit, "कृपया समय भरें", Snackbar.LENGTH_SHORT).show();
                     } catch (NullPointerException e) {
@@ -527,8 +536,12 @@ public class Form extends AppCompatActivity {
                     a_builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            final String uName = Name_kit.getText().toString();
-                            final String uAge = Age_kit.getText().toString();
+                            String uName = "";
+                            if(mode != Forms.FORM_STUDENTS){
+                              uName = Name_kit.getText().toString();
+                            }
+
+                             final String uAge = Age_kit.getText().toString();
                             final String uVillage = Village_kit.getText().toString();
                             final String uPanchayat = Panchayat_kit.getText().toString();
                             String uPlace = "";
@@ -555,6 +568,7 @@ public class Form extends AppCompatActivity {
                             final String finalUPlace = uPlace;
                             final String finalURajasava = uRajasava;
                             final String finalCategory = Category1;
+                            final String finalUName = uName;
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                                     new Response.Listener<String>() {
                                         @Override
@@ -589,7 +603,7 @@ public class Form extends AppCompatActivity {
                                     params.put(Forms.KEY_Name_kp, "Bhoomik");
 
                                     // params.put(KEY_Complaint_Emailid, ComplaineeEmailaddress);
-                                    params.put(Forms.KEY_uName, uName);
+                                    params.put(Forms.KEY_uName, finalUName);
                                     params.put(Forms.KEY_Age, uAge);
                                     params.put(Forms.KEY_Date, mDateTime);
                                     params.put(Forms.KEY_Category, finalCategory);
@@ -599,7 +613,7 @@ public class Form extends AppCompatActivity {
                                     params.put(Forms.KEY_Rajasav, finalURajasava);
                                     params.put(Forms.KEY_GramPanchayat, uPanchayat);
                                     params.put(Forms.KEY_Samiti, Samiti1);
-                                    Log.d("12301001", uName + uAge + finalCategory + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
+                                    Log.d("12301001", finalUName + uAge + finalCategory + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
                                     Log.d("imageuser", UserImage.toString());
                                     if (UserImage != null) {
                                         for (int i = 0; i < UserImage.size(); i++) {

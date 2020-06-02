@@ -24,6 +24,7 @@ import android.widget.ProgressBar;
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
 import com.example.awareness.R;
+import com.example.awareness.ui.About;
 import com.example.awareness.ui.Dashboard;
 import com.example.awareness.ui.Form;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -87,6 +88,8 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     public void about(MenuItem item) {
+        Intent intent = new Intent(this, About.class);
+        startActivity(intent);
     }
 
     public void logout(MenuItem item) {
@@ -175,10 +178,6 @@ public class LearningActivity extends AppCompatActivity {
             return a.getModuleNumber() - b.getModuleNumber();
         }
     }
-
-
-}
-
 
 
 }

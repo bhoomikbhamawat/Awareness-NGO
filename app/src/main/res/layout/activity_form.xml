@@ -18,6 +18,8 @@
 
         <androidx.cardview.widget.CardView
             app:cardCornerRadius="8dp"
+            android:id="@+id/card_name"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp">

@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    startActivity(new Intent(MainActivity.this, LearningActivity.class));
+                    Constants.name_all=name;
+                    startActivity(new Intent(MainActivity.this, Dashboard.class));
                     finish();
                 }
             }

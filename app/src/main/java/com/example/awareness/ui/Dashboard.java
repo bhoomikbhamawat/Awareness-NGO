@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -36,6 +38,33 @@ import static com.example.awareness.ui.learningactivity.LearningActivity.progres
 public class Dashboard extends AppCompatActivity {
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    public void certificate(MenuItem item) {
+    }
+
+    public void FormStudents(MenuItem item) {
+        Intent intent = new Intent(this, Form.class);
+        intent.putExtra("mode", Constants.Forms.FORM_STUDENTS);
+        startActivity(intent);
+    }
+
+    public void FormKit(MenuItem item) {
+        Intent intent = new Intent(this, Form.class);
+        intent.putExtra("mode", Constants.Forms.FORM_KIT);
+        startActivity(intent);
+    }
+
+    public void about(MenuItem item) {
+    }
+
+    public void logout(MenuItem item) {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
