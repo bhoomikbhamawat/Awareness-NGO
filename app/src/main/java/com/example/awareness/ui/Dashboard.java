@@ -103,9 +103,7 @@ public class Dashboard extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         modules.clear();
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            Map<String, String> attachments = new HashMap<>();
-                            attachments.put("Link", document.getString("Link"));
-                            attachments.put("Pdf", document.getString("Pdf"));
+                            Map<String, Object> attachments = document.getData();
 
                             modules.add(new Module(Integer.parseInt(document.getId()), document.getString("Topic"), attachments));
                         }

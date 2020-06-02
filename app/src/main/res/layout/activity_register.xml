@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.RegisterActivity"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    >
+    tools:context=".ui.RegisterActivity">
+
     <LinearLayout
+        android:id="@+id/linear_l"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linear_l"
         android:orientation="vertical"
 
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingTop="20dp"
+        android:paddingRight="24dp"
+        android:paddingBottom="20dp">
 
         <TextView
             android:id="@+id/secret"
@@ -22,11 +22,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="नाम"/>
-        <EditText android:id="@+id/input_name"
+            android:text="नाम" />
+
+        <EditText
+            android:id="@+id/input_name"
             android:layout_width="match_parent"
-            android:ems="10"
             android:layout_height="wrap_content"
+            android:ems="10"
             android:hint="अपना नाम लिखिए" />
 
 
@@ -35,21 +37,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="गाँव"/>
+            android:text="गाँव" />
+
         <EditText
             android:id="@+id/input_Gaav"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:hint="गाँव"
-            android:inputType="text"
-            android:layout_height="wrap_content"/>
+            android:inputType="text" />
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="उम्र" />
 
         <EditText
@@ -63,8 +66,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="जाति" />
 
         <Spinner
@@ -72,15 +75,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="जाति"
-            />
+            android:hint="जाति" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="फला"/>
+            android:text="फला" />
 
         <EditText
             android:id="@+id/input_faala"
@@ -88,12 +90,13 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="फला" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="राजस्व गाँव"/>
+            android:text="राजस्व गाँव" />
 
         <EditText
             android:id="@+id/input_rajasav"
@@ -103,45 +106,48 @@
             android:hint="राजस्व गाँव" />
 
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="मोबाइल न."/>
+            android:text="मोबाइल न." />
 
         <EditText
             android:id="@+id/input_phone_reg"
             android:layout_width="match_parent"
-            android:ems="10"
             android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:hint="अपने मोबाइल नंबर डालिये" />
+            android:ems="10"
+            android:hint="अपने मोबाइल नंबर डालिये"
+            android:inputType="phone" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="ग्राम पंचायत"/>
-        <EditText android:id="@+id/reg_grampanc"
+            android:text="ग्राम पंचायत" />
+
+        <EditText
+            android:id="@+id/reg_grampanc"
             android:layout_width="match_parent"
-            android:ems="10"
             android:layout_height="wrap_content"
-            android:hint="ग्राम पंचायत"/>
+            android:ems="10"
+            android:hint="ग्राम पंचायत" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="पंचायत समिति"/>
-        <EditText android:id="@+id/reg_samiti"
+            android:text="पंचायत समिति" />
+
+        <EditText
+            android:id="@+id/reg_samiti"
             android:layout_width="match_parent"
-            android:ems="10"
             android:layout_height="wrap_content"
+            android:ems="10"
             android:hint="पंचायत समिति" />
 
         <TextView
@@ -149,19 +155,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="जिला"/>
-        <EditText android:id="@+id/input_city"
+            android:text="जिला" />
+
+        <EditText
+            android:id="@+id/input_city"
             android:layout_width="match_parent"
-            android:ems="10"
             android:layout_height="wrap_content"
+            android:ems="10"
             android:hint="जिला" />
 
         <Button
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
             android:background="@drawable/selector_button"
-            android:text="रजिस्टर करे"/>
+            android:text="रजिस्टर करे" />
 
 
     </LinearLayout>

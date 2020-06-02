@@ -63,10 +63,12 @@ public class Constants {
         public static final String ACCESS_QUESTION = "access_question";
         public static final String PROGRESS_LINK = "progress_Link";
         public static final String PROGRESS_PDF = "progress_Pdf";
+        public static final String PROGRESS_LECTURE = "progress_Lecture";
 
         public static int accessModule;
         public static int accessQuestion;
         public static boolean progressLink;
         public static boolean progressPdf;
+        public static boolean progressLecture;
     }
 }

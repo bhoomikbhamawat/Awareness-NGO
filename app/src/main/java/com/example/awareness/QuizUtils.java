@@ -2,6 +2,7 @@ package com.example.awareness;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.awareness.ui.CertificateActivity;
 import com.example.awareness.ui.learningactivity.LearningActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.example.awareness.Constants.User;
+import static com.example.awareness.ui.learningactivity.LearningActivity.modules;
 import static com.example.awareness.ui.learningactivity.LearningActivity.quizBottomSheet;
 import static com.example.awareness.ui.learningactivity.LearningActivity.quizBottomSheetDialog;
 
@@ -52,6 +55,7 @@ public class QuizUtils {
     @SuppressLint("StaticFieldLeak")
     private static ScrollView mainContent;
     private static boolean done = false;
+    private static boolean certificate = false;
 
 
     public static void createQuiz(final Context context, final int moduleNumber) {
@@ -112,6 +116,11 @@ public class QuizUtils {
                     checkNext.setText("Submit");
                     done = false;
                     quizBottomSheetDialog.dismiss();
+                }else if(certificate){
+                    checkNext.setText("Submit");
+                    certificate = false;
+                    quizBottomSheetDialog.dismiss();
+                    context.startActivity(new Intent(context, CertificateActivity.class));
                 } else {
                     Handler handler = new Handler();
 
@@ -121,18 +130,32 @@ public class QuizUtils {
                         correctAnswer.setBackgroundResource(R.drawable.correct_answer);
 
                         if (questionPosition == questions.size() - 1) {
+                            done = true;
+                            certificate = false;
+                            checkNext.setText("Done");
 
                             if (moduleNumber == User.accessModule) {
-                                User.accessModule++;
-                                User.progressLink = false;
-                                User.progressPdf = false;
+                                if(moduleNumber == modules.get(modules.size()-1).getModuleNumber()){
+                                    User.progressLecture = true;
+                                    User.progressLink = true;
+                                    User.progressPdf = true;
+                                    done = false;
+                                    certificate = true;
+                                    checkNext.setText("View Certificate");
+                                }else {
+                                    User.accessModule++;
+                                    User.progressLecture = false;
+                                    // To be changed if link or pdf added
+                                    User.progressLink = true;
+                                    User.progressPdf = true;
+                                }
                                 User.accessQuestion = 1;
                                 updateProgress(context);
                                 LearningActivity.learningAdapter.notifyDataSetChanged();
+
                             }
 
-                            done = true;
-                            checkNext.setText("Done");
+
                         } else {
                             if (moduleNumber == User.accessModule) {
                                 User.accessQuestion++;
@@ -207,9 +230,12 @@ public class QuizUtils {
         newProgress.put(User.ACCESS_MODULE, User.accessModule);
         newProgress.put(User.PROGRESS_LINK, User.progressLink);
         newProgress.put(User.PROGRESS_PDF, User.progressPdf);
+        newProgress.put(User.PROGRESS_LECTURE,User.PROGRESS_LECTURE);
         newProgress.put(User.ACCESS_QUESTION, User.accessQuestion);
 
-        firestore.collection("users").document(userId).update(newProgress);
+        if (userId != null) {
+            firestore.collection("users").document(userId).update(newProgress);
+        }
     }
 
     static class SortbyQuestionNumber implements Comparator<Question> {

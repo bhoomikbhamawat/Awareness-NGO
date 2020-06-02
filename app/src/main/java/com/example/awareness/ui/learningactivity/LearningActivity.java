@@ -1,54 +1,46 @@
 package com.example.awareness.ui.learningactivity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
 import com.example.awareness.R;
 import com.example.awareness.ui.About;
-import com.example.awareness.ui.Dashboard;
+import com.example.awareness.ui.CertificateActivity;
 import com.example.awareness.ui.Form;
+import com.example.awareness.ui.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.example.awareness.Constants.User.ACCESS_MODULE;
-import static com.example.awareness.Constants.User.ACCESS_QUESTION;
-import static com.example.awareness.Constants.User.PROGRESS_LINK;
-import static com.example.awareness.Constants.User.PROGRESS_PDF;
 import static com.example.awareness.Constants.User;
 
 public class LearningActivity extends AppCompatActivity {
@@ -64,15 +56,17 @@ public class LearningActivity extends AppCompatActivity {
     public static ProgressBar progressBar;
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    SharedPreferences preferences;
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     public void certificate(MenuItem item) {
+        startActivity(new Intent(this, CertificateActivity.class));
     }
 
     public void FormStudents(MenuItem item) {
@@ -93,6 +87,40 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     public void logout(MenuItem item) {
+        final AlertDialog.Builder logout = new AlertDialog.Builder(this);
+
+        View layout = getLayoutInflater().inflate(R.layout.logout_layout, null, false);
+        final EditText entryName = layout.findViewById(R.id.entry_name);
+        logout.setView(layout);
+        logout.setCancelable(true);
+
+        final AlertDialog logoutDialog = logout.create();
+
+
+        layout.findViewById(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (entryName.getText().toString().equals(preferences.getString(User.USER_NAME, null))) {
+                    preferences.getAll().clear();
+                    startActivity(new Intent(LearningActivity.this, LoginActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(LearningActivity.this, "Wrong entry", Toast.LENGTH_SHORT).show();
+                    entryName.getText().clear();
+                }
+            }
+        });
+
+        layout.findViewById(R.id.btn_logout_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutDialog.cancel();
+
+            }
+        });
+        logoutDialog.show();
+
+
     }
 
     @Override
@@ -112,7 +140,7 @@ public class LearningActivity extends AppCompatActivity {
         learningRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         learningAdapter = new LearningAdapter(this, modules);
         learningRecyclerView.setAdapter(learningAdapter);
-        if(modules.size() > 0){
+        if (modules.size() > 0) {
             progressBar.setVisibility(View.GONE);
         }
 
@@ -122,10 +150,10 @@ public class LearningActivity extends AppCompatActivity {
 //                .build();
 //        firestore.setFirestoreSettings(settings);
 
-        SharedPreferences preferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        preferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
 
-        String userId = preferences.getString(User.USER_CONTACT_NUMBER,null);
-        if(userId != null) {
+        String userId = preferences.getString(User.USER_CONTACT_NUMBER, null);
+        if (userId != null) {
             firestore.collection("users").document(userId).get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -135,8 +163,16 @@ public class LearningActivity extends AppCompatActivity {
                                 if (document != null) {
                                     User.accessModule = Objects.requireNonNull(document.getLong(User.ACCESS_MODULE)).intValue();
                                     User.accessQuestion = Objects.requireNonNull(document.getLong(User.ACCESS_QUESTION)).intValue();
-                                    User.progressLink = document.getBoolean(User.PROGRESS_LINK);
-                                    User.progressPdf = document.getBoolean(User.PROGRESS_PDF);
+                                    if (document.contains(User.PROGRESS_LECTURE)) {
+                                        User.progressLecture = document.getBoolean(User.PROGRESS_LECTURE);
+                                    }
+                                    if (document.contains(User.PROGRESS_LINK)) {
+                                        User.progressLink = document.getBoolean(User.PROGRESS_LINK);
+                                    }
+                                    if (document.contains(User.PROGRESS_PDF)) {
+                                        User.progressPdf = document.getBoolean(User.PROGRESS_PDF);
+                                    }
+
                                 }
                             }
                         }
@@ -148,9 +184,7 @@ public class LearningActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         modules.clear();
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            Map<String, String> attachments = new HashMap<>();
-                            attachments.put("Link", document.getString("Link"));
-                            attachments.put("Pdf", document.getString("Pdf"));
+                            Map<String, Object> attachments = document.getData();
 
                             modules.add(new Module(Integer.parseInt(document.getId()), document.getString("Topic"), attachments));
                         }
@@ -159,7 +193,7 @@ public class LearningActivity extends AppCompatActivity {
                             learningAdapter.notifyDataSetChanged();
                             progressBar.setVisibility(View.GONE);
                         } catch (Exception e) {
-                            Log.e("TAGG", e.toString());
+                            e.printStackTrace();
                         }
 
                     } else {

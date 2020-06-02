@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -93,7 +94,8 @@ public class Form extends AppCompatActivity {
     private Button sendButton;
     private LinearLayout uploadedImageContainer, uploadedImageContainerStudentsList;
     private String Samiti;
-    Spinner categorySpinner;
+    AutoCompleteTextView categorySpinner;
+    TextInputLayout categotySpinnerLayout;
     private String Category;
     View categoryview;
     private EditText Name_kit, Panchayat_kit, Village_kit, Place_kit, Age_kit, Falla_kit, Rajasava_kit;
@@ -122,10 +124,11 @@ public class Form extends AppCompatActivity {
         final int mode = intent.getIntExtra("mode", -1);
         Age_kit = findViewById(R.id.age_kit);
         name_card =findViewById(R.id.card_name);
-        categoryview = findViewById(R.id.view_category);
+//        categoryview = findViewById(R.id.view_category);
         Name_kp = findViewById(R.id.name_kp);
         categorySpinner = findViewById(R.id.category_spinner);
-        category_text = findViewById(R.id.form_category_text);
+        categotySpinnerLayout = findViewById(R.id.category_spinner_layout);
+//        category_text = findViewById(R.id.form_category_text);
         Name_kit = findViewById(R.id.name_kit);
         if (mode == Forms.FORM_STUDENTS) {
             HorizontalScrollView formStudentsExtra = findViewById(R.id.form_students_extra);
@@ -145,9 +148,10 @@ public class Form extends AppCompatActivity {
             Name_kp.setText(Constants.name_all);
             url = Forms.ADD_USER_URL;
             Age_kit.setHint("उम्र");
-            categorySpinner.setVisibility(View.VISIBLE);
-            category_text.setVisibility(View.VISIBLE);
-            categoryview.setVisibility(View.VISIBLE);
+//            categorySpinner.setVisibility(View.VISIBLE);
+            categotySpinnerLayout.setVisibility(View.VISIBLE);
+//            category_text.setVisibility(View.VISIBLE);
+//            categoryview.setVisibility(View.VISIBLE);
         }
 
 
@@ -166,7 +170,7 @@ public class Form extends AppCompatActivity {
         uploadedImageContainerStudentsList = findViewById(R.id.uploaded_image_container_students_list);
         removeImageStudentsList = findViewById(R.id.remove_image_students_list);
 
-        final Spinner SamitiSpinner = findViewById(R.id.Samiti_spinner);
+        final AutoCompleteTextView SamitiSpinner = findViewById(R.id.Samiti_spinner);
 
 
         uploadImageLayout = getLayoutInflater().inflate(R.layout.uploadimage_dialog_layout, null, false);
@@ -202,130 +206,130 @@ public class Form extends AppCompatActivity {
 
 
         List<String> hostels = new ArrayList<>();
-        hostels.add(0, "पंचायत समिति");
+//        hostels.add(0, "पंचायत समिति");
         hostels.add("फलासिया");
         hostels.add("कोटड़ा");
         hostels.add("सायरा");
 
         // Setting up adapters to spinners
         List<String> complaints = new ArrayList<>();
-        complaints.add(0, "जाति");
+//        complaints.add(0, "जाति");
         complaints.add("SC");
         complaints.add("ST");
         complaints.add("Minority");
         complaints.add("OBC");
         complaints.add("General");
-        ArrayAdapter<String> complaintsAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, complaints) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                view.setPadding(0, view.getPaddingTop(), 0, view.getPaddingBottom());
-                return view;
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                switch (position) {
-                    case 0:
-
-                        tv.setTypeface(null, Typeface.BOLD);
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 52);
-                        break;
-                    default:
-                        tv.setTypeface(null, Typeface.NORMAL);
-                        tv.setTextColor(Color.BLACK);
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 48);
-                        break;
-                }
-                return view;
-            }
+        ArrayAdapter<String> complaintsAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, complaints) {
+//            @Override
+//            public boolean isEnabled(int position) {
+//                if (position == 0) {
+//
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            }
+//
+//            @NonNull
+//            @Override
+//            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//                View view = super.getView(position, convertView, parent);
+//                view.setPadding(0, view.getPaddingTop(), 0, view.getPaddingBottom());
+//                return view;
+//            }
+//
+//            @Override
+//            public View getDropDownView(int position, View convertView,
+//                                        ViewGroup parent) {
+//                View view = super.getDropDownView(position, convertView, parent);
+//                TextView tv = (TextView) view;
+//                switch (position) {
+//                    case 0:
+//
+//                        tv.setTypeface(null, Typeface.BOLD);
+//                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 52);
+//                        break;
+//                    default:
+//                        tv.setTypeface(null, Typeface.NORMAL);
+//                        tv.setTextColor(Color.BLACK);
+//                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 48);
+//                        break;
+//                }
+//                return view;
+//            }
         };
-        complaintsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        complaintsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(complaintsAdapter);
-        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                Category = parent.getItemAtPosition(position).toString();
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
+        ArrayAdapter<String> hostelAdapter = new ArrayAdapter<String>(Form.this, android.R.layout.simple_spinner_dropdown_item, hostels) {
+//            @Override
+//            public boolean isEnabled(int position) {
+//                if (position == 0) {
+//                    // Disable the first item from Spinner
+//                    // First item will be use for hint
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            }
+//
+//            @NonNull
+//            @Override
+//            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//                View view = super.getView(position, convertView, parent);
+//                view.setPadding(0, view.getPaddingTop(), 0, view.getPaddingBottom());
+//                return view;
+//            }
 
-                Category = parent.getItemAtPosition(position).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        ArrayAdapter<String> hostelAdapter = new ArrayAdapter<String>(Form.this, android.R.layout.simple_spinner_item, hostels) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                view.setPadding(0, view.getPaddingTop(), 0, view.getPaddingBottom());
-                return view;
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                switch (position) {
-                    case 0:
-                        tv.setTypeface(null, Typeface.BOLD);
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 52);
-                        break;
-                    default:
-                        tv.setTypeface(null, Typeface.NORMAL);
-                        tv.setTextColor(Color.BLACK);
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 48);
-                        break;
-                }
-                return view;
-            }
+//            @Override
+//            public View getDropDownView(int position, View convertView,
+//                                        ViewGroup parent) {
+//                View view = super.getDropDownView(position, convertView, parent);
+//                TextView tv = (TextView) view;
+//                switch (position) {
+//                    case 0:
+//                        tv.setTypeface(null, Typeface.BOLD);
+//                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 52);
+//                        break;
+//                    default:
+//                        tv.setTypeface(null, Typeface.NORMAL);
+//                        tv.setTextColor(Color.BLACK);
+//                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 48);
+//                        break;
+//                }
+//                return view;
+//            }
         };
-        hostelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        hostelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SamitiSpinner.setAdapter(hostelAdapter);
 
 
-        SamitiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                    @Override
-                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                                                        Samiti = parent.getItemAtPosition(position).toString();
-                                                    }
-
-                                                    @Override
-                                                    public void onNothingSelected(AdapterView<?> parent) {
-
-                                                    }
-                                                }
-
-
-        );
+//        SamitiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                                                    @Override
+//                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                                                        Samiti = parent.getItemAtPosition(position).toString();
+//                                                    }
+//
+//                                                    @Override
+//                                                    public void onNothingSelected(AdapterView<?> parent) {
+//
+//                                                    }
+//                                                }
+//
+//
+//        );
 
 
         // Adding & Removing Image
@@ -462,7 +466,7 @@ public class Form extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mode != Forms.FORM_STUDENTS) {
-                    if (Category.equals("जाति")){
+                    if (TextUtils.isEmpty(categorySpinner.getText())){
                         try {
                             Snackbar.make(layout_formkit, "Please specify जाति", Snackbar.LENGTH_SHORT).show();
                         } catch (NullPointerException e) {
@@ -471,7 +475,7 @@ public class Form extends AppCompatActivity {
                             Toast.makeText(Form.this, "Please specify जाति", Toast.LENGTH_SHORT).show();
                         }
                 }
-                } else if (Samiti.equals("पंचायत समिति")) {
+                } else if (TextUtils.isEmpty(SamitiSpinner.getText())) {
                     try {
                         Snackbar.make(layout_formkit, "Please Select your पंचायत समिति", Snackbar.LENGTH_SHORT).show();
                     } catch (NullPointerException e) {
@@ -561,9 +565,9 @@ public class Form extends AppCompatActivity {
                             pdialog.show();
                             String Category1 = "";
                             if(mode != Forms.FORM_STUDENTS) {
-                                Category1 = Category.trim();
+                                Category1 = categorySpinner.getText().toString().trim();
                             }
-                            final String Samiti1 = Samiti.trim();
+                            final String Samiti1 = SamitiSpinner.getText().toString().trim();
 
                             final String finalUPlace = uPlace;
                             final String finalURajasava = uRajasava;

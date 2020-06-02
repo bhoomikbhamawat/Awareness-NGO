@@ -1,6 +1,7 @@
 package com.example.awareness.ui.learningactivity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -23,11 +24,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+import java.util.Objects;
 
-import static com.example.awareness.Constants.User.PROGRESS_LINK;
-import static com.example.awareness.Constants.User.PROGRESS_PDF;
-import static com.example.awareness.Constants.User.progressLink;
-import static com.example.awareness.Constants.User.progressPdf;
+import static com.example.awareness.Constants.User;
 import static com.example.awareness.ui.learningactivity.LearningActivity.learningAdapter;
 import static com.example.awareness.ui.learningactivity.LearningActivity.quizBottomSheetDialog;
 
@@ -50,12 +49,18 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
     @Override
     public void onBindViewHolder(@NonNull final LearningViewHolder holder, final int position) {
         final int MODULE_NUMBER = mModules.get(position).getModuleNumber();
+        SharedPreferences preferences = mContext.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        final String userId = preferences.getString(User.USER_CONTACT_NUMBER, null);
 
         if (MODULE_NUMBER <= Constants.User.accessModule) {
             holder.lock.setVisibility(View.GONE);
 
+            holder.attachedLink.setVisibility(View.GONE);
+            holder.attachedFile.setVisibility(View.GONE);
+            holder.attachedLecture.setVisibility(View.VISIBLE);
             holder.attachedFile.setEnabled(true);
             holder.attachedLink.setEnabled(true);
+            holder.attachedLecture.setEnabled(true);
 
 
             if (MODULE_NUMBER != Constants.User.accessModule) {
@@ -63,52 +68,74 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
                 holder.test.setTextColor(Color.parseColor("#64DD17"));
                 holder.attachedFileText.setTextColor(Color.parseColor("#64DD17"));
                 holder.attachedLinkText.setTextColor(Color.parseColor("#64DD17"));
+                holder.attachedLectureText.setTextColor(Color.parseColor("#64DD17"));
 
             } else {
-                if (progressPdf) {
+                if (User.progressPdf) {
                     holder.attachedFileText.setTextColor(Color.parseColor("#64DD17"));
                 }
-                if (progressLink) {
+                if (User.progressLink) {
                     holder.attachedLinkText.setTextColor(Color.parseColor("#64DD17"));
                 }
-                if (progressPdf && progressLink) {
+                if (User.progressLecture) {
+                    holder.attachedLectureText.setTextColor(Color.parseColor("#64DD17"));
+                }
+                if (User.progressPdf && User.progressLink && User.progressLecture) {
                     holder.test.setEnabled(true);
                 }
             }
         } else {
             holder.attachedFile.setEnabled(false);
             holder.attachedLink.setEnabled(false);
+            holder.attachedLecture.setEnabled(false);
             holder.test.setEnabled(false);
         }
 
         holder.moduleNumber.setText("Module: " + MODULE_NUMBER);
         holder.topicName.setText(mModules.get(position).getTopic());
+        holder.attachedLecture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MODULE_NUMBER == Constants.User.accessModule) {
+                    User.progressLecture = true;
+                    learningAdapter.notifyDataSetChanged();
+                    if (userId != null) {
+                        FirebaseFirestore.getInstance().collection("users").document(userId).update(User.PROGRESS_LECTURE, User.progressLecture);
+                    }
+                }
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(mContext, Uri.parse(Objects.requireNonNull(mModules.get(position).getAttachments().get("Lecture")).toString()));
+            }
+        });
         holder.attachedFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (MODULE_NUMBER == Constants.User.accessModule) {
-                    progressPdf = true;
+                    User.progressPdf = true;
                     learningAdapter.notifyDataSetChanged();
-                    String userID = "0123456789";
-                    FirebaseFirestore.getInstance().collection("users").document(userID).update(PROGRESS_PDF, progressPdf);
+                    if (userId != null) {
+                        FirebaseFirestore.getInstance().collection("users").document(userId).update(User.PROGRESS_PDF, User.progressPdf);
+                    }
                 }
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                 CustomTabsIntent customTabsIntent = builder.build();
-                customTabsIntent.launchUrl(mContext, Uri.parse(mModules.get(position).getAttachments().get("Pdf")));
+                customTabsIntent.launchUrl(mContext, Uri.parse(Objects.requireNonNull(mModules.get(position).getAttachments().get("Pdf")).toString()));
             }
         });
         holder.attachedLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (MODULE_NUMBER == Constants.User.accessModule) {
-                    progressLink = true;
+                    User.progressLink = true;
                     learningAdapter.notifyDataSetChanged();
-                    String userID = "0123456789";
-                    FirebaseFirestore.getInstance().collection("users").document(userID).update(PROGRESS_LINK, progressLink);
+                    if (userId != null) {
+                        FirebaseFirestore.getInstance().collection("users").document(userId).update(User.PROGRESS_LINK, User.progressLink);
+                    }
                 }
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                 CustomTabsIntent customTabsIntent = builder.build();
-                customTabsIntent.launchUrl(mContext, Uri.parse(mModules.get(position).getAttachments().get("Link")));
+                customTabsIntent.launchUrl(mContext, Uri.parse(Objects.requireNonNull(mModules.get(position).getAttachments().get("Link")).toString()));
             }
         });
         holder.test.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +155,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
 
     public class LearningViewHolder extends RecyclerView.ViewHolder {
 
-        TextView moduleNumber, topicName, test, attachedFileText, attachedLinkText;
+        TextView moduleNumber, topicName, test, attachedFileText, attachedLinkText,attachedLectureText;
         LinearLayout attachedFile, attachedLecture, attachedLink;
         ImageView lock;
 
@@ -144,6 +171,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
             lock = itemView.findViewById(R.id.lock);
             attachedFileText = itemView.findViewById(R.id.attached_file_text);
             attachedLinkText = itemView.findViewById(R.id.attached_link_text);
+            attachedLectureText = itemView.findViewById(R.id.attached_lecture_text);
 
         }
     }
