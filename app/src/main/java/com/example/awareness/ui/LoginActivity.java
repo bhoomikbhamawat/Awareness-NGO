@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         //setindeterminate-it works(shows)figure continously till it completes  another way is loading percentage in progress dialogue
         progressDialog.setIndeterminate(true);
         progressDialog.setTitle("Authenticating...");
-        progressDialog.setMessage("loading");
+        progressDialog.setMessage("Loading");
         progressDialog.show();
 
         final String name = nameText.getText().toString().trim();
@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                 }).addOnCanceledListener(new OnCanceledListener() {
             @Override
             public void onCanceled() {
-                Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "इंटरनेट कनेक्शन की जाँच करें ", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
                 onLoginFailed();
             }
@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "लॉगिन विफल", Toast.LENGTH_LONG).show();
         loginButton.setEnabled(true);
     }
 
@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         String phone = phoneText.getText().toString().trim();
 
         if (name.isEmpty()) {
-            nameText.setError("enter a name");
+            nameText.setError("अपना नाम भरें");
             valid = false;
         } else {
             nameText.setError(null);
@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (phone.length() < 10) {
 //            phoneText.setError("between 4 and 20 alphanumeric characters");
-            phoneText.setError("Enter valid phone number");
+            phoneText.setError("मान्य फ़ोन नंबर भरें");
             valid = false;
         } else {
             phoneText.setError(null);

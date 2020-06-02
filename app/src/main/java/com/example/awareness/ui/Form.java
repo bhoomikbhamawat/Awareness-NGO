@@ -334,28 +334,30 @@ public class Form extends AppCompatActivity {
 
         // Adding & Removing Image
         getCurrentTime();
-
+        final Calendar newCalendar = Calendar.getInstance();
         dateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(Form.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        Calendar newDate = Calendar.getInstance();
                         mYear = year;
                         mMonth = month;
                         mDay = dayOfMonth;
 
-                        mDateTime = mYear + "-" + mMonth + "-" + mDay;
+                        mDateTime = year + "-" + month + "-" + dayOfMonth;
                         Date date = null;
                         String date6 = "";
                         try {
                             Locale hindi = new Locale("hi", "IN");
-                            SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy", hindi);
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", hindi);
 
                             date = new SimpleDateFormat("yyyy-mm-dd").parse(mDateTime);
                             // String date5 = sdf.format(mDateTime);
                             date6 = sdf.format(date);
-                            //   Log.d("datehindi",date5);
+                               Log.d("datehindi",date.toString());
+                               Log.d("datehindi",date6);
 
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -363,7 +365,7 @@ public class Form extends AppCompatActivity {
                         //dateTime.setText(new SimpleDateFormat("E, dd MMM ").format(date));
                         dateTime.setText(date6);
                     }
-                }, mYear, mMonth, mDay);
+                }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.show();
             }
         });
@@ -391,10 +393,10 @@ public class Form extends AppCompatActivity {
 
                 } else {
                     try {
-                        Snackbar.make(layout_formkit, "You have reached your maximum upload limit of 4", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(layout_formkit, "आप अपनी अधिकतम अपलोड सीमा 4 पर पहुंच गए हैं", Snackbar.LENGTH_SHORT).show();
                     } catch (NullPointerException e) {
                         Log.e("ComplainFragment", "Snackbar: You have reached your maximum upload limit of 4", e);
-                        Toast.makeText(Form.this, "You have reached your maximum upload limit of 4", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Form.this, "आप अपनी अधिकतम अपलोड सीमा 4 पर पहुंच गए हैं", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -423,10 +425,10 @@ public class Form extends AppCompatActivity {
 
                 } else {
                     try {
-                        Snackbar.make(layout_formkit, "You have reached your maximum upload limit of 4", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(layout_formkit, "आप अपनी अधिकतम अपलोड सीमा 4 पर पहुंच गए हैं", Snackbar.LENGTH_SHORT).show();
                     } catch (NullPointerException e) {
                         Log.e("ComplainFragment", "Snackbar: You have reached your maximum upload limit of 4", e);
-                        Toast.makeText(Form.this, "You have reached your maximum upload limit of 4", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Form.this, "आप अपनी अधिकतम अपलोड सीमा 4 पर पहुंच गए हैं", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -458,33 +460,31 @@ public class Form extends AppCompatActivity {
         sendButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(Form.this, "Send Complain", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Form.this, "भेजें", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mode != Forms.FORM_STUDENTS) {
-                    if (TextUtils.isEmpty(categorySpinner.getText())){
+                if (mode != Forms.FORM_STUDENTS && TextUtils.isEmpty(categorySpinner.getText())) {
                         try {
-                            Snackbar.make(layout_formkit, "Please specify जाति", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(layout_formkit, "कृपया जाति भरें", Snackbar.LENGTH_SHORT).show();
                         } catch (NullPointerException e) {
 
                             Log.e("ComplainFragment", "Snackbar: Please specify complain type", e);
-                            Toast.makeText(Form.this, "Please specify जाति", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Form.this, "कृपया जाति भरें", Toast.LENGTH_SHORT).show();
                         }
-                }
+
                 } else if (TextUtils.isEmpty(SamitiSpinner.getText())) {
                     try {
-                        Snackbar.make(layout_formkit, "Please Select your पंचायत समिति", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(layout_formkit, "कृपया पंचायत समिति भरे", Snackbar.LENGTH_SHORT).show();
                     } catch (NullPointerException e) {
 
                         Log.e("ComplainFragment", "Snackbar: Please Select your पंचायत समिति", e);
-                        Toast.makeText(Form.this, "Please Select your पंचायत समिति", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Form.this, "कृपया पंचायत समिति भरे", Toast.LENGTH_SHORT).show();
                     }
-                } else if (mode != Forms.FORM_STUDENTS){
-                    if(TextUtils.isEmpty(Name_kit.getText())) {
+                } else if(TextUtils.isEmpty(Name_kit.getText())) {
                         try {
                             Snackbar.make(layout_formkit, "कृपया नाम भरें", Snackbar.LENGTH_SHORT).show();
                         } catch (NullPointerException e) {
@@ -493,13 +493,13 @@ public class Form extends AppCompatActivity {
                             Toast.makeText(Form.this, "कृपया नाम भरे", Toast.LENGTH_SHORT).show();
                         }
                     }
-                }else if (mDateTime.isEmpty()) {
+                else if (mDateTime.isEmpty()) {
                     try {
-                        Snackbar.make(layout_formkit, "कृपया समय भरें", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(layout_formkit, "कृपया तारीख भरें", Snackbar.LENGTH_SHORT).show();
                     } catch (NullPointerException e) {
 
                         Log.e("ComplainFragment", "Snackbar: कृपया समय भरे", e);
-                        Toast.makeText(Form.this, "कृपया समय भरे", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Form.this, "कृपया तारीख भरे", Toast.LENGTH_SHORT).show();
                     }
                 } else if (TextUtils.isEmpty(Age_kit.getText())) {
                     try {
@@ -537,14 +537,15 @@ public class Form extends AppCompatActivity {
                     final AlertDialog.Builder a_builder = new AlertDialog.Builder(Form.this);
                     a_builder.setMessage("मेरे द्वारा दी गई उपरोक्त सभी जानकारीया सही है |");
                     a_builder.setCancelable(false);
-                    a_builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    a_builder.setPositiveButton("हाँ", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            String uName = "";
-                            if(mode != Forms.FORM_STUDENTS){
-                              uName = Name_kit.getText().toString();
-                            }
+                            String uname_kp = "";
 
+                             final String uName = Name_kit.getText().toString();
+                            if(mode != Forms.FORM_STUDENTS) {
+                                uname_kp = Name_kp.getText().toString();
+                            }
                              final String uAge = Age_kit.getText().toString();
                             final String uVillage = Village_kit.getText().toString();
                             final String uPanchayat = Panchayat_kit.getText().toString();
@@ -561,7 +562,7 @@ public class Form extends AppCompatActivity {
 
                             final ProgressDialog pdialog = new ProgressDialog(Form.this);
                             pdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                            pdialog.setMessage("Registering your complain....");
+                            pdialog.setMessage("आपका फॉर्म रजिस्टर हो रहा है....");
                             pdialog.show();
                             String Category1 = "";
                             if(mode != Forms.FORM_STUDENTS) {
@@ -573,6 +574,7 @@ public class Form extends AppCompatActivity {
                             final String finalURajasava = uRajasava;
                             final String finalCategory = Category1;
                             final String finalUName = uName;
+                            final String finalUname_kp = uname_kp;
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                                     new Response.Listener<String>() {
                                         @Override
@@ -604,7 +606,7 @@ public class Form extends AppCompatActivity {
                                 protected Map<String, String> getParams() {
                                     Map<String, String> params = new HashMap<String, String>();
                                     params.put(Forms.KEY_ACTION, "insert");
-                                    params.put(Forms.KEY_Name_kp, "Bhoomik");
+                                    params.put(Forms.KEY_Name_kp, finalUname_kp);
 
                                     // params.put(KEY_Complaint_Emailid, ComplaineeEmailaddress);
                                     params.put(Forms.KEY_uName, finalUName);
@@ -617,8 +619,8 @@ public class Form extends AppCompatActivity {
                                     params.put(Forms.KEY_Rajasav, finalURajasava);
                                     params.put(Forms.KEY_GramPanchayat, uPanchayat);
                                     params.put(Forms.KEY_Samiti, Samiti1);
-                                    Log.d("12301001", finalUName + uAge + finalCategory + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
-                                    Log.d("imageuser", UserImage.toString());
+                                   // Log.d("12301001", finalUName + uAge + finalCategory + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
+                                    //Log.d("imageuser", UserImage.toString());
                                     if (UserImage != null) {
                                         for (int i = 0; i < UserImage.size(); i++) {
                                             params.put(Forms.KEY_LOST_IMAGE + i, UserImage.get(i));
@@ -650,7 +652,7 @@ public class Form extends AppCompatActivity {
                         }
                     });
 
-                    a_builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    a_builder.setNegativeButton("नहीं", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
@@ -783,10 +785,10 @@ public class Form extends AppCompatActivity {
                 }
             } else {
                 try {
-                    Snackbar.make(layout_formkit, "Can't upload more than 4 images", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(layout_formkit, "4 से अधिक चित्र अपलोड नहीं किए जा सकते", Snackbar.LENGTH_SHORT).show();
                 } catch (NullPointerException e) {
                     Log.e("ComplainFragment", "Can't upload more than 4 images", e);
-                    Toast.makeText(Form.this, "Can't upload more than 4 images", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Form.this, "4 से अधिक चित्र अपलोड नहीं किए जा सकते", Toast.LENGTH_SHORT).show();
 
                 }
             }

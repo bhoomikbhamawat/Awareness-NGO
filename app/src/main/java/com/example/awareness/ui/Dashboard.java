@@ -61,6 +61,8 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void about(MenuItem item) {
+        Intent intent = new Intent(this, About.class);
+        startActivity(intent);
     }
 
     public void logout(MenuItem item) {
@@ -76,7 +78,7 @@ public class Dashboard extends AppCompatActivity {
         String name = preferences.getString(User.USER_NAME,null);
 
         if(name !=null){
-            welcomeText.setText("Welcome " + name);
+            welcomeText.setText("स्वागत हे " + name);
         }
 
         String userId = preferences.getString(User.USER_CONTACT_NUMBER,null);

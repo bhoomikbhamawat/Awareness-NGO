@@ -34,9 +34,9 @@ public class About extends AppCompatActivity {
                 .setImage(R.drawable.girl_photo)
                 .addItem(new Element().setTitle("Version 1.0"))
                 .addGroup("Always ready to help you")
-                .addEmail("sattvikmess@gmail.com")
+                .addEmail("bhoomikbhamawat.eee18@iitbhu.ac.in")
                 .addWebsite("http://sattvikmess.com/")
-                .addGitHub("medyo")
+                .addGitHub("bhoomikbhamawat")
                 .addPlayStore("com.jain.shreyash.myapplication")
                 .addItem(getCopyRightsElement())
                 .create();
@@ -49,7 +49,7 @@ public class About extends AppCompatActivity {
     }
     Element getCopyRightsElement() {
         Element copyRightsElement = new Element();
-        final String copyrights = "Sattvik App Team | 2019";
+        final String copyrights = "DevIITans Team | 2020";
         copyRightsElement.setTitle(copyrights);
         copyRightsElement.setIconDrawable(R.drawable.ic_baseline_copyright_24);
         copyRightsElement.setIconTint(mehdi.sakout.aboutpage.R.color.about_item_icon_color);
