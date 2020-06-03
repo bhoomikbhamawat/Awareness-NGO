@@ -1,14 +1,18 @@
 package com.example.awareness.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +42,7 @@ import static com.example.awareness.ui.learningactivity.LearningActivity.progres
 public class Dashboard extends AppCompatActivity {
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    SharedPreferences preferences;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,9 +66,53 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void about(MenuItem item) {
+        Intent intent = new Intent(this, About.class);
+        startActivity(intent);
+    }
+    public void aboutngo(MenuItem item) {
+        Intent intent = new Intent(this, AboutNgo.class);
+        startActivity(intent);
     }
 
     public void logout(MenuItem item) {
+        final AlertDialog.Builder logout = new AlertDialog.Builder(this);
+
+        View layout = getLayoutInflater().inflate(R.layout.logout_layout, null, false);
+        final EditText entryName = layout.findViewById(R.id.entry_name);
+        logout.setView(layout);
+        logout.setCancelable(true);
+
+        final AlertDialog logoutDialog = logout.create();
+
+
+        layout.findViewById(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (entryName.getText().toString().equals(Constants.name_all)) {
+//                    preferences.getAll().clear();
+                    SharedPreferences preferences =getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.apply();
+                    startActivity(new Intent(Dashboard.this, LoginActivity.class));
+                    finish();
+                    startActivity(new Intent(Dashboard.this, LoginActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(Dashboard.this, "गलत नाम डाला जा रहा है", Toast.LENGTH_SHORT).show();
+                    entryName.getText().clear();
+                }
+            }
+        });
+
+        layout.findViewById(R.id.btn_logout_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutDialog.cancel();
+
+            }
+        });
+        logoutDialog.show();
     }
 
     @Override
@@ -76,7 +125,7 @@ public class Dashboard extends AppCompatActivity {
         String name = preferences.getString(User.USER_NAME,null);
 
         if(name !=null){
-            welcomeText.setText("Welcome " + name);
+            welcomeText.setText("स्वागत हे " + name);
         }
 
         String userId = preferences.getString(User.USER_CONTACT_NUMBER,null);

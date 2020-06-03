@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+
                 if(name == null) {
 
                     Intent i = new Intent(MainActivity.this, LoginActivity.class);

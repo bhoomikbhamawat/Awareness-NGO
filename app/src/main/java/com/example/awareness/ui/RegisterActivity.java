@@ -183,7 +183,7 @@ public class RegisterActivity extends AppCompatActivity {
                         // Log.e("ComplainFragment", "Snackbar: कृपया गाँव भरे", e);
                         Toast.makeText(RegisterActivity.this, "कृपया गाँव भरे", Toast.LENGTH_SHORT).show();
                     }
-                } else if (TextUtils.isEmpty(RegMobile.getText())) {
+                } else if (RegMobile.length() < 10) {
                     try {
                         Snackbar.make(linearLayout, "कृपया मोबाइल न. भरें", Snackbar.LENGTH_SHORT).show();
                     } catch (NullPointerException e) {
@@ -209,11 +209,11 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 } else if (TextUtils.isEmpty(RegCity.getText())) {
                     try {
-                        Snackbar.make(linearLayout, "कृपया समय भरें", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(linearLayout, "कृपया शहर भरें", Snackbar.LENGTH_SHORT).show();
                     } catch (NullPointerException e) {
 
                         // Log.e("ComplainFragment", "Snackbar: कृपया समय भरे", e);
-                        Toast.makeText(RegisterActivity.this, "कृपया समय भरे", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "कृपया शहर भरें", Toast.LENGTH_SHORT).show();
                     }
                 } else if (TextUtils.isEmpty(RegRajasav.getText())) {
                     try {
@@ -330,8 +330,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     params.put(Constants.Register.KEY_Mobile, rmobile);
                                     params.put(Constants.Register.KEY_City, rCity);
 
-                                    //  Log.d("12301001", uName + uAge + Category1 + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
-                                    // Log.d("imageuser", UserImage.toString());
+
 
 
                                     return params;
@@ -366,9 +365,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             });
 
-                            SimpleDateFormat format = new SimpleDateFormat("yyyy/M/d h:mm:ss a");
-
-                            // pdialog.dismiss();
 
                         }
                     });

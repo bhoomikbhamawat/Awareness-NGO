@@ -23,6 +23,7 @@ import com.example.awareness.Constants;
 import com.example.awareness.Module;
 import com.example.awareness.R;
 import com.example.awareness.ui.About;
+import com.example.awareness.ui.AboutNgo;
 import com.example.awareness.ui.CertificateActivity;
 import com.example.awareness.ui.Form;
 import com.example.awareness.ui.LoginActivity;
@@ -85,6 +86,10 @@ public class LearningActivity extends AppCompatActivity {
         Intent intent = new Intent(this, About.class);
         startActivity(intent);
     }
+    public void aboutngo(MenuItem item) {
+        Intent intent = new Intent(this, AboutNgo.class);
+        startActivity(intent);
+    }
 
     public void logout(MenuItem item) {
         final AlertDialog.Builder logout = new AlertDialog.Builder(this);
@@ -100,12 +105,16 @@ public class LearningActivity extends AppCompatActivity {
         layout.findViewById(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (entryName.getText().toString().equals(preferences.getString(User.USER_NAME, null))) {
+                if (entryName.getText().toString().equals(Constants.name_all)) {
                     preferences.getAll().clear();
+                    SharedPreferences preferences =getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.apply();
                     startActivity(new Intent(LearningActivity.this, LoginActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(LearningActivity.this, "Wrong entry", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LearningActivity.this, "गलत नाम डाला जा रहा है", Toast.LENGTH_SHORT).show();
                     entryName.getText().clear();
                 }
             }
