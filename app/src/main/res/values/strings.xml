@@ -6,8 +6,9 @@
     <string name="hindi_done"></string>
     <string name="hindi_submit"></string>
     <string name="hindi_date"></string>
-    <string name="hindi_students_list"></string>
-    <string name="hindi_students_photograph"></string>
+    <string name="hindi_students_list">छात्रों की सूची</string>
+    <string name="hindi_students_photograph">छात्रों की तस्वीर</string>
+
     <string name="hindi_send"></string>
 
 </resources>
