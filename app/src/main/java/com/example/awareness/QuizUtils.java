@@ -145,9 +145,9 @@ public class QuizUtils {
                                 }else {
                                     User.accessModule++;
                                     User.progressLecture = false;
-                                    // To be changed if link or pdf added
+                                    User.progressPdf = false;
+                                    // To be changed if link
                                     User.progressLink = true;
-                                    User.progressPdf = true;
                                 }
                                 User.accessQuestion = 1;
                                 updateProgress(context);
@@ -230,7 +230,7 @@ public class QuizUtils {
         newProgress.put(User.ACCESS_MODULE, User.accessModule);
         newProgress.put(User.PROGRESS_LINK, User.progressLink);
         newProgress.put(User.PROGRESS_PDF, User.progressPdf);
-        newProgress.put(User.PROGRESS_LECTURE,User.PROGRESS_LECTURE);
+        newProgress.put(User.PROGRESS_LECTURE,User.progressLecture);
         newProgress.put(User.ACCESS_QUESTION, User.accessQuestion);
 
         if (userId != null) {
