@@ -145,9 +145,9 @@ public class QuizUtils {
                                 }else {
                                     User.accessModule++;
                                     User.progressLecture = false;
-                                    // To be changed if link or pdf added
+                                    User.progressPdf = false;
+                                    // To be changed if link
                                     User.progressLink = true;
-                                    User.progressPdf = true;
                                 }
                                 User.accessQuestion = 1;
                                 updateProgress(context);

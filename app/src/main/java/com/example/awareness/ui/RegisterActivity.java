@@ -277,7 +277,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         put(User.ACCESS_QUESTION, 1);
                                                         put(User.PROGRESS_LECTURE,false);
                                                         put(User.PROGRESS_LINK, true);
-                                                        put(User.PROGRESS_PDF, true);
+                                                        put(User.PROGRESS_PDF, false);
 
                                                     }
 

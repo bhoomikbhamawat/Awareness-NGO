@@ -91,7 +91,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
                 if (User.progressLecture) {
                     holder.attachedLectureText.setTextColor(Color.parseColor("#64DD17"));
                 }
-                if (User.progressPdf && User.progressLink && User.progressLecture) {
+                if ((User.progressPdf || User.progressLecture) && User.progressLink ) {
                     holder.test.setEnabled(true);
                 }
             }
