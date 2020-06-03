@@ -16,11 +16,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="16dp"
             android:visibility="gone"
             app:cardCornerRadius="8dp">
 
@@ -30,15 +33,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="21sp"
                 tools:text="Rama Sinha" />
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
@@ -51,7 +55,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
 
                     <EditText
                         android:id="@+id/name_kit"
@@ -65,7 +70,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
 
                     <EditText
                         android:id="@+id/age_kit"
@@ -80,17 +86,18 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     android:visibility="gone">
 
 
-                <AutoCompleteTextView
-                    android:id="@+id/category_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="जाति"
-                    android:editable="false"
-                    android:inputType="none"
-                    android:textSize="16sp"/>
+                    <AutoCompleteTextView
+                        android:id="@+id/category_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:hint="जाति"
+                        android:inputType="none"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -110,12 +117,14 @@
 
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
@@ -128,36 +137,39 @@
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/Samiti_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="पंचायत समिति"
                         android:editable="false"
+                        android:hint="पंचायत समिति"
                         android:inputType="none"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
 
                     <EditText
                         android:id="@+id/panchayat_kit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="ग्राम पंचायत"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
 
                     <EditText
                         android:id="@+id/Falla_kit"
@@ -170,7 +182,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
 
                     <EditText
                         android:id="@+id/place_kit"
@@ -183,7 +196,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
 
                     <EditText
                         android:id="@+id/village_kit"
@@ -202,21 +216,25 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:hint="जिला"
                         android:text="उदयपुर"
-                        android:textSize="16sp"
-                        android:enabled="false"/>
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/students_list_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            app:cardCornerRadius="8dp">
+            android:layout_margin="8dp"
+            android:visibility="gone"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@android:color/darker_gray"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -224,19 +242,19 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/students_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Students List"
+                    android:layout_marginTop="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/hindi_students_list"
                     android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                    android:textStyle="bold" />
 
                 <HorizontalScrollView
                     android:id="@+id/form_students_extra"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:visibility="gone">
+                    android:layout_height="200dp">
 
                     <LinearLayout
                         android:id="@+id/uploaded_image_container_students_list"
@@ -253,7 +271,6 @@
                             android:layout_marginTop="4dp"
                             android:src="@drawable/ic_add_box_black_24dp" />
 
-
                     </LinearLayout>
                 </HorizontalScrollView>
 
@@ -267,11 +284,34 @@
                     android:text="Remove All"
                     android:visibility="gone" />
 
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@android:color/darker_gray"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/students_photograph"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Students Photograph"
+                    android:layout_marginTop="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/hindi_students_photograph"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:visibility="gone" />
@@ -310,7 +350,7 @@
                     android:text="Remove All"
                     android:visibility="gone" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -320,23 +360,23 @@
 
             <Button
                 android:id="@+id/event_date_time"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackground"
-                app:icon="@drawable/ic_event_black_24dp"
-                android:drawablePadding="8dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:hint="Date"
                 android:textSize="16sp"
-                style="?attr/materialButtonOutlinedStyle"/>
+                app:icon="@drawable/ic_event_black_24dp" />
 
             <Button
                 android:id="@+id/send_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_margin="8dp"
                 android:gravity="center"
                 android:text="Send"
                 android:textSize="26dp" />
