@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">Awareness</string>
 
-    <string-array name="branches">
-        <item>Electrical</item>
-        <item>Electronics</item>
-        <item>Computer Science</item>
-        <item>Civil</item>"
-    </string-array>
+    <string name="hindi_previous">पीछे</string>
+    <string name="hindi_next">आगे</string>
+    <string name="hindi_done"></string>
+    <string name="hindi_submit"></string>
+    <string name="hindi_date"></string>
+    <string name="hindi_students_list"></string>
+    <string name="hindi_students_photograph"></string>
+    <string name="hindi_send"></string>
+
 </resources>
