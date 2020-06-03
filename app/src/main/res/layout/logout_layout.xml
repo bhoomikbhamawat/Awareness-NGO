@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Please type your name below to confirm"
+        android:text="कृपया पुष्टि करने के लिए नीचे अपना नाम लिखें"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 

@@ -356,8 +356,7 @@ public class Form extends AppCompatActivity {
                             date = new SimpleDateFormat("yyyy-mm-dd").parse(mDateTime);
                             // String date5 = sdf.format(mDateTime);
                             date6 = sdf.format(date);
-                               Log.d("datehindi",date.toString());
-                               Log.d("datehindi",date6);
+
 
                         } catch (ParseException e) {
                             e.printStackTrace();

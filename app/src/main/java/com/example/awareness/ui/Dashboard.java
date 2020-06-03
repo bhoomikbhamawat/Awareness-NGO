@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -68,6 +69,10 @@ public class Dashboard extends AppCompatActivity {
         Intent intent = new Intent(this, About.class);
         startActivity(intent);
     }
+    public void aboutngo(MenuItem item) {
+        Intent intent = new Intent(this, AboutNgo.class);
+        startActivity(intent);
+    }
 
     public void logout(MenuItem item) {
         final AlertDialog.Builder logout = new AlertDialog.Builder(this);
@@ -83,12 +88,18 @@ public class Dashboard extends AppCompatActivity {
         layout.findViewById(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (entryName.getText().toString().equals(preferences.getString(User.USER_NAME, null))) {
-                    preferences.getAll().clear();
+                if (entryName.getText().toString().equals(Constants.name_all)) {
+//                    preferences.getAll().clear();
+                    SharedPreferences preferences =getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.apply();
+                    startActivity(new Intent(Dashboard.this, LoginActivity.class));
+                    finish();
                     startActivity(new Intent(Dashboard.this, LoginActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(Dashboard.this, "Wrong entry", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Dashboard.this, "गलत नाम डाला जा रहा है", Toast.LENGTH_SHORT).show();
                     entryName.getText().clear();
                 }
             }

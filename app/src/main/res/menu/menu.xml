@@ -15,7 +15,10 @@
             android:title="Kit Form" />
         <item
             android:onClick="about"
-            android:title="About" />
+            android:title="About us" />
+        <item
+            android:onClick="aboutngo"
+            android:title="About NGO" />
         <item
             android:onClick="logout"
             android:title="Log Out" />

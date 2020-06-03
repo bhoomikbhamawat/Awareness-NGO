@@ -132,32 +132,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
                 Intent intent = new Intent(mContext, PdfViewActivity.class);
                 intent.putExtra("mode1", MODULE_NUMBER);
                 mContext.startActivity(intent);
-              /*  File pdfFile = new File("res/raw/ppt1.pdf");
-                Uri path = Uri.fromFile(pdfFile);
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(path, "application/pdf");
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                try {
-                   mContext.startActivity(intent);
-                }
-                catch (ActivityNotFoundException e) {
-                    Toast.makeText(mContext,
-                            "No Application available to viewPDF",
-                            Toast.LENGTH_SHORT).show();
-                }*/
-               /*AssetManager assetManager = getAssets();
-                Uri path = Uri.fromFile(A);
-                Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-                pdfIntent.setDataAndType(path , "application/pdf");
-                pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                try {
-                    mContext.startActivity(pdfIntent);
-                }
-                catch (ActivityNotFoundException e) {
-                    Toast.makeText(mContext,
-                            "No Application available to viewPDF",
-                            Toast.LENGTH_SHORT).show();
-                }*/
+
 
             }
         });
@@ -187,42 +162,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
     }
 
 
-    /*private void CopyReadAssets() {
-        AssetManager assetManager = getAssets();
 
-        InputStream in = null;
-        OutputStream out = null;
-        File file = new File(getFilesDir(), "abc.pdf");
-        try {
-            in = assetManager.open("abc.pdf");
-            out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-            copyFile(in, out);
-            in.close();
-            in = null;
-            out.flush();
-            out.close();
-            out = null;
-        } catch (Exception e) {
-            Log.e("tag", e.getMessage());
-        }
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(
-                Uri.parse("file://" + getFilesDir() + "/abc.pdf"),
-                "application/pdf");
-
-        startActivity(intent);
-    }
-
-    private void copyFile(InputStream in, OutputStream out) {
-        byte[] buffer = new byte[1024];
-        int read;
-        while ((read = in.read(buffer)) != -1) {
-            out.write(buffer, 0, read);
-        }
-    }
-*/
 
     @Override
     public int getItemCount() {

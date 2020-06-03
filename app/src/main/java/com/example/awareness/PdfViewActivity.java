@@ -25,7 +25,7 @@ public class PdfViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pdf_view);
         Intent intent = getIntent();
         final int mode = intent.getIntExtra("mode1", 1);
-        Log.d("module",mode+"");
+
         PDFView pdfView = findViewById(R.id.pdfView);
         pdfView.fromAsset("ppt"+ mode + ".pdf")
                 .scrollHandle(new DefaultScrollHandle(this))

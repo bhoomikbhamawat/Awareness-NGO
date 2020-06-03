@@ -330,8 +330,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     params.put(Constants.Register.KEY_Mobile, rmobile);
                                     params.put(Constants.Register.KEY_City, rCity);
 
-                                    //  Log.d("12301001", uName + uAge + Category1 + finalUPlace + uFalla + uVillage + finalURajasava + uPanchayat + Samiti1);
-                                    // Log.d("imageuser", UserImage.toString());
+
 
 
                                     return params;
@@ -366,9 +365,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             });
 
-                          //  SimpleDateFormat format = new SimpleDateFormat("yyyy/M/d h:mm:ss a");
-
-                            // pdialog.dismiss();
 
                         }
                     });

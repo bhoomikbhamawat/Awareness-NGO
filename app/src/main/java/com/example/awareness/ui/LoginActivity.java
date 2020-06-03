@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login() {
-        //Log.d(TAG, "Login");
+
 
         if (!validate()) {
             onLoginFailed();
@@ -183,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setEnabled(true);
 
 
-        Intent i = new Intent(LoginActivity.this, LearningActivity.class);
+        Intent i = new Intent(LoginActivity.this,Dashboard.class);
 //            i.putExtra("EXTRA", "notopenFragment");
         startActivity(i);
         finish();
