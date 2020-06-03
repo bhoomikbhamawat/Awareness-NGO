@@ -1,15 +1,20 @@
 package com.example.awareness.ui.learningactivity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
@@ -17,12 +22,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
+import com.example.awareness.PdfViewActivity;
 import com.example.awareness.QuizUtils;
 import com.example.awareness.R;
+import com.example.awareness.ui.Form;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,7 +67,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
             holder.lock.setVisibility(View.GONE);
 
             holder.attachedLink.setVisibility(View.GONE);
-            holder.attachedFile.setVisibility(View.GONE);
+            holder.attachedFile.setVisibility(View.VISIBLE);
             holder.attachedLecture.setVisibility(View.VISIBLE);
             holder.attachedFile.setEnabled(true);
             holder.attachedLink.setEnabled(true);
@@ -118,9 +129,36 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
                         FirebaseFirestore.getInstance().collection("users").document(userId).update(User.PROGRESS_PDF, User.progressPdf);
                     }
                 }
-                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                CustomTabsIntent customTabsIntent = builder.build();
-                customTabsIntent.launchUrl(mContext, Uri.parse(Objects.requireNonNull(mModules.get(position).getAttachments().get("Pdf")).toString()));
+                Intent intent = new Intent(mContext, PdfViewActivity.class);
+                intent.putExtra("mode1", MODULE_NUMBER);
+                mContext.startActivity(intent);
+              /*  File pdfFile = new File("res/raw/ppt1.pdf");
+                Uri path = Uri.fromFile(pdfFile);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(path, "application/pdf");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                try {
+                   mContext.startActivity(intent);
+                }
+                catch (ActivityNotFoundException e) {
+                    Toast.makeText(mContext,
+                            "No Application available to viewPDF",
+                            Toast.LENGTH_SHORT).show();
+                }*/
+               /*AssetManager assetManager = getAssets();
+                Uri path = Uri.fromFile(A);
+                Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+                pdfIntent.setDataAndType(path , "application/pdf");
+                pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                try {
+                    mContext.startActivity(pdfIntent);
+                }
+                catch (ActivityNotFoundException e) {
+                    Toast.makeText(mContext,
+                            "No Application available to viewPDF",
+                            Toast.LENGTH_SHORT).show();
+                }*/
+
             }
         });
         holder.attachedLink.setOnClickListener(new View.OnClickListener() {
@@ -143,10 +181,48 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
             public void onClick(View v) {
                 quizBottomSheetDialog.show();
                 quizBottomSheetDialog.getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
-                QuizUtils.createQuiz(mContext,MODULE_NUMBER);
+                QuizUtils.createQuiz(mContext, MODULE_NUMBER);
             }
         });
     }
+
+
+    /*private void CopyReadAssets() {
+        AssetManager assetManager = getAssets();
+
+        InputStream in = null;
+        OutputStream out = null;
+        File file = new File(getFilesDir(), "abc.pdf");
+        try {
+            in = assetManager.open("abc.pdf");
+            out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
+
+            copyFile(in, out);
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+        } catch (Exception e) {
+            Log.e("tag", e.getMessage());
+        }
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(
+                Uri.parse("file://" + getFilesDir() + "/abc.pdf"),
+                "application/pdf");
+
+        startActivity(intent);
+    }
+
+    private void copyFile(InputStream in, OutputStream out) {
+        byte[] buffer = new byte[1024];
+        int read;
+        while ((read = in.read(buffer)) != -1) {
+            out.write(buffer, 0, read);
+        }
+    }
+*/
 
     @Override
     public int getItemCount() {
@@ -155,7 +231,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
 
     public class LearningViewHolder extends RecyclerView.ViewHolder {
 
-        TextView moduleNumber, topicName, test, attachedFileText, attachedLinkText,attachedLectureText;
+        TextView moduleNumber, topicName, test, attachedFileText, attachedLinkText, attachedLectureText;
         LinearLayout attachedFile, attachedLecture, attachedLink;
         ImageView lock;
 
@@ -175,5 +251,8 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
 
         }
     }
-
 }
+
+
+
+

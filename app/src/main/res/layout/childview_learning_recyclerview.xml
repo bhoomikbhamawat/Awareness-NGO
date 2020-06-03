@@ -52,7 +52,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="4dp"
-                    android:visibility="gone">
+                   >
 
                     <ImageView
                         android:layout_width="match_parent"

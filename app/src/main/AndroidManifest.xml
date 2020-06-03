@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.CertificateActivity"></activity>
+        <activity android:name=".PdfViewActivity"></activity>
+        <activity android:name=".ui.CertificateActivity" />
         <activity android:name=".ui.About" />
         <activity android:name=".ui.Form" />
         <activity android:name=".ui.learningactivity.LearningActivity" />

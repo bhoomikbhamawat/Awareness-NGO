@@ -1,5 +1,6 @@
 package com.example.awareness.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +41,7 @@ import static com.example.awareness.ui.learningactivity.LearningActivity.progres
 public class Dashboard extends AppCompatActivity {
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    SharedPreferences preferences;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,6 +70,38 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void logout(MenuItem item) {
+        final AlertDialog.Builder logout = new AlertDialog.Builder(this);
+
+        View layout = getLayoutInflater().inflate(R.layout.logout_layout, null, false);
+        final EditText entryName = layout.findViewById(R.id.entry_name);
+        logout.setView(layout);
+        logout.setCancelable(true);
+
+        final AlertDialog logoutDialog = logout.create();
+
+
+        layout.findViewById(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (entryName.getText().toString().equals(preferences.getString(User.USER_NAME, null))) {
+                    preferences.getAll().clear();
+                    startActivity(new Intent(Dashboard.this, LoginActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(Dashboard.this, "Wrong entry", Toast.LENGTH_SHORT).show();
+                    entryName.getText().clear();
+                }
+            }
+        });
+
+        layout.findViewById(R.id.btn_logout_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutDialog.cancel();
+
+            }
+        });
+        logoutDialog.show();
     }
 
     @Override
