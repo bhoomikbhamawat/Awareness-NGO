@@ -9,5 +9,7 @@
     <string name="hindi_students_list">छात्रों की सूची</string>
     <string name="hindi_students_photograph">छात्रों की तस्वीर</string>
     <string name="hindi_send"></string>
+    <string name="hindi_start_next">सभी उत्तर सही हैं। कृपया अगली शुरु करें।</string>
+    <string name="hindi_test_guideline"><b><font color="#6200EE">\u2022</font></b> सभी प्रश्नों के उत्तर देना अनिवार्य है।\n<b><font color="#6200EE">\u2022</font></b> गलत उत्तर देने पर दोबारा वविकल्प चुनें।\n<b><font color="#6200EE">\u2022</font></b> अगर आपको उत्तर नहीं पता तो मॉड्यूल दोबारा देखे।</string>
 
 </resources>
