@@ -15,7 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="4dp">
 
             <TextView
                 android:id="@+id/module_number"
@@ -43,6 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -52,7 +54,10 @@
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackground"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="4dp"
+                   >
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -64,7 +69,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="File"
+                        android:text="प्रशिक्षण लेख"
+                        android:textSize="18dp"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
 
@@ -75,7 +81,9 @@
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackground"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="4dp">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -87,7 +95,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Lecture"
+                        android:text="प्रशिक्षण वीडियो"
+                        android:textSize="18dp"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
 
@@ -98,7 +107,9 @@
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackground"
                     android:orientation="vertical"
-                    android:padding="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="4dp"
                     android:visibility="gone">
 
                     <ImageView
@@ -129,8 +140,12 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="center"
-                android:padding="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
                 android:text="Test"
+                android:textSize="20dp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
         </LinearLayout>

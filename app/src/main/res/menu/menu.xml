@@ -9,16 +9,16 @@
 
         <item
             android:onClick="FormStudents"
-            android:title="10,000 Form" />
+            android:title="जागरूकता अभियान" />
         <item
             android:onClick="FormKit"
-            android:title="Kit Form" />
+            android:title="स्वच्छता किट" />
         <item
             android:onClick="about"
             android:title="About us" />
         <item
             android:onClick="aboutngo"
-            android:title="About NGO" />
+            android:title="About Jumio" />
         <item
             android:onClick="logout"
             android:title="Log Out" />

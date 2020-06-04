@@ -125,7 +125,7 @@ public class Dashboard extends AppCompatActivity {
         String name = preferences.getString(User.USER_NAME,null);
 
         if(name !=null){
-            welcomeText.setText("स्वागत हे " + name);
+            welcomeText.setText("स्वागत है " + name);
         }
 
         String userId = preferences.getString(User.USER_CONTACT_NUMBER,null);

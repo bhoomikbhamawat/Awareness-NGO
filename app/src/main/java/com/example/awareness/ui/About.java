@@ -30,8 +30,8 @@ public class About extends AppCompatActivity {
                 .isRTL(false)
 
 
-                .setDescription(Html.fromHtml("<b>" + "•Developers Team•" + "</b>" + "<br><br><p align=\"right\">•Bhoomik Bhamavat<br>•Monu Kumar<br><br><b></p>" + "•Content Team•<br><br>" + "</b>" + "•Divya Jain<br>•Aditi Jain<br>"))
-                .setImage(R.drawable.girl_photo)
+                .setDescription(Html.fromHtml("<b>" + "Shrushti Seva Samiti" +"</b>" + "<p>Our mission is to evolve, develop and support indigenous strategies that would cater to the developmental needs of the rural society in realizing their true strength and transforming themselves into a developed society.</p>" + "<br><b>" + "•Developers Team•" + "</b>" + "<p align=\"right\">•Bhoomik Bhamawat<br>•Monu Kumar<br>•Divya Jain<br>•Aditi Jain<br><b></p>"))
+                .setImage(R.drawable.shrushti)
                 .addItem(new Element().setTitle("Version 1.0"))
                 .addGroup("Always ready to help you")
                 .addEmail("bhoomikbhamawat.eee18@iitbhu.ac.in")
