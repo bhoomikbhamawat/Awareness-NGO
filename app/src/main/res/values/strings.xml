@@ -7,7 +7,7 @@
     <string name="hindi_submit"></string>
     <string name="hindi_date"></string>
     <string name="hindi_students_list">प्रशिक्षणार्थियो की सूची की तस्वीर</string>
-    <string name="hindi_students_photograph">प्रक्षिशण समूह की तस्वीर</string>
+    <string name="hindi_students_photograph">प्रशिक्षण समूह की तस्वीर</string>
 
     <string name="hindi_send"></string>
     <string name="jumi_about"><b>Jumio is an AI platform that deliver identity verification as it should be, helping companies fight fraud.
@@ -29,7 +29,7 @@
         Department, GOI, Care India, Jumio India Pvt. Ltd., Sightsavers International, IGSSS and others.
 
 \n\nShrushti works in following thematic areas local governance systems, health and nutrition, education, livelihood and implementation of government welfare scheme. Shrusthi’s office is based in Udaipur with staff present in more than 12 districts. For more information about the organisation, please visit http://www.shrushti.org/</string>
-    <string name="hindi_start_next">सभी उत्तर सही हैं। कृपया अगली शुरु करें।</string>
+    <string name="hindi_start_next">शुभकामनाएं, आपके सभी उत्तर सही हैं। कृपया अगले मॉड्यूल को प्रारम्भ करे।</string>
     <string name="hindi_test_guideline"><b><font color="#6200EE">\u2022</font></b> सभी प्रश्नों के उत्तर देना अनिवार्य है।\n<b><font color="#6200EE">\u2022</font></b> गलत उत्तर देने पर दोबारा वविकल्प चुनें।\n<b><font color="#6200EE">\u2022</font></b> अगर आपको उत्तर नहीं पता तो मॉड्यूल दोबारा देखे।</string>
-
+    <string name="Creatorus">A community of passionate individuals whose purpose is to revolutionize software design,creation,content and delivery while advocating for positive social change </string>
 </resources>

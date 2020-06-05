@@ -1,44 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/root_individual_about"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/about_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Developers Team"
-        android:textSize="28dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_margin="4dp"
-        ></TextView>
-
-    <LinearLayout
+        android:layout_height="match_parent" />
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="4dp">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/picture_about"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_margin="4dp" />
-        <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/picture_2"
-            android:padding="8dp"
-            android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_margin="4dp" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/name_individual_about"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:gravity="center" />
+        android:text="hello bitch"/>
 </LinearLayout>
