@@ -31,6 +31,7 @@ import com.example.awareness.ui.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -56,6 +57,7 @@ public class LearningActivity extends AppCompatActivity {
     public static BottomSheetDialog quizBottomSheetDialog;
     @SuppressLint("StaticFieldLeak")
     public static ProgressBar progressBar;
+    public static MaterialCardView extraMaterialCardView;
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     SharedPreferences preferences;
@@ -144,6 +146,8 @@ public class LearningActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progress_circle);
         progressBar.setVisibility(View.VISIBLE);
+        extraMaterialCardView = findViewById(R.id.extra_material);
+        extraMaterialCardView.setVisibility(View.GONE);
 
         RecyclerView learningRecyclerView = findViewById(R.id.learning_recyclerview);
         quizBottomSheet = getLayoutInflater().inflate(R.layout.test_layout, null, false);
@@ -156,6 +160,7 @@ public class LearningActivity extends AppCompatActivity {
         learningRecyclerView.setAdapter(learningAdapter);
         if (modules.size() > 0) {
             progressBar.setVisibility(View.GONE);
+            extraMaterialCardView.setVisibility(View.VISIBLE);
         }
 
 //        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
@@ -206,6 +211,7 @@ public class LearningActivity extends AppCompatActivity {
                         try {
                             learningAdapter.notifyDataSetChanged();
                             progressBar.setVisibility(View.GONE);
+                            extraMaterialCardView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
