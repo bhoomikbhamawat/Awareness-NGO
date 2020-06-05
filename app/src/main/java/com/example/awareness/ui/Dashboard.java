@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.example.awareness.Constants.User;
+import static com.example.awareness.ui.learningactivity.LearningActivity.extraMaterialCardView;
 import static com.example.awareness.ui.learningactivity.LearningActivity.learningAdapter;
 import static com.example.awareness.ui.learningactivity.LearningActivity.modules;
 import static com.example.awareness.ui.learningactivity.LearningActivity.progressBar;
@@ -165,6 +166,7 @@ public class Dashboard extends AppCompatActivity {
                         try {
                             learningAdapter.notifyDataSetChanged();
                             progressBar.setVisibility(View.GONE);
+                            extraMaterialCardView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             Log.e("TAGG", e.toString());
                         }
