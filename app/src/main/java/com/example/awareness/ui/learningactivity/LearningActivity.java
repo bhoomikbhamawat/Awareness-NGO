@@ -22,9 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
 import com.example.awareness.R;
-import com.example.awareness.ui.About;
 import com.example.awareness.ui.AboutNgo;
+import com.example.awareness.ui.Aboutus;
 import com.example.awareness.ui.CertificateActivity;
+import com.example.awareness.ui.Dashboard;
 import com.example.awareness.ui.Form;
 import com.example.awareness.ui.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -83,7 +84,11 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     public void about(MenuItem item) {
-        Intent intent = new Intent(this, About.class);
+        Intent intent = new Intent(this, Aboutus.class);
+        startActivity(intent);
+    }
+    public void creator(MenuItem item) {
+        Intent intent = new Intent(this, CreatorUs.class);
         startActivity(intent);
     }
     public void aboutngo(MenuItem item) {
@@ -220,6 +225,13 @@ public class LearningActivity extends AppCompatActivity {
         public int compare(Module a, Module b) {
             return a.getModuleNumber() - b.getModuleNumber();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // disable going back to the MainActivity
+        Intent intent = new Intent(LearningActivity.this, Dashboard.class);
+        startActivity(intent);
     }
 
 

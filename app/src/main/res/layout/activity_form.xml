@@ -80,6 +80,45 @@
                         android:inputType="number"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <EditText
+                        android:id="@+id/place_kit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="स्थान"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <EditText
+                        android:id="@+id/Falla_kit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="फला"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <EditText
+                        android:id="@+id/village_kit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="गाँव"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/category_spinner_layout"
@@ -132,6 +171,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="4dp">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <EditText
+                        android:id="@+id/panchayat_kit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="ग्राम पंचायत"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -150,62 +203,13 @@
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp">
-
-                    <EditText
-                        android:id="@+id/panchayat_kit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="ग्राम पंचायत"
-                        android:textSize="16sp" />
-                </com.google.android.material.textfield.TextInputLayout>
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp">
 
-                    <EditText
-                        android:id="@+id/Falla_kit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="फला"
-                        android:textSize="16sp" />
-                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp">
 
-                    <EditText
-                        android:id="@+id/place_kit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="स्थान"
-                        android:textSize="16sp" />
-                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp">
 
-                    <EditText
-                        android:id="@+id/village_kit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="गाँव"
-                        android:textSize="16sp" />
-                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout

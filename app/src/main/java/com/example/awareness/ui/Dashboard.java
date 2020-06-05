@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
 import com.example.awareness.R;
+import com.example.awareness.ui.learningactivity.CreatorUs;
 import com.example.awareness.ui.learningactivity.LearningActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -66,11 +67,15 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void about(MenuItem item) {
-        Intent intent = new Intent(this, About.class);
+        Intent intent = new Intent(this, Aboutus.class);
         startActivity(intent);
     }
     public void aboutngo(MenuItem item) {
         Intent intent = new Intent(this, AboutNgo.class);
+        startActivity(intent);
+    }
+    public void creator(MenuItem item) {
+        Intent intent = new Intent(this, CreatorUs.class);
         startActivity(intent);
     }
 

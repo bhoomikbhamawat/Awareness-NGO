@@ -1,15 +1,34 @@
 <resources>
-    <string name="app_name">Awareness</string>
+    <string name="app_name">Vardaan</string>
 
     <string name="hindi_previous">पीछे</string>
     <string name="hindi_next">आगे</string>
     <string name="hindi_done"></string>
     <string name="hindi_submit"></string>
     <string name="hindi_date"></string>
-    <string name="hindi_students_list">छात्रों की सूची</string>
-    <string name="hindi_students_photograph">छात्रों की तस्वीर</string>
+    <string name="hindi_students_list">प्रशिक्षणार्थियो की सूची की तस्वीर</string>
+    <string name="hindi_students_photograph">प्रक्षिशण समूह की तस्वीर</string>
 
     <string name="hindi_send"></string>
+    <string name="jumi_about"><b>Jumio is an AI platform that deliver identity verification as it should be, helping companies fight fraud.
+        Jumio uses the power of informed AI, biometrics, machine learning, and certified liveness detection to help you rapidly
+        convert more customers, stop fraudsters from infiltrating your online ecosystem.</b>
+        \nJumio also helps organizations meet regulatory compliance
+        including KYC, AML and GDPR and has verified more than 225
+        million identities issued by over 200 countries and territories
+        from real-time web and mobile transactions. Jumio’s solutions are
+        used by leading companies in the financial services, sharing economy, digital currency, retail, travel and online gaming sectors.
+       \n\n This program is intiative under CSR of the company where it aims to reach more than 10,000 tribal women of Udaipur district and to sensitize tribal on menstruation health and hygiene.</string>
+    <string name="shrushti"><b>Shrushti Seva Samiti was founded in 1999 with a vision to create an equal and just society where the vulnerable and marginalized sections of the society effectively participate in the development process leading to control over their resources”.</b>
+        \nSHRUSHTI is having active presence in 12 districts of Rajasthan with reach
+        over more than 59,000 households through direct interventions.
+        The present people engaged with the organization are more than
+        650. The organisation is currently trusted partner of institutions
+        like Department of Science and Technology, Government of India,
+        Hindustan Zinc Limited, IIFL Foundation, Women and Child Development
+        Department, GOI, Care India, Jumio India Pvt. Ltd., Sightsavers International, IGSSS and others.
+
+\n\nShrushti works in following thematic areas local governance systems, health and nutrition, education, livelihood and implementation of government welfare scheme. Shrusthi’s office is based in Udaipur with staff present in more than 12 districts. For more information about the organisation, please visit http://www.shrushti.org/</string>
     <string name="hindi_start_next">सभी उत्तर सही हैं। कृपया अगली शुरु करें।</string>
     <string name="hindi_test_guideline"><b><font color="#6200EE">\u2022</font></b> सभी प्रश्नों के उत्तर देना अनिवार्य है।\n<b><font color="#6200EE">\u2022</font></b> गलत उत्तर देने पर दोबारा वविकल्प चुनें।\n<b><font color="#6200EE">\u2022</font></b> अगर आपको उत्तर नहीं पता तो मॉड्यूल दोबारा देखे।</string>
 

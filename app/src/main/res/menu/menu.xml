@@ -20,6 +20,9 @@
             android:onClick="aboutngo"
             android:title="About Jumio" />
         <item
+            android:onClick="creator"
+            android:title="Creator" />
+        <item
             android:onClick="logout"
             android:title="Log Out" />
     </group>
