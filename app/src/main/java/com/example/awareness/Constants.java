@@ -71,4 +71,10 @@ public class Constants {
         public static boolean progressPdf;
         public static boolean progressLecture;
     }
+
+    public static class Organisation {
+        public static final String ORGANISATION_NAME = "organisation_name";
+        public static final int SHRUSHTI = 0;
+        public static final int JUMIO = 1;
+    }
 }

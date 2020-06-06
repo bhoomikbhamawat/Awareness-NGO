@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,54 +8,159 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_alignParentTop="true"
-            android:id="@+id/club_profile_image"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/shrushti"
-            />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Shrushti Seva Samiti"
-            android:id="@+id/club_profile_name"
-            android:layout_below="@+id/club_profile_image"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:textAlignment="center"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            />
+            android:background="?attr/selectableItemBackground"
+            android:onClick="shrushti"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:layout_below="@+id/club_profile_name"
-            android:layout_margin="8dp"
-            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/club_info"
-                android:textColor="@color/black"
-                android:text="@string/shrushti"
-                tools:text="Jumio is an AI platform that deliver identity verification as it should be, helping companies fight fraud.  Jumio uses the power of informed AI, biometrics, machine learning, and certified liveness detection to help you rapidly convert more customers, stop fraudsters from infiltrating your online ecosystem. Jumio also helps organizations meet regulatory compliance including KYC, AML and GDPR and has verified more than 225 million identities issued by over 200 countries and territories from real-time web and mobile transactions. Jumio’s solutions are used by leading companies in the financial services, sharing economy, digital currency, retail, travel and online gaming sectors.
 
-This program is intiative under CSR of the company where it aims to reach more than 10,000 tribal women of Udaipur district and to sensitize tribal on menstruation health and hygiene."
+                android:text="Shrushti Seva Samiti"
+                android:textColor="@android:color/black"
+                android:textSize="21sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:background="?attr/selectableItemBackground"
+                android:text="http://www.shrushti.org/"
+                android:textColorLink="@android:color/holo_blue_light" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dividerHorizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="jumio"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jumio"
+                android:textColor="@android:color/black"
+                android:textSize="21sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:background="?attr/selectableItemBackground"
+                android:text="https://www.jumio.com/"
+                android:textColorLink="@android:color/holo_blue_light" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dividerHorizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="developers"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="App Team"
+                android:textColor="@android:color/black"
+                android:textSize="21sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:text="@string/app_team" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dividerHorizontal" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="80dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@android:color/black"
+                android:textSize="21sp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:layout_margin="16dp"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif-light"
-                android:elevation="5dp"/>
-        </androidx.cardview.widget.CardView>
+                android:contentDescription="App Logo"
+                android:src="@mipmap/ic_launcher_round" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="contactUs"
+                android:text="Contact Us"
+                android:visibility="gone"
+                app:icon="@drawable/ic_baseline_mail_outline_24" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Version 1.00"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_baseline_copyright_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="company name?? | 2020-20??" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -61,7 +62,6 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private Button buttonSubmit;
     LinearLayout linearLayout;
-    private String Category;
     SharedPreferences sharedPreferences;
 
 
@@ -71,6 +71,11 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         linearLayout = findViewById(R.id.linear_l);
         RegName = findViewById(R.id.input_name);
         RegGaav = findViewById(R.id.input_Gaav);
@@ -81,77 +86,26 @@ public class RegisterActivity extends AppCompatActivity {
         RegGramPanch = findViewById(R.id.reg_grampanc);
         RegCity = findViewById(R.id.input_city);
         RegSamiti = findViewById(R.id.reg_samiti);
-        final Spinner categorySpinner = findViewById(R.id.category_spinner_register);
+        final AutoCompleteTextView categorySpinner = findViewById(R.id.category_spinner_register);
         buttonSubmit = findViewById(R.id.button);
 
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Mess");
 
-        List<String> complaints = new ArrayList<>();
-        complaints.add(0, "जाति");
-        complaints.add("SC");
-        complaints.add("ST");
-        complaints.add("Minority");
-        complaints.add("OBC");
-        complaints.add("General");
-        ArrayAdapter<String> complaintsAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, complaints) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
+        List<String> caste = new ArrayList<>();
+        caste.add("SC");
+        caste.add("ST");
+        caste.add("Minority");
+        caste.add("OBC");
+        caste.add("General");
+        ArrayAdapter<String> casteAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, caste);
+        categorySpinner.setAdapter(casteAdapter);
 
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                view.setPadding(0, view.getPaddingTop(), 0, view.getPaddingBottom());
-                return view;
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                switch (position) {
-                    case 0:
-
-                        tv.setTypeface(null, Typeface.BOLD);
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 52);
-                        break;
-                    default:
-                        tv.setTypeface(null, Typeface.NORMAL);
-                        tv.setTextColor(Color.BLACK);
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 48);
-                        break;
-                }
-                return view;
-            }
-        };
-        complaintsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(complaintsAdapter);
-        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Category = parent.getItemAtPosition(position).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (Category.equals("जाति")) {
+                if (categorySpinner.getText().toString().trim().isEmpty()) {
                     try {
                         Snackbar.make(linearLayout, "कृपया जाति भरें", Snackbar.LENGTH_SHORT).show();
                     } catch (NullPointerException e) {
@@ -247,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
                             pdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             pdialog.setMessage("आपका रजिस्टर प्रक्रिया में है....");
                             pdialog.show();
-                            final String Category1 = Category.trim();
+                            final String Category1 = categorySpinner.getText().toString().trim();
                             final String rname = RegName.getText().toString();
                             final String rmobile = RegMobile.getText().toString();
                             final String rVillage = RegGaav.getText().toString();
@@ -385,5 +339,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

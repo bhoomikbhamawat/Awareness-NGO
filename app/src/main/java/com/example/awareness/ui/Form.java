@@ -99,6 +99,9 @@ public class Form extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         final int mode = intent.getIntExtra("mode", -1);
         Age_kit = findViewById(R.id.age_kit);
@@ -673,5 +676,10 @@ public class Form extends AppCompatActivity {
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 
 }
