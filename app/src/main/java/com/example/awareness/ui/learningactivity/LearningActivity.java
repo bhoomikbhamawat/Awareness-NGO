@@ -144,6 +144,9 @@ public class LearningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning);
 
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         progressBar = findViewById(R.id.progress_circle);
         progressBar.setVisibility(View.VISIBLE);
         extraMaterialCardView = findViewById(R.id.extra_material);
@@ -240,5 +243,12 @@ public class LearningActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        // disable going back to the MainActivity
+        Intent intent = new Intent(LearningActivity.this, Dashboard.class);
+        startActivity(intent);
+        return true;
+    }
 
 }

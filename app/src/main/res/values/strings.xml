@@ -10,7 +10,7 @@
     <string name="hindi_students_photograph">प्रशिक्षण समूह की तस्वीर</string>
 
     <string name="hindi_send"></string>
-    <string name="jumi_about"><b>Jumio is an AI platform that deliver identity verification as it should be, helping companies fight fraud.
+    <string name="description_jumio"><b>Jumio is an AI platform that deliver identity verification as it should be, helping companies fight fraud.
         Jumio uses the power of informed AI, biometrics, machine learning, and certified liveness detection to help you rapidly
         convert more customers, stop fraudsters from infiltrating your online ecosystem.</b>
         \nJumio also helps organizations meet regulatory compliance
@@ -19,7 +19,7 @@
         from real-time web and mobile transactions. Jumio’s solutions are
         used by leading companies in the financial services, sharing economy, digital currency, retail, travel and online gaming sectors.
        \n\n This program is intiative under CSR of the company where it aims to reach more than 10,000 tribal women of Udaipur district and to sensitize tribal on menstruation health and hygiene.</string>
-    <string name="shrushti"><b>Shrushti Seva Samiti was founded in 1999 with a vision to create an equal and just society where the vulnerable and marginalized sections of the society effectively participate in the development process leading to control over their resources”.</b>
+    <string name="description_shrushti"><b>Shrushti Seva Samiti was founded in 1999 with a vision to create an equal and just society where the vulnerable and marginalized sections of the society effectively participate in the development process leading to control over their resources”.</b>
         \nSHRUSHTI is having active presence in 12 districts of Rajasthan with reach
         over more than 59,000 households through direct interventions.
         The present people engaged with the organization are more than
@@ -32,4 +32,7 @@
     <string name="hindi_start_next">शुभकामनाएं, आपके सभी उत्तर सही हैं। कृपया अगले मॉड्यूल को प्रारम्भ करे।</string>
     <string name="hindi_test_guideline"><b><font color="#6200EE">\u2022</font></b> सभी प्रश्नों के उत्तर देना अनिवार्य है।\n<b><font color="#6200EE">\u2022</font></b> गलत उत्तर देने पर दोबारा वविकल्प चुनें।\n<b><font color="#6200EE">\u2022</font></b> अगर आपको उत्तर नहीं पता तो मॉड्यूल दोबारा देखे।</string>
     <string name="Creatorus">A community of passionate individuals whose purpose is to revolutionize software design,creation,content and delivery while advocating for positive social change </string>
+    <string name="app_team">• Bhoomik Bhamawat \n• Monu Kumar \n• Divya Jain \n• Aditi Jain</string>
+    <string name="shrushti">Shrushti</string>
+    <string name="jumio">Jumio</string>
 </resources>

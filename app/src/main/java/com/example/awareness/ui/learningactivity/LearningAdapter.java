@@ -1,20 +1,16 @@
 package com.example.awareness.ui.learningactivity;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
@@ -22,18 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
-import com.example.awareness.PdfViewActivity;
+import com.example.awareness.ui.PdfViewActivity;
 import com.example.awareness.QuizUtils;
 import com.example.awareness.R;
-import com.example.awareness.ui.Form;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Objects;
 

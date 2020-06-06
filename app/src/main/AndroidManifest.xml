@@ -22,7 +22,7 @@
         <activity android:name=".ui.learningactivity.CreatorUs" />
         <activity android:name=".ui.Aboutus" />
         <activity android:name=".ui.AboutNgo" />
-        <activity android:name=".PdfViewActivity" />
+        <activity android:name=".ui.PdfViewActivity" />
         <activity android:name=".ui.CertificateActivity" />
         <activity android:name=".ui.Form" />
         <activity android:name=".ui.learningactivity.LearningActivity" />

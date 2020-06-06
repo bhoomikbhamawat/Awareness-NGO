@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:nestedScrollingEnabled="false"
-    android:padding="4dp"
     android:scrollbars="none"
     tools:context=".ui.Form">
 
@@ -14,18 +13,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="16dp"
+            android:layout_margin="8dp"
             android:visibility="gone"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp">
 
             <TextView
                 android:id="@+id/name_kp"
@@ -40,10 +38,9 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp">
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -161,16 +158,16 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp">
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="4dp">
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"

@@ -72,4 +72,10 @@ public class DeveloperInfo extends AppCompatActivity {
         mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }
