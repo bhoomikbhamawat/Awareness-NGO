@@ -73,6 +73,7 @@ public class Dashboard extends AppCompatActivity {
     }
     public void aboutngo(MenuItem item) {
         Intent intent = new Intent(this, AboutNgo.class);
+        intent.putExtra(Constants.Organisation.ORGANISATION_NAME, Constants.Organisation.JUMIO);
         startActivity(intent);
     }
     public void creator(MenuItem item) {

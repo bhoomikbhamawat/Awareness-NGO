@@ -95,6 +95,7 @@ public class LearningActivity extends AppCompatActivity {
     }
     public void aboutngo(MenuItem item) {
         Intent intent = new Intent(this, AboutNgo.class);
+        intent.putExtra(Constants.Organisation.ORGANISATION_NAME, Constants.Organisation.JUMIO);
         startActivity(intent);
     }
 

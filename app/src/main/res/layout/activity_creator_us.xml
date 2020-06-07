@@ -1,47 +1,27 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_marginTop="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_margin="4dp"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Developers"
-            android:textColor="@android:color/black"
-            android:textSize="21sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/developer_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="Team Name ???"
-            android:textColor="@android:color/black"
-            android:textSize="21sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/other_members_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/Creatorus" />
+        android:textAlignment="center"
+       android:layout_gravity="center"
+        android:gravity="center"
+        android:fontFamily="sans-serif"
+       android:padding="2dp"
+        android:text="@string/Creatorus"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold|italic" />
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/about_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
     </LinearLayout>
-</ScrollView>
