@@ -1,7 +1,4 @@
-package com.example.awareness.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+package com.example.awareness.ui.aboutactivity;
 
 import android.animation.Animator;
 import android.graphics.Rect;
@@ -11,24 +8,19 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.example.awareness.R;
 
 public class DeveloperInfo extends AppCompatActivity {
     private Animator mCurrentAnimator;
 
-    // The system "short" animation time duration, in milliseconds. This
-    // duration is ideal for subtle animations or animations that occur
-    // very frequently.
-    private int mShortAnimationDuration;
     private boolean zoomMode;
     private ImageView expandedImageView;
     private Rect startBounds;
     private float startScaleFinal;
-    private ImageView userProfilePictureImageView;
     private boolean showingMin = false;
-    private int Image;
-    private String  Name, Email, Branch;
-    private TextView Name1, Email1, Branch1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +33,13 @@ public class DeveloperInfo extends AppCompatActivity {
 //       getSupportActionBar().setDisplayShowTitleEnabled(false);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Name1 = findViewById(R.id.user_name_profile);
-        Email1 = findViewById(R.id.user_email_profile);
-        Branch1 = findViewById(R.id.user_rollno_profile);
-        Image = getIntent().getIntExtra("Image",0);
-        Name = getIntent().getStringExtra("Name");
-        Email = getIntent().getStringExtra("Email");
-        Branch = getIntent().getStringExtra("Branch");
+        TextView name1 = findViewById(R.id.user_name_profile);
+        TextView email1 = findViewById(R.id.user_email_profile);
+        TextView branch1 = findViewById(R.id.user_rollno_profile);
+        int image = getIntent().getIntExtra("Image", 0);
+        String name = getIntent().getStringExtra("Name");
+        String email = getIntent().getStringExtra("Email");
+        String branch = getIntent().getStringExtra("Branch");
 
         Window window = this.getWindow();
 
@@ -61,15 +53,18 @@ public class DeveloperInfo extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
 
 
-        Name1.setText(Name);
-        Branch1.setText(Branch);
-        Email1.setText(Email);
-        userProfilePictureImageView = findViewById(R.id.user_profile_picture_profile);
+        name1.setText(name);
+        branch1.setText(branch);
+        email1.setText(email);
+        ImageView userProfilePictureImageView = findViewById(R.id.user_profile_picture_profile);
 //        expandedImageView = findViewById(R.id.expanded_image_profile);
-        userProfilePictureImageView.setImageResource(Image);
+        userProfilePictureImageView.setImageResource(image);
 
 
-        mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        // The system "short" animation time duration, in milliseconds. This
+        // duration is ideal for subtle animations or animations that occur
+        // very frequently.
+        int mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
     }
 

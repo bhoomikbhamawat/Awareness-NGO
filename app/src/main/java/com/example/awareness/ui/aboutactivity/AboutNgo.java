@@ -1,11 +1,11 @@
-package com.example.awareness.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.awareness.ui.aboutactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.awareness.Constants.Organisation;
 import com.example.awareness.R;

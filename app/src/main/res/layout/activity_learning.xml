@@ -80,7 +80,7 @@
                     android:textAppearance="?android:attr/textAppearanceListItemSmall"
                     android:textColor="@android:color/holo_blue_light"
                     android:textSize="18dp"
-                    tools:text="https://youtu.be/1Yofu23jxhE" />
+                    android:text="https://youtu.be/1Yofu23jxhE" />
 
             </LinearLayout>
 

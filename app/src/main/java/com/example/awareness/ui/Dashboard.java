@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
 import com.example.awareness.R;
-import com.example.awareness.ui.learningactivity.CreatorUs;
+import com.example.awareness.ui.aboutactivity.AboutNgo;
+import com.example.awareness.ui.aboutactivity.Aboutus;
+import com.example.awareness.ui.aboutactivity.CreatorUs;
 import com.example.awareness.ui.learningactivity.LearningActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,15 +32,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import static com.example.awareness.Constants.User;
-import static com.example.awareness.ui.learningactivity.LearningActivity.extraMaterialCardView;
-import static com.example.awareness.ui.learningactivity.LearningActivity.learningAdapter;
 import static com.example.awareness.ui.learningactivity.LearningActivity.modules;
-import static com.example.awareness.ui.learningactivity.LearningActivity.progressBar;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -128,15 +125,34 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         TextView welcomeText = findViewById(R.id.welcome);
-        SharedPreferences preferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
-        String name = preferences.getString(User.USER_NAME,null);
 
-        if(name !=null){
+        findViewById(R.id.shrushti_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Dashboard.this, AboutNgo.class);
+                intent.putExtra(Constants.Organisation.ORGANISATION_NAME, Constants.Organisation.SHRUSHTI);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.jumio_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Dashboard.this, AboutNgo.class);
+                intent.putExtra(Constants.Organisation.ORGANISATION_NAME, Constants.Organisation.JUMIO);
+                startActivity(intent);
+            }
+        });
+
+        SharedPreferences preferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        String name = preferences.getString(User.USER_NAME, null);
+
+        if (name != null) {
             welcomeText.setText("स्वागत है " + name);
         }
 
-        String userId = preferences.getString(User.USER_CONTACT_NUMBER,null);
-        if(userId != null) {
+        String userId = preferences.getString(User.USER_CONTACT_NUMBER, null);
+        if (userId != null) {
             firestore.collection("users").document(userId).get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -146,8 +162,16 @@ public class Dashboard extends AppCompatActivity {
                                 if (document != null) {
                                     User.accessModule = Objects.requireNonNull(document.getLong(User.ACCESS_MODULE)).intValue();
                                     User.accessQuestion = Objects.requireNonNull(document.getLong(User.ACCESS_QUESTION)).intValue();
-                                    User.progressLink = document.getBoolean(User.PROGRESS_LINK);
-                                    User.progressPdf = document.getBoolean(User.PROGRESS_PDF);
+                                    if (document.contains(User.PROGRESS_LECTURE)) {
+                                        User.progressLecture = document.getBoolean(User.PROGRESS_LECTURE);
+                                    }
+                                    if (document.contains(User.PROGRESS_LINK)) {
+                                        User.progressLink = document.getBoolean(User.PROGRESS_LINK);
+                                    }
+                                    if (document.contains(User.PROGRESS_PDF)) {
+                                        User.progressPdf = document.getBoolean(User.PROGRESS_PDF);
+                                    }
+
                                 }
                             }
                         }
@@ -164,13 +188,6 @@ public class Dashboard extends AppCompatActivity {
                             modules.add(new Module(Integer.parseInt(document.getId()), document.getString("Topic"), attachments));
                         }
                         Collections.sort(modules, new SortbyModuleNumber());
-                        try {
-                            learningAdapter.notifyDataSetChanged();
-                            progressBar.setVisibility(View.GONE);
-                            extraMaterialCardView.setVisibility(View.VISIBLE);
-                        } catch (Exception e) {
-                            Log.e("TAGG", e.toString());
-                        }
 
                     } else {
                         Log.e("TAGG", "Error getting modules", task.getException());

@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Aboutus">
+    tools:context=".ui.aboutactivity.Aboutus">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +17,10 @@
             android:background="?attr/selectableItemBackground"
             android:onClick="shrushti"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -49,7 +50,10 @@
             android:background="?attr/selectableItemBackground"
             android:onClick="jumio"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -78,7 +82,10 @@
             android:background="?attr/selectableItemBackground"
             android:onClick="developers"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -100,12 +107,10 @@
             android:layout_height="1dp"
             android:background="?attr/dividerHorizontal" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
-
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -114,39 +119,48 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:text="@string/app_name"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:contentDescription="App Logo"
                 android:src="@mipmap/girl_photo" />
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:clickable="true"
                 android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
                 android:text="Version 1.0"
                 android:textSize="18sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?attr/dividerHorizontal" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="8dp"
-
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
                 android:text="Always ready to help you"
                 android:textSize="18sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -157,14 +171,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="contactUs"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
                 android:text="Contact Us"
                 app:icon="@drawable/ic_baseline_mail_outline_24" />
-
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-
                 android:background="?attr/dividerHorizontal" />
 
             <Button
@@ -172,41 +188,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="rateus"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
                 android:text="Rate us on the Play Store "
                 app:icon="@drawable/about_icon_google_play" />
-
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?attr/dividerHorizontal" />
-            <LinearLayout
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:clickable="true"
-                android:padding="8dp"
-                android:background="?attr/selectableItemBackground"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_baseline_copyright_24" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textSize="20dp"
-                    android:text="Mayken | 2020" />
-
-
-            </LinearLayout>
-
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:text=" © Mayken | 2020"
+                android:textSize="18sp" />
         </LinearLayout>
-
-
     </LinearLayout>
 </ScrollView>
