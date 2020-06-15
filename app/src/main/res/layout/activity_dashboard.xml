@@ -18,108 +18,115 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:textColor="@android:color/white"
             android:textSize="28sp"
-            tools:text="Welcome Monu Kumar"
-            android:textColor="@android:color/white"/>
+            tools:text="Welcome Monu Kumar" />
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
-<!--            <ImageView-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/jumio_logo"/>-->
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal">-->
+        <!--            <ImageView-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:src="@drawable/jumio_logo"/>-->
 
-<!--            <ImageView-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/shrushti"/>-->
-<!--        </LinearLayout>-->
+        <!--            <ImageView-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:src="@drawable/shrushti"/>-->
+        <!--        </LinearLayout>-->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
+            android:layout_margin="8dp"
             android:elevation="5dp"
             android:padding="4dp"
-            app:cardElevation="4dp"
-            android:layout_margin="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp"
-                android:padding="8dp"
                 android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
                 android:gravity="center"
-                android:text="प्रशिक्षण मॉड्यूल"
+                android:minHeight="100dp"
                 android:onClick="learningSection"
-                android:textColor="@android:color/black"
-                android:background="?attr/selectableItemBackground"
-                android:textSize="21sp" />
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            android:elevation="5dp"
-            android:padding="4dp"
-            app:cardElevation="4dp"
-            android:layout_margin="8dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="100dp"
                 android:padding="8dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="जागरूकता अभियान"
-                android:onClick="Formstudents"
+                android:text="प्रशिक्षण मॉड्यूल"
                 android:textColor="@android:color/black"
-                android:background="?attr/selectableItemBackground"
                 android:textSize="21sp" />
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
+            android:layout_margin="8dp"
             android:elevation="5dp"
             android:padding="4dp"
-            app:cardElevation="4dp"
-            android:layout_margin="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
                 android:minHeight="100dp"
+                android:onClick="Formstudents"
+                android:padding="8dp"
+                android:text="जागरूकता अभियान"
+                android:textColor="@android:color/black"
+                android:textSize="21sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:elevation="5dp"
+            android:padding="4dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:minHeight="100dp"
+                android:onClick="FormKit"
                 android:padding="8dp"
                 android:text="स्वच्छता किट"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:onClick="FormKit"
                 android:textColor="@android:color/black"
-                android:background="?attr/selectableItemBackground"
                 android:textSize="21sp" />
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="4dp"
             android:layout_weight="10"
-            >
+            android:orientation="horizontal"
+            android:padding="4dp">
 
             <ImageView
+                android:id="@+id/shrushti_image"
                 android:layout_width="wrap_content"
-                android:layout_weight="5"
                 android:layout_height="120dp"
-                android:src="@drawable/shrushti"></ImageView>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_weight="5"
-            android:layout_height="150dp"
-            android:src="@drawable/jumio_logo"></ImageView>
+                android:layout_weight="5"
+                android:src="@drawable/shrushti" />
+
+            <ImageView
+                android:id="@+id/jumio_image"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_weight="5"
+                android:src="@drawable/jumio_logo" />
         </LinearLayout>
 
     </LinearLayout>

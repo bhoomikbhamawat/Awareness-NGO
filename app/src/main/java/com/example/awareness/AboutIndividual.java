@@ -1,4 +1,4 @@
-package com.example.awareness.ui;
+package com.example.awareness;
 
 public class AboutIndividual {
     private String id;

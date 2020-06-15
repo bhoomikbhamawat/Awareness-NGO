@@ -22,12 +22,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.awareness.Constants;
 import com.example.awareness.Module;
 import com.example.awareness.R;
-import com.example.awareness.ui.AboutNgo;
-import com.example.awareness.ui.Aboutus;
 import com.example.awareness.ui.CertificateActivity;
 import com.example.awareness.ui.Dashboard;
 import com.example.awareness.ui.Form;
 import com.example.awareness.ui.LoginActivity;
+import com.example.awareness.ui.aboutactivity.AboutNgo;
+import com.example.awareness.ui.aboutactivity.Aboutus;
+import com.example.awareness.ui.aboutactivity.CreatorUs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -50,14 +51,14 @@ public class LearningActivity extends AppCompatActivity {
 
     public static List<Module> modules = new ArrayList<>();
     @SuppressLint("StaticFieldLeak")
-    public static LearningAdapter learningAdapter;
+    public LearningAdapter learningAdapter;
     @SuppressLint("StaticFieldLeak")
     public static View quizBottomSheet;
     @SuppressLint("StaticFieldLeak")
     public static BottomSheetDialog quizBottomSheetDialog;
     @SuppressLint("StaticFieldLeak")
-    public static ProgressBar progressBar;
-    public static MaterialCardView extraMaterialCardView;
+    public ProgressBar progressBar;
+    public MaterialCardView extraMaterialCardView;
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     SharedPreferences preferences;
@@ -166,12 +167,6 @@ public class LearningActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             extraMaterialCardView.setVisibility(View.VISIBLE);
         }
-
-//        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-//                .setPersistenceEnabled(true)
-//                .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
-//                .build();
-//        firestore.setFirestoreSettings(settings);
 
         preferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
 

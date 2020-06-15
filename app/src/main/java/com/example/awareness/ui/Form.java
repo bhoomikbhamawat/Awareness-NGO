@@ -24,7 +24,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -72,8 +71,6 @@ public class Form extends AppCompatActivity {
 
 
     String url;
-    private ImageButton addImage, addImageStudentsList;
-    private Button sendButton;
     private LinearLayout uploadedImageContainer, uploadedImageContainerStudentsList;
     AutoCompleteTextView categorySpinner;
     TextInputLayout categotySpinnerLayout;
@@ -140,7 +137,7 @@ public class Form extends AppCompatActivity {
         uploadedImageContainer = findViewById(R.id.uploaded_image_container);
         removeImage = findViewById(R.id.remove_image);
         dateTime = findViewById(R.id.event_date_time);
-        addImageStudentsList = findViewById(R.id.add_image_students_list);
+        ImageButton addImageStudentsList = findViewById(R.id.add_image_students_list);
         uploadedImageContainerStudentsList = findViewById(R.id.uploaded_image_container_students_list);
         removeImageStudentsList = findViewById(R.id.remove_image_students_list);
 
@@ -150,8 +147,8 @@ public class Form extends AppCompatActivity {
         uploadImageLayout = getLayoutInflater().inflate(R.layout.uploadimage_dialog_layout, null, false);
         uploadImageDialog = new BottomSheetDialog(this);
         uploadImageDialog.setContentView(uploadImageLayout);
-        addImage = findViewById(R.id.add_image);
-        sendButton = findViewById(R.id.send_button);
+        ImageButton addImage = findViewById(R.id.add_image);
+        Button sendButton = findViewById(R.id.send_button);
 
 
         UserImage = new ArrayList<>();
@@ -394,9 +391,9 @@ public class Form extends AppCompatActivity {
                                         @Override
                                         public void onResponse(String response) {
                                             pdialog.dismiss();
-                                            if ((response.toString()).equals("Success")) {
+                                            if ((response).equals("Success")) {
                                                 Snackbar.make(layout_formkit, "सफलतापूर्वक किया गया", Snackbar.LENGTH_LONG).show();
-                                            } else if ((response.toString()).equals("Block")) {
+                                            } else if ((response).equals("Block")) {
                                                 Snackbar.make(layout_formkit, "Complain Registered but You are blocked for misuse of app Contact concerned authority", Snackbar.LENGTH_LONG).show();
                                             }
 
@@ -665,7 +662,7 @@ public class Form extends AppCompatActivity {
         mMonth = calendar.get(Calendar.MONTH);
         mDay = calendar.get(Calendar.DAY_OF_MONTH);
         mHour = 18;
-        mMinute = 00;
+        mMinute = 0;
     }
 
     private String getStringImage(Bitmap bmp) {

@@ -1,17 +1,15 @@
-package com.example.awareness.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.awareness.ui.aboutactivity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.awareness.Constants.Organisation;
 import com.example.awareness.R;
-import com.example.awareness.ui.learningactivity.CreatorUs;
 
 public class Aboutus extends AppCompatActivity {
 
@@ -22,13 +20,6 @@ public class Aboutus extends AppCompatActivity {
 
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-
-
-
-
     }
 
     public void contactUs(View view) {
@@ -38,8 +29,6 @@ public class Aboutus extends AppCompatActivity {
     } public void rateus(View view) {
         Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-        // To count with Play market backstack, After pressing back button,
-        // to taken back to our application, we need to add following flags to intent.
         goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                 Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
                 Intent.FLAG_ACTIVITY_MULTIPLE_TASK);

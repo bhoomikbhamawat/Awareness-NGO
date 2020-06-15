@@ -1,4 +1,4 @@
-package com.example.awareness.ui;
+package com.example.awareness.ui.aboutactivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.awareness.AboutIndividual;
 import com.example.awareness.R;
 
 import java.util.List;
@@ -40,13 +41,6 @@ public class AboutCategory extends StatelessSection {
         this.name = name;
     }
 
-//    public List<AboutIndividual> getIndividuals() {
-//        return individuals;
-//    }
-
-//    public void setIndividuals(List<AboutIndividual> individuals) {
-//        this.individuals = individuals;
-//    }
 
     @Override
     public int getContentItemsTotal() {
@@ -62,11 +56,6 @@ public class AboutCategory extends StatelessSection {
     public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
         final AboutIndividual individual = individuals.get(position);
         IndividualViewHolder individualViewHolder = (IndividualViewHolder) holder;
-        /*Picasso.get()
-                .load("https://insti.app/team-pi/" + individual.getImageName())
-                .placeholder(R.drawable.user_placeholder)
-                .resize(0, 300)
-                .into(individualViewHolder.pictureImageView);*/
         individualViewHolder.pictureImageView.setImageResource(individual.getImageName());
         individualViewHolder.nameTextView.setText(individual.getName());
         individualViewHolder.rootView.setOnClickListener(new View.OnClickListener() {

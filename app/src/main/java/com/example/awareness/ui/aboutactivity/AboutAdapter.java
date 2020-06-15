@@ -1,4 +1,4 @@
-package com.example.awareness.ui;
+package com.example.awareness.ui.aboutactivity;
 
 import android.view.ViewGroup;
 
