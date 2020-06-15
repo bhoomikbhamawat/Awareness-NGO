@@ -1,6 +1,5 @@
 package com.example.awareness.ui.learningactivity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -50,15 +49,9 @@ import static com.example.awareness.Constants.User;
 public class LearningActivity extends AppCompatActivity {
 
     public static List<Module> modules = new ArrayList<>();
-    @SuppressLint("StaticFieldLeak")
-    public LearningAdapter learningAdapter;
-    @SuppressLint("StaticFieldLeak")
-    public static View quizBottomSheet;
-    @SuppressLint("StaticFieldLeak")
-    public static BottomSheetDialog quizBottomSheetDialog;
-    @SuppressLint("StaticFieldLeak")
-    public ProgressBar progressBar;
-    public MaterialCardView extraMaterialCardView;
+    private LearningAdapter learningAdapter;
+    private ProgressBar progressBar;
+    private MaterialCardView extraMaterialCardView;
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     SharedPreferences preferences;
@@ -155,13 +148,13 @@ public class LearningActivity extends AppCompatActivity {
         extraMaterialCardView.setVisibility(View.GONE);
 
         RecyclerView learningRecyclerView = findViewById(R.id.learning_recyclerview);
-        quizBottomSheet = getLayoutInflater().inflate(R.layout.test_layout, null, false);
-        quizBottomSheetDialog = new BottomSheetDialog(this);
+        View quizBottomSheet = getLayoutInflater().inflate(R.layout.test_layout, null, false);
+        BottomSheetDialog quizBottomSheetDialog = new BottomSheetDialog(this);
         quizBottomSheetDialog.setContentView(quizBottomSheet);
 
 
         learningRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        learningAdapter = new LearningAdapter(this, modules);
+        learningAdapter = new LearningAdapter(this, modules, quizBottomSheet, quizBottomSheetDialog);
         learningRecyclerView.setAdapter(learningAdapter);
         if (modules.size() > 0) {
             progressBar.setVisibility(View.GONE);
