@@ -191,6 +191,7 @@ public class Form extends AppCompatActivity {
 
         getCurrentTime();
         final Calendar newCalendar = Calendar.getInstance();
+
         dateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,8 +212,6 @@ public class Form extends AppCompatActivity {
 
                             date = new SimpleDateFormat("yyyy-MM-dd").parse(mDateTime);
                             date6 = sdf.format(date);
-
-
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }

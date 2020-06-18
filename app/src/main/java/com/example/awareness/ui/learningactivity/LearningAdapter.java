@@ -31,6 +31,7 @@ import com.example.awareness.ui.PdfViewActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,18 +46,23 @@ import java.util.Objects;
 
 import static com.example.awareness.Constants.User;
 import static com.example.awareness.ui.learningactivity.LearningActivity.modules;
-import static com.example.awareness.ui.learningactivity.LearningActivity.quizBottomSheet;
-import static com.example.awareness.ui.learningactivity.LearningActivity.quizBottomSheetDialog;
 
 public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.LearningViewHolder> {
 
     private Context mContext;
     private List<Module> mModules;
+    private BottomSheetDialog quizBottomSheetDialog;
+    private View quizBottomSheet;
+    private List<Question> questions = new ArrayList<>();
+    private boolean showGuideline;
 
-    public LearningAdapter(Context context, List<Module> modules) {
+    public LearningAdapter(Context context, List<Module> modules, View quizBottomSheet, BottomSheetDialog quizBottomSheetDialog) {
         this.mContext = context;
         this.mModules = modules;
+        this.quizBottomSheet = quizBottomSheet;
+        this.quizBottomSheetDialog = quizBottomSheetDialog;
     }
+
 
     @NonNull
     @Override
@@ -72,16 +78,6 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
         return mModules.size();
     }
 
-    private List<Question> questions = new ArrayList<>();
-    private TextView questionNumber, question, guideline;
-    private RadioButton option1, option2, option3, option4;
-    private Button checkNext, previous;
-    private RadioGroup radioGroup;
-    private ProgressBar progressBar;
-    private ScrollView mainContent;
-    private boolean done = false;
-    private boolean certificate = false;
-    private boolean showGuideline = User.accessModule == 1 && User.accessQuestion == 1;
 
     @Override
     public void onBindViewHolder(@NonNull final LearningViewHolder holder, final int position) {
@@ -180,12 +176,22 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
         holder.test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showGuideline = User.accessQuestion == 1 || MODULE_NUMBER != User.accessModule;
                 quizBottomSheetDialog.show();
                 quizBottomSheetDialog.getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
                 createQuiz(mContext, MODULE_NUMBER);
             }
         });
     }
+
+    private TextView questionNumber, question, guideline;
+    private RadioButton option1, option2, option3, option4;
+    private Button checkNext, previous;
+    private RadioGroup radioGroup;
+    private ProgressBar progressBar;
+    private ScrollView mainContent;
+    private boolean done = false;
+    private boolean certificate = false;
 
     public void createQuiz(final Context context, final int moduleNumber) {
 
