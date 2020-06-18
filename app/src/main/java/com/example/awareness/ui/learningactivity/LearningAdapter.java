@@ -54,6 +54,15 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
     private BottomSheetDialog quizBottomSheetDialog;
     private View quizBottomSheet;
     private List<Question> questions = new ArrayList<>();
+    private boolean showGuideline;
+
+    public LearningAdapter(Context context, List<Module> modules, View quizBottomSheet, BottomSheetDialog quizBottomSheetDialog) {
+        this.mContext = context;
+        this.mModules = modules;
+        this.quizBottomSheet = quizBottomSheet;
+        this.quizBottomSheetDialog = quizBottomSheetDialog;
+    }
+
 
     @NonNull
     @Override
@@ -167,6 +176,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
         holder.test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showGuideline = User.accessQuestion == 1 || MODULE_NUMBER != User.accessModule;
                 quizBottomSheetDialog.show();
                 quizBottomSheetDialog.getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
                 createQuiz(mContext, MODULE_NUMBER);
@@ -182,14 +192,6 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
     private ScrollView mainContent;
     private boolean done = false;
     private boolean certificate = false;
-    private boolean showGuideline = User.accessModule == 1 && User.accessQuestion == 1;
-
-    public LearningAdapter(Context context, List<Module> modules, View quizBottomSheet, BottomSheetDialog quizBottomSheetDialog) {
-        this.mContext = context;
-        this.mModules = modules;
-        this.quizBottomSheet = quizBottomSheet;
-        this.quizBottomSheetDialog = quizBottomSheetDialog;
-    }
 
     public void createQuiz(final Context context, final int moduleNumber) {
 
