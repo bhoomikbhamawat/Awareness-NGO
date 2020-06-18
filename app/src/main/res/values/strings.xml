@@ -5,16 +5,15 @@
     <string name="hindi_students_list">प्रशिक्षणार्थियो की सूची की तस्वीर</string>
     <string name="hindi_students_photograph">प्रशिक्षण समूह की तस्वीर</string>
 
-    <string name="description_jumio"><b>Jumio is an AI platform that deliver identity verification as it should be, helping companies fight fraud.
-        Jumio uses the power of informed AI, biometrics, machine learning, and certified liveness detection to help you rapidly
-        convert more customers, stop fraudsters from infiltrating your online ecosystem.</b>
-        \nJumio also helps organizations meet regulatory compliance
-        including KYC, AML and GDPR and has verified more than 225
-        million identities issued by over 200 countries and territories
-        from real-time web and mobile transactions. Jumio’s solutions are
-        used by leading companies in the financial services, sharing economy, digital currency, retail, travel and online gaming sectors.
-       \n\n This program is intiative under CSR of the company where it aims to reach more than 10,000 tribal women of Udaipur district and to sensitize tribal on menstruation health and hygiene.</string>
-    <string name="description_shrushti"><b>Shrushti Seva Samiti was founded in 1999 with a vision to create an equal and just society where the vulnerable and marginalized sections of the society effectively participate in the development process leading to control over their resources”.</b>
+    <string name="description_jumio"><b>
+जुमियो एक AI प्लेटफ़ॉर्म है जो पहचान की जाचं करता है जिससे कंपनियों को धोखाधड़ी से लड़ने में मदद मिलती है। जुमियो ने सूचित AI, बायोमेट्रिक्स, मशीन लर्निंग, और प्रमाणित लाईवनेस डिटेक्शन की शक्ति का उपयोग करके आपको तेजी से अधिक ग्राहक बदलने में मदद करता है और धोखेबाजों को आपके ऑनलाइन इकोसिस्टम में घुसपैठ करने से रोकता है। </b>
+        \n। साथ ही जुमियो विभिन्न संगठनों को KYC, AML और GDPR सहित विनियामक अनुपालन को पूरा करने में मदद करता है। इसने अभी तक 200 से अधिक देशों और क्षेत्रों द्वारा जारी किए गए 225 मिलियन से अधिक पहचानों का सत्यापन किया है। जुमियो के समाधान का उपयोग वित्तीय सेवाओं, साझा अर्थव्यवस्था, डिजिटल मुद्रा, खुदरा, यात्रा और ऑनलाइन गेमिंग क्षेत्रों में अग्रणी कंपनियों द्वारा किया जाता है।
+       \n\nयह कार्यक्रम उस कंपनी के CSR के अंतर्गत है जो उदयपुर जिले की 10,000 से अधिक आदिवासी महिलाओं तक पहुंचने और मासिक धर्म स्वास्थ्य और स्वच्छता पर आदिवासी को संवेदनशील बनाने का लक्ष्य रखती है।</string>
+    <string name="description_shrushti"><b>सृष्टि सेवा समिति की स्थापना 1999 में एक समान और न्यायपूर्ण समाज बनाने के लिए की गई थी, जहाँ समाज के कमजोर और अधिकारहीन लोग अपने संसाधनों पर नियंत्रण रखने के लिए विकास प्रक्रिया में प्रभावी रूप से भाग लेते हैं।”</b>
+        \nराजस्थान के 12 जिलों में सृष्टि की सक्रिय उपस्थिति है, जो 59,000 से अधिक घरों में सीधे हस्तक्षेप के माध्यम से पहुंच रहा है। संगठन से जुड़े वर्तमान लोग 650 से अधिक हैं। संगठन वर्तमान में विज्ञान और प्रौद्योगिकी विभाग, भारत सरकार, हिंदुस्तान जिंक लिमिटेड, आईआईएफएल फाउंडेशन, महिला और बाल विकास विभाग, भारत सरकार, केयर इंडिया, जुमियो , साइटसेवर्स इंटरनेशनल, IGSSS जैसे संस्थानों का विश्वसनीय भागीदार है।
+
+\n\n सृष्टि निम्नलिखित विषयगत क्षेत्रों स्थानीय शासन प्रणाली, स्वास्थ्य और पोषण, शिक्षा, आजीविका और सरकारी कल्याण योजना के कार्यान्वयन में काम करती है। सृष्टि का कार्यालय उदयपुर में 12 से अधिक जिलों में मौजूद कर्मचारियों के साथ स्थित है। संगठन के बारे में अधिक जानकारी के लिए, कृपया http://www.shrushti.org/ पर जाएं।</string>
+    <!--    <string name="description_shrushti"><b>Shrushti Seva Samiti was founded in 1999 with a vision to create an equal and just society where the vulnerable and marginalized sections of the society effectively participate in the development process leading to control over their resources”.</b>
         \nSHRUSHTI is having active presence in 12 districts of Rajasthan with reach
         over more than 59,000 households through direct interventions.
         The present people engaged with the organization are more than
@@ -23,7 +22,7 @@
         Hindustan Zinc Limited, IIFL Foundation, Women and Child Development
         Department, GOI, Care India, Jumio India Pvt. Ltd., Sightsavers International, IGSSS and others.
 
-\n\nShrushti works in following thematic areas local governance systems, health and nutrition, education, livelihood and implementation of government welfare scheme. Shrusthi’s office is based in Udaipur with staff present in more than 12 districts. For more information about the organisation, please visit http://www.shrushti.org/</string>
+\n\nShrushti works in following thematic areas local governance systems, health and nutrition, education, livelihood and implementation of government welfare scheme. Shrusthi’s office is based in Udaipur with staff present in more than 12 districts. For more information about the organisation, please visit http://www.shrushti.org/</string>-->
     <string name="hindi_start_next">शुभकामनाएं, आपके सभी उत्तर सही हैं। कृपया अगले मॉड्यूल को प्रारम्भ करे।</string>
     <string name="hindi_test_guideline"><b><font color="#6200EE">\u2022</font></b> सभी प्रश्नों के उत्तर देना अनिवार्य है।\n<b><font color="#6200EE">\u2022</font></b> गलत उत्तर देने पर दोबारा वविकल्प चुनें।\n<b><font color="#6200EE">\u2022</font></b> अगर आपको उत्तर नहीं पता तो मॉड्यूल दोबारा देखे।</string>
     <string name="Creatorus">A community of passionate individuals whose purpose is to revolutionize software design,creation,content and delivery while advocating for positive social change </string>

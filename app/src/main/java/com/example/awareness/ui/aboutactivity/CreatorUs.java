@@ -27,7 +27,7 @@ public class CreatorUs extends AppCompatActivity {
 
         AboutAdapter aboutAdapter = new AboutAdapter(new ArrayList<AboutCategory>() {{
             add(new AboutCategory("Core Developers", new ArrayList<AboutIndividual>() {{
-                add(new AboutIndividual("bhoomikbhamawat.eee18@iitbhu.ac.in", "Bhoomik Bhamawat", R.drawable.userdrawable, "8003044991"));
+                add(new AboutIndividual("bhoomikbhamawat.eee18@iitbhu.ac.in", "Bhoomik Bhamawat", R.drawable.bhoomik, "8003044991"));
                 add(new AboutIndividual("kmonu9581@gmail.com", "Monu Kumar", R.drawable.mk, "8505089989"));
                 add(new AboutIndividual("divyabhamawat16@gmail.com", "Divya Jain", R.drawable.divya, "9001847205"));
                 add(new AboutIndividual("aditijain8901@gmail.com", "Aditi Jain", R.drawable.aditi, "7340666132"));
