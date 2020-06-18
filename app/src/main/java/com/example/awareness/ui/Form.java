@@ -209,7 +209,7 @@ public class Form extends AppCompatActivity {
                             Locale hindi = new Locale("hi", "IN");
                             SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", hindi);
 
-                            date = new SimpleDateFormat("yyyy-mm-dd").parse(mDateTime);
+                            date = new SimpleDateFormat("yyyy-MM-dd").parse(mDateTime);
                             date6 = sdf.format(date);
 
 
