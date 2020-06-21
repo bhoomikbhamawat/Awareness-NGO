@@ -207,8 +207,8 @@ public class Form extends AppCompatActivity {
                         Date date = null;
                         String date6 = "";
                         try {
-                            Locale hindi = new Locale("hi", "IN");
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", hindi);
+                           // Locale hindi = new Locale("hi", "IN");
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
 
                             date = new SimpleDateFormat("yyyy-MM-dd").parse(mDateTime);
                             date6 = sdf.format(date);

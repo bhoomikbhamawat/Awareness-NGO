@@ -4,17 +4,20 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +28,7 @@ import com.example.awareness.ui.CertificateActivity;
 import com.example.awareness.ui.Dashboard;
 import com.example.awareness.ui.Form;
 import com.example.awareness.ui.LoginActivity;
+import com.example.awareness.ui.PdfViewActivity;
 import com.example.awareness.ui.aboutactivity.AboutNgo;
 import com.example.awareness.ui.aboutactivity.Aboutus;
 import com.example.awareness.ui.aboutactivity.CreatorUs;
@@ -51,6 +55,7 @@ public class LearningActivity extends AppCompatActivity {
     public static List<Module> modules = new ArrayList<>();
     private LearningAdapter learningAdapter;
     private ProgressBar progressBar;
+    LinearLayout file,video;
     private MaterialCardView extraMaterialCardView;
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -141,11 +146,29 @@ public class LearningActivity extends AppCompatActivity {
 
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        file = findViewById(R.id.attached_file1);
+        video = findViewById(R.id.attached_lecture1);
         progressBar = findViewById(R.id.progress_circle);
         progressBar.setVisibility(View.VISIBLE);
         extraMaterialCardView = findViewById(R.id.extra_material);
         extraMaterialCardView.setVisibility(View.GONE);
+
+        file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LearningActivity.this, PdfViewActivity.class);
+                intent.putExtra("mode1", 7);
+                startActivity(intent);
+            }
+        });
+        video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(LearningActivity.this, Uri.parse(Objects.requireNonNull("https://www.youtube.com/watch?v=4b4MUYve_U8&t=2295s")));
+            }
+        });
 
         RecyclerView learningRecyclerView = findViewById(R.id.learning_recyclerview);
         View quizBottomSheet = getLayoutInflater().inflate(R.layout.test_layout, null, false);

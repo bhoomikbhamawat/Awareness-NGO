@@ -132,23 +132,7 @@
                 android:src="@drawable/jumio_logo" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="कोरोनोवायरस क्या है और इससे कैसे सुरक्षित रहें"
-            android:textColor="@color/black"
-            android:textSize="21dp"
-            android:textStyle="bold"></TextView>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_margin="4dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/covid_19"
-            ></ImageView>
+
 
     </LinearLayout>
 

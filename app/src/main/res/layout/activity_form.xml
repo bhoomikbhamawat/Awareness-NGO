@@ -363,6 +363,7 @@
                 android:id="@+id/event_date_time"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
+                android:focusable="false"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="8dp"
