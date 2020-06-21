@@ -217,7 +217,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(String response) {
                                             pdialog.dismiss();
-                                            if ((response.toString()).equals("Success")) {
+                                            if ((response).equals("Success")) {
                                                 ////here cloud firestore registration is reqiured
                                                 Snackbar.make(linearLayout, "सफलतापूर्वक किया गया", Snackbar.LENGTH_LONG).show();
 //                                                PersonDetails personDetails = new PersonDetails(

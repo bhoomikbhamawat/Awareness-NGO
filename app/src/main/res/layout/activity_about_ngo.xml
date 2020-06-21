@@ -16,8 +16,6 @@
             android:id="@+id/image"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:src="@drawable/jumio_logo" />
@@ -26,7 +24,6 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/club_profile_image"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:textAlignment="center"
@@ -37,7 +34,6 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/club_profile_name"
             android:layout_margin="8dp"
             app:cardCornerRadius="20dp">
 

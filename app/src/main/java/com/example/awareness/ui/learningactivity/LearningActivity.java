@@ -166,7 +166,7 @@ public class LearningActivity extends AppCompatActivity {
             public void onClick(View v) {
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                 CustomTabsIntent customTabsIntent = builder.build();
-                customTabsIntent.launchUrl(LearningActivity.this, Uri.parse(Objects.requireNonNull("https://www.youtube.com/watch?v=4b4MUYve_U8&t=2295s")));
+                customTabsIntent.launchUrl(LearningActivity.this, Uri.parse(Objects.requireNonNull("https://youtu.be/Yem1klJsG7s")));
             }
         });
 
