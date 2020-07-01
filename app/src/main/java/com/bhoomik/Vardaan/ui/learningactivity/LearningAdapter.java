@@ -1,4 +1,4 @@
-package com.example.awareness.ui.learningactivity;
+package com.bhoomik.Vardaan.ui.learningactivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,12 +22,12 @@ import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.awareness.Constants;
-import com.example.awareness.Module;
-import com.example.awareness.Question;
-import com.example.awareness.R;
-import com.example.awareness.ui.CertificateActivity;
-import com.example.awareness.ui.PdfViewActivity;
+import com.bhoomik.Vardaan.Constants;
+import com.bhoomik.Vardaan.Module;
+import com.bhoomik.Vardaan.Question;
+import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.ui.CertificateActivity;
+import com.bhoomik.Vardaan.ui.PdfViewActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -44,8 +44,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.example.awareness.Constants.User;
-import static com.example.awareness.ui.learningactivity.LearningActivity.modules;
+import static com.bhoomik.Vardaan.Constants.User;
+import static com.bhoomik.Vardaan.ui.learningactivity.LearningActivity.modules;
 
 public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.LearningViewHolder> {
 

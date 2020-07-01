@@ -1,10 +1,10 @@
-package com.example.awareness.ui;
+package com.bhoomik.Vardaan.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.awareness.R;
+import com.bhoomik.Vardaan.R;
 
 public class CertificateActivity extends AppCompatActivity {
 

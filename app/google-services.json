@@ -8,12 +8,94 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:688407449297:android:77809fa8f8449f32033ff0",
+        "mobilesdk_app_id": "1:688407449297:android:5e9403f6070cf994033ff0",
         "android_client_info": {
-          "package_name": "com.example.awareness"
+          "package_name": "com.bhoomik.Vardaan"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "688407449297-360tlcuhjscss5p5moebaao7uj8hgps4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bhoomik.Vardaan",
+            "certificate_hash": "f1d7092e727df356428fa0223fe71b5dd6251d03"
+          }
+        },
+        {
+          "client_id": "688407449297-3q8a46j1urcjarvkhfn04kc73js88765.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKcHhR_7vj686-hScK9A78wPPc5RRvsc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688407449297-3q8a46j1urcjarvkhfn04kc73js88765.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688407449297:android:4fa5006b4a106981033ff0",
+        "android_client_info": {
+          "package_name": "com.shrushti.Vardaan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688407449297-stumeq6bk0pim2hl8st86kduckdon90f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shrushti.Vardaan",
+            "certificate_hash": "f1d7092e727df356428fa0223fe71b5dd6251d03"
+          }
+        },
+        {
+          "client_id": "688407449297-3q8a46j1urcjarvkhfn04kc73js88765.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKcHhR_7vj686-hScK9A78wPPc5RRvsc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688407449297-3q8a46j1urcjarvkhfn04kc73js88765.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688407449297:android:06760b213a0b6535033ff0",
+        "android_client_info": {
+          "package_name": "com.social.Vardaan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688407449297-2k79f9euqqbn0c2e5lb508ogo4lvl3vq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.social.Vardaan",
+            "certificate_hash": "f1d7092e727df356428fa0223fe71b5dd6251d03"
+          }
+        },
         {
           "client_id": "688407449297-3q8a46j1urcjarvkhfn04kc73js88765.apps.googleusercontent.com",
           "client_type": 3

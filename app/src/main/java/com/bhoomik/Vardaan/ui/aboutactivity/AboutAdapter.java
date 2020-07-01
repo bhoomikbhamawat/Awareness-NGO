@@ -1,4 +1,4 @@
-package com.example.awareness.ui.aboutactivity;
+package com.bhoomik.Vardaan.ui.aboutactivity;
 
 import android.view.ViewGroup;
 

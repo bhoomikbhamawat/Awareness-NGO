@@ -1,4 +1,4 @@
-package com.example.awareness.ui;
+package com.bhoomik.Vardaan.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -6,20 +6,16 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
-import com.example.awareness.Constants;
-import com.example.awareness.Constants.User;
-import com.example.awareness.R;
-import com.example.awareness.ui.learningactivity.LearningActivity;
+import com.bhoomik.Vardaan.Constants;
+import com.bhoomik.Vardaan.Constants.User;
+import com.bhoomik.Vardaan.R;
 
 public class MainActivity extends AppCompatActivity {
 

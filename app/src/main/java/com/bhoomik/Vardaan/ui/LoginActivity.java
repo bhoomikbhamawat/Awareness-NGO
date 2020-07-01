@@ -1,4 +1,4 @@
-package com.example.awareness.ui;
+package com.bhoomik.Vardaan.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,10 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.awareness.Constants;
-import com.example.awareness.Constants.User;
-import com.example.awareness.R;
-import com.example.awareness.ui.learningactivity.LearningActivity;
+import com.bhoomik.Vardaan.Constants;
+import com.bhoomik.Vardaan.Constants.User;
+import com.bhoomik.Vardaan.R;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

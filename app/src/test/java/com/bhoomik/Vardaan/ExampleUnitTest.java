@@ -1,4 +1,4 @@
-package com.example.awareness;
+package com.bhoomik.Vardaan;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.awareness.ui.aboutactivity;
+package com.bhoomik.Vardaan.ui.aboutactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.awareness.Constants.Organisation;
-import com.example.awareness.R;
+import com.bhoomik.Vardaan.Constants.Organisation;
+import com.bhoomik.Vardaan.R;
 
 public class AboutNgo extends AppCompatActivity {
 

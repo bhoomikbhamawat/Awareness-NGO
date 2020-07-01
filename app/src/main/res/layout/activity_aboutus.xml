@@ -208,7 +208,7 @@
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="8dp"
-                android:text=" © Mayken | 2020"
+                android:text=" © MINDBY | 2020"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>

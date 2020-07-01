@@ -1,4 +1,4 @@
-package com.example.awareness.ui.aboutactivity;
+package com.bhoomik.Vardaan.ui.aboutactivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.awareness.AboutIndividual;
-import com.example.awareness.R;
+import com.bhoomik.Vardaan.AboutIndividual;
+import com.bhoomik.Vardaan.R;
 
 import java.util.List;
 

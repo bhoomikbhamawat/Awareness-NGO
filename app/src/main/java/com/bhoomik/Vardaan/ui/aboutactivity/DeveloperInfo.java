@@ -1,4 +1,4 @@
-package com.example.awareness.ui.aboutactivity;
+package com.bhoomik.Vardaan.ui.aboutactivity;
 
 import android.animation.Animator;
 import android.graphics.Rect;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.awareness.R;
+import com.bhoomik.Vardaan.R;
 
 public class DeveloperInfo extends AppCompatActivity {
     private Animator mCurrentAnimator;

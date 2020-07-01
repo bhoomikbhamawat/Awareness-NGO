@@ -1,30 +1,22 @@
-package com.example.awareness.ui;
+package com.bhoomik.Vardaan.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,9 +28,9 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.awareness.Constants;
-import com.example.awareness.R;
-import com.example.awareness.ui.learningactivity.LearningActivity;
+import com.bhoomik.Vardaan.Constants;
+import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.ui.learningactivity.LearningActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -46,16 +38,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.awareness.Constants.Register.Register_Url;
-import static com.example.awareness.Constants.User;
+import static com.bhoomik.Vardaan.Constants.Register.Register_Url;
+import static com.bhoomik.Vardaan.Constants.User;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText RegName, RegGaav, RegMobile, RegRajasav, RegAge, RegFaala, RegGramPanch, RegCity, RegSamiti;

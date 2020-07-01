@@ -1,4 +1,4 @@
-package com.example.awareness.ui.aboutactivity;
+package com.bhoomik.Vardaan.ui.aboutactivity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.awareness.Constants.Organisation;
-import com.example.awareness.R;
+import com.bhoomik.Vardaan.Constants.Organisation;
+import com.bhoomik.Vardaan.R;
 
 public class Aboutus extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class Aboutus extends AppCompatActivity {
     }
 
     public void contactUs(View view) {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + "bhoomikbhamawat.eee18@iitbhu.ac.in"));
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + "mindbydev@gmail.com"));
         startActivity(Intent.createChooser(emailIntent, "email"));
 
     } public void rateus(View view) {

@@ -1,4 +1,4 @@
-package com.example.awareness.ui;
+package com.bhoomik.Vardaan.ui.learningactivity;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,46 +10,62 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.awareness.Constants;
-import com.example.awareness.Module;
-import com.example.awareness.R;
-import com.example.awareness.ui.aboutactivity.AboutNgo;
-import com.example.awareness.ui.aboutactivity.Aboutus;
-import com.example.awareness.ui.aboutactivity.CreatorUs;
-import com.example.awareness.ui.learningactivity.LearningActivity;
+import com.bhoomik.Vardaan.Constants;
+import com.bhoomik.Vardaan.Module;
+import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.ui.CertificateActivity;
+import com.bhoomik.Vardaan.ui.Dashboard;
+import com.bhoomik.Vardaan.ui.Form;
+import com.bhoomik.Vardaan.ui.LoginActivity;
+import com.bhoomik.Vardaan.ui.aboutactivity.AboutNgo;
+import com.bhoomik.Vardaan.ui.aboutactivity.Aboutus;
+import com.bhoomik.Vardaan.ui.aboutactivity.CreatorUs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.example.awareness.Constants.User;
-import static com.example.awareness.ui.learningactivity.LearningActivity.modules;
+import static com.bhoomik.Vardaan.Constants.User;
 
-public class Dashboard extends AppCompatActivity {
+public class LearningActivity extends AppCompatActivity {
+
+    public static List<Module> modules = new ArrayList<>();
+    private LearningAdapter learningAdapter;
+    private ProgressBar progressBar;
+
+    private MaterialCardView extraMaterialCardView;
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     SharedPreferences preferences;
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     public void certificate(MenuItem item) {
+        startActivity(new Intent(this, CertificateActivity.class));
     }
 
     public void FormStudents(MenuItem item) {
@@ -68,13 +84,13 @@ public class Dashboard extends AppCompatActivity {
         Intent intent = new Intent(this, Aboutus.class);
         startActivity(intent);
     }
+    public void creator(MenuItem item) {
+        Intent intent = new Intent(this, CreatorUs.class);
+        startActivity(intent);
+    }
     public void aboutngo(MenuItem item) {
         Intent intent = new Intent(this, AboutNgo.class);
         intent.putExtra(Constants.Organisation.ORGANISATION_NAME, Constants.Organisation.JUMIO);
-        startActivity(intent);
-    }
-    public void creator(MenuItem item) {
-        Intent intent = new Intent(this, CreatorUs.class);
         startActivity(intent);
     }
 
@@ -93,17 +109,15 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (entryName.getText().toString().equals(Constants.name_all)) {
-//                    preferences.getAll().clear();
+                    preferences.getAll().clear();
                     SharedPreferences preferences =getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.clear();
                     editor.apply();
-                    startActivity(new Intent(Dashboard.this, LoginActivity.class));
-                    finish();
-                    startActivity(new Intent(Dashboard.this, LoginActivity.class));
+                    startActivity(new Intent(LearningActivity.this, LoginActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(Dashboard.this, "गलत नाम डाला जा रहा है", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LearningActivity.this, "गलत नाम डाला जा रहा है", Toast.LENGTH_SHORT).show();
                     entryName.getText().clear();
                 }
             }
@@ -117,39 +131,38 @@ public class Dashboard extends AppCompatActivity {
             }
         });
         logoutDialog.show();
+
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_learning);
 
-        TextView welcomeText = findViewById(R.id.welcome);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        findViewById(R.id.shrushti_image).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this, AboutNgo.class);
-                intent.putExtra(Constants.Organisation.ORGANISATION_NAME, Constants.Organisation.SHRUSHTI);
-                startActivity(intent);
-            }
-        });
+        progressBar = findViewById(R.id.progress_circle);
+        progressBar.setVisibility(View.VISIBLE);
+        extraMaterialCardView = findViewById(R.id.extra_material);
+        extraMaterialCardView.setVisibility(View.GONE);
 
-        findViewById(R.id.jumio_image).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this, AboutNgo.class);
-                intent.putExtra(Constants.Organisation.ORGANISATION_NAME, Constants.Organisation.JUMIO);
-                startActivity(intent);
-            }
-        });
+        RecyclerView learningRecyclerView = findViewById(R.id.learning_recyclerview);
+        View quizBottomSheet = getLayoutInflater().inflate(R.layout.test_layout, null, false);
+        BottomSheetDialog quizBottomSheetDialog = new BottomSheetDialog(this);
+        quizBottomSheetDialog.setContentView(quizBottomSheet);
 
-        SharedPreferences preferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
-        String name = preferences.getString(User.USER_NAME, null);
 
-        if (name != null) {
-            welcomeText.setText("स्वागत है " + name);
+        learningRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        learningAdapter = new LearningAdapter(this, modules, quizBottomSheet, quizBottomSheetDialog);
+        learningRecyclerView.setAdapter(learningAdapter);
+        if (modules.size() > 0) {
+            progressBar.setVisibility(View.GONE);
+            extraMaterialCardView.setVisibility(View.VISIBLE);
         }
+
+        preferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
 
         String userId = preferences.getString(User.USER_CONTACT_NUMBER, null);
         if (userId != null) {
@@ -187,7 +200,14 @@ public class Dashboard extends AppCompatActivity {
 
                             modules.add(new Module(Integer.parseInt(document.getId()), document.getString("Topic"), attachments));
                         }
-                        Collections.sort(modules, new SortbyModuleNumber());
+                        Collections.sort(modules, new LearningActivity.SortbyModuleNumber());
+                        try {
+                            learningAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            extraMaterialCardView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                     } else {
                         Log.e("TAGG", "Error getting modules", task.getException());
@@ -206,26 +226,19 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onBackPressed() {
         // disable going back to the MainActivity
-        moveTaskToBack(true);
-    }
-
-    public void learningSection(View view) {
-        startActivity(new Intent(this, LearningActivity.class));
-    }
-
-    public void Formstudents(View view) {
-        Intent intent = new Intent(this, Form.class);
-        intent.putExtra("mode", Constants.Forms.FORM_STUDENTS);
+        Intent intent = new Intent(LearningActivity.this, Dashboard.class);
         startActivity(intent);
     }
 
-    public void FormKit(View view) {
-        Intent intent = new Intent(this, Form.class);
-        intent.putExtra("mode", Constants.Forms.FORM_KIT);
+    @Override
+    public boolean onSupportNavigateUp() {
+        // disable going back to the MainActivity
+        Intent intent = new Intent(LearningActivity.this, Dashboard.class);
         startActivity(intent);
+        return true;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.awareness;
+package com.bhoomik.Vardaan;
 
 public class Constants {
     public static final String MY_PREFERENCE = "myPref";

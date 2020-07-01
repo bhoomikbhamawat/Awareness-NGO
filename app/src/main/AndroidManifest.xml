@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.1" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.awareness">
+    package="com.bhoomik.Vardaan">
 
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -19,18 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".ui.aboutactivity.DeveloperInfo"></activity>
-        <activity android:name=".ui.aboutactivity.CreatorUs" />
-        <activity android:name=".ui.aboutactivity.Aboutus" />
-        <activity android:name=".ui.aboutactivity.AboutNgo" />
-        <activity android:name=".ui.PdfViewActivity" />
-        <activity android:name=".ui.CertificateActivity" />
-        <activity android:name=".ui.Form" />
-        <activity android:name=".ui.learningactivity.LearningActivity" />
-        <activity android:name=".ui.Dashboard" />
-        <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name="com.bhoomik.Vardaan.ui.aboutactivity.DeveloperInfo"></activity>
+        <activity android:name="com.bhoomik.Vardaan.ui.aboutactivity.CreatorUs" />
+        <activity android:name="com.bhoomik.Vardaan.ui.aboutactivity.Aboutus" />
+        <activity android:name="com.bhoomik.Vardaan.ui.aboutactivity.AboutNgo" />
+        <activity android:name="com.bhoomik.Vardaan.ui.PdfViewActivity" />
+        <activity android:name="com.bhoomik.Vardaan.ui.CertificateActivity" />
+        <activity android:name="com.bhoomik.Vardaan.ui.Form" />
+        <activity android:name="com.bhoomik.Vardaan.ui.learningactivity.LearningActivity" />
+        <activity android:name="com.bhoomik.Vardaan.ui.Dashboard" />
+        <activity android:name="com.bhoomik.Vardaan.ui.LoginActivity" />
+        <activity android:name="com.bhoomik.Vardaan.ui.RegisterActivity" />
+        <activity android:name="com.bhoomik.Vardaan.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
