@@ -16,13 +16,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bhoomik.Vardaan.Constants;
-import com.bhoomik.Vardaan.Module;
 import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.model.Module;
 import com.bhoomik.Vardaan.ui.aboutactivity.AboutNgo;
 import com.bhoomik.Vardaan.ui.aboutactivity.Aboutus;
 import com.bhoomik.Vardaan.ui.aboutactivity.CreatorUs;
+import com.bhoomik.Vardaan.ui.language.QuizLanguage;
 import com.bhoomik.Vardaan.ui.learningactivity.LearningActivity;
+import com.bhoomik.Vardaan.utils.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,8 +36,8 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.bhoomik.Vardaan.Constants.User;
 import static com.bhoomik.Vardaan.ui.learningactivity.LearningActivity.modules;
+import static com.bhoomik.Vardaan.utils.Constants.User;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -45,7 +46,7 @@ public class Dashboard extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -68,11 +69,13 @@ public class Dashboard extends AppCompatActivity {
         Intent intent = new Intent(this, Aboutus.class);
         startActivity(intent);
     }
+
     public void aboutngo(MenuItem item) {
         Intent intent = new Intent(this, AboutNgo.class);
         intent.putExtra(Constants.Organisation.ORGANISATION_NAME, Constants.Organisation.JUMIO);
         startActivity(intent);
     }
+
     public void creator(MenuItem item) {
         Intent intent = new Intent(this, CreatorUs.class);
         startActivity(intent);
@@ -94,7 +97,7 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 if (entryName.getText().toString().equals(Constants.name_all)) {
 //                    preferences.getAll().clear();
-                    SharedPreferences preferences =getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences preferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.clear();
                     editor.apply();
@@ -117,6 +120,10 @@ public class Dashboard extends AppCompatActivity {
             }
         });
         logoutDialog.show();
+    }
+
+    public void translate(MenuItem item) {
+        startActivity(new Intent(this, QuizLanguage.class));
     }
 
     @Override
@@ -150,7 +157,19 @@ public class Dashboard extends AppCompatActivity {
 
         if (name != null) {
             welcomeText.setText("स्वागत है " + name);
+
+            if (name.equals(Constants.GUEST_USER_NAME)) {
+                SharedPreferences guestPreferences = getSharedPreferences(Constants.GUEST_USER_NAME, MODE_PRIVATE);
+
+                User.accessModule = guestPreferences.getInt(User.ACCESS_MODULE, 1);
+                User.accessQuestion = guestPreferences.getInt(User.ACCESS_QUESTION, 1);
+                User.progressLecture = guestPreferences.getBoolean(User.PROGRESS_LECTURE, false);
+                User.progressLink = guestPreferences.getBoolean(User.PROGRESS_LINK, false);
+                User.progressPdf = guestPreferences.getBoolean(User.PROGRESS_PDF, false);
+
+            }
         }
+
 
         String userId = preferences.getString(User.USER_CONTACT_NUMBER, null);
         if (userId != null) {
@@ -178,26 +197,29 @@ public class Dashboard extends AppCompatActivity {
                         }
                     });
 
-            firestore.collection("modules").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        modules.clear();
-                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            Map<String, Object> attachments = document.getData();
 
-                            modules.add(new Module(Integer.parseInt(document.getId()), document.getString("Topic"), attachments));
-                        }
-                        Collections.sort(modules, new SortbyModuleNumber());
-
-                    } else {
-                        Log.e("TAGG", "Error getting modules", task.getException());
-                    }
-                }
-            });
         }
 
+        firestore.collection("modules").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    modules.clear();
+                    for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                        Map<String, Object> attachments = document.getData();
+
+                        modules.add(new Module(Integer.parseInt(document.getId()), document.getString("Topic"), attachments));
+                    }
+                    Collections.sort(modules, new SortbyModuleNumber());
+
+                } else {
+                    Log.e("TAGG", "Error getting modules", task.getException());
+                }
+            }
+        });
+
     }
+
 
     static class SortbyModuleNumber implements Comparator<Module> {
 

@@ -14,9 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bhoomik.Vardaan.Constants;
-import com.bhoomik.Vardaan.Constants.User;
 import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.utils.Constants;
+import com.bhoomik.Vardaan.utils.Constants.User;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText nameText;
     EditText phoneText;
     Button loginButton;
-    TextView signupLink;
+    TextView signupLink, guestUser;
 
     SharedPreferences sharedPreferences;
 
@@ -43,12 +43,20 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton = findViewById(R.id.btn_login);
         signupLink = findViewById(R.id.text_signup);
+        guestUser = findViewById(R.id.guest);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+
+        guestUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guestUser();
             }
         });
 
@@ -61,6 +69,29 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    private void guestUser() {
+
+        String name = Constants.GUEST_USER_NAME;
+        sharedPreferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(User.USER_NAME, name);
+        editor.apply();
+        Constants.name_all = name;
+
+        SharedPreferences guestPreferences = getSharedPreferences(Constants.GUEST_USER_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor progressEditor = guestPreferences.edit();
+
+        progressEditor.putInt(User.ACCESS_MODULE, 1);
+        progressEditor.putInt(User.ACCESS_QUESTION, 1);
+        progressEditor.putBoolean(User.PROGRESS_LECTURE, false);
+        progressEditor.putBoolean(User.PROGRESS_LINK, true);
+        progressEditor.putBoolean(User.PROGRESS_PDF, false);
+        progressEditor.apply();
+
+        onLoginSuccess();
 
     }
 
@@ -107,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                                         editor.putString(User.USER_NAME, name);
                                         editor.putString(User.USER_CONTACT_NUMBER, phone);
                                         editor.apply();
-                                        Constants.name_all=name;
+                                        Constants.name_all = name;
                                         progressDialog.dismiss();
                                         onLoginSuccess();
                                     } else {
@@ -182,7 +213,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setEnabled(true);
 
 
-        Intent i = new Intent(LoginActivity.this,Dashboard.class);
+        Intent i = new Intent(LoginActivity.this, Dashboard.class);
 //            i.putExtra("EXTRA", "notopenFragment");
         startActivity(i);
         finish();

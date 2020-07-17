@@ -1,5 +1,6 @@
 package com.bhoomik.Vardaan.ui.learningactivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,12 +23,13 @@ import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bhoomik.Vardaan.Constants;
-import com.bhoomik.Vardaan.Module;
-import com.bhoomik.Vardaan.Question;
 import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.model.Module;
+import com.bhoomik.Vardaan.model.Question;
 import com.bhoomik.Vardaan.ui.CertificateActivity;
 import com.bhoomik.Vardaan.ui.PdfViewActivity;
+import com.bhoomik.Vardaan.utils.Constants;
+import com.bhoomik.Vardaan.utils.TranslateUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -35,6 +37,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.mlkit.nl.translate.TranslateLanguage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,8 +47,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.bhoomik.Vardaan.Constants.User;
+import static android.content.Context.MODE_PRIVATE;
 import static com.bhoomik.Vardaan.ui.learningactivity.LearningActivity.modules;
+import static com.bhoomik.Vardaan.utils.Constants.User;
 
 public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.LearningViewHolder> {
 
@@ -55,12 +59,16 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
     private View quizBottomSheet;
     private List<Question> questions = new ArrayList<>();
     private boolean showGuideline;
+    final SharedPreferences sharedPreferences;
+    String languagePreference;
 
     public LearningAdapter(Context context, List<Module> modules, View quizBottomSheet, BottomSheetDialog quizBottomSheetDialog) {
         this.mContext = context;
         this.mModules = modules;
         this.quizBottomSheet = quizBottomSheet;
         this.quizBottomSheetDialog = quizBottomSheetDialog;
+        sharedPreferences = mContext.getSharedPreferences(Constants.MY_PREFERENCE, MODE_PRIVATE);
+        languagePreference = sharedPreferences.getString(Constants.QUIZ_LANGUAGE_PREFERENCE, TranslateLanguage.HINDI);
     }
 
 
@@ -82,7 +90,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
     @Override
     public void onBindViewHolder(@NonNull final LearningViewHolder holder, final int position) {
         final int MODULE_NUMBER = mModules.get(position).getModuleNumber();
-        SharedPreferences preferences = mContext.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = mContext.getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
         final String userId = preferences.getString(User.USER_CONTACT_NUMBER, null);
 
         if (MODULE_NUMBER <= Constants.User.accessModule) {
@@ -125,7 +133,14 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
         }
 
         holder.moduleNumber.setText("Module: " + MODULE_NUMBER);
-        holder.topicName.setText(mModules.get(position).getTopic());
+        final ProgressDialog progressDialog = new ProgressDialog(mContext);
+
+        TranslateUtils.setTranslatedText(progressDialog, TranslateLanguage.HINDI, languagePreference, holder.topicName, null, mModules.get(position).getTopic());
+        TranslateUtils.setTranslatedText(progressDialog, TranslateLanguage.HINDI, languagePreference, holder.attachedFileText, null, "प्रशिक्षण लेख");
+        TranslateUtils.setTranslatedText(progressDialog, TranslateLanguage.HINDI, languagePreference, holder.attachedLectureText, null, "प्रशिक्षण वीडियो");
+
+
+//        holder.topicName.setText(mModules.get(position).getTopic());
         holder.attachedLecture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -391,6 +406,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
     }
 
     private void setQuestion(int questionPosition) {
+
         if (questionPosition == 0) {
             previous.setVisibility(View.INVISIBLE);
         } else {
@@ -404,20 +420,24 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
         questionNumber.setText(questions.get(questionPosition).getQuestionNumber() + "/" + questions.size());
         radioGroup.clearCheck();
 
-        question.setText(questions.get(questionPosition).getQuestion());
-        option1.setText(questions.get(questionPosition).getOption1());
+        final ProgressDialog progressDialog = new ProgressDialog(mContext);
+
+
+        TranslateUtils.setTranslatedText(progressDialog, TranslateLanguage.HINDI, languagePreference, question, null, questions.get(questionPosition).getQuestion());
+        TranslateUtils.setTranslatedText(progressDialog, TranslateLanguage.HINDI, languagePreference, null, option1, questions.get(questionPosition).getOption1());
         option1.setBackgroundColor(Color.TRANSPARENT);
-        option2.setText(questions.get(questionPosition).getOption2());
+        TranslateUtils.setTranslatedText(progressDialog, TranslateLanguage.HINDI, languagePreference, null, option2, questions.get(questionPosition).getOption2());
         option2.setBackgroundColor(Color.TRANSPARENT);
-        option3.setText(questions.get(questionPosition).getOption3());
+        TranslateUtils.setTranslatedText(progressDialog, TranslateLanguage.HINDI, languagePreference, null, option3, questions.get(questionPosition).getOption3());
         option3.setBackgroundColor(Color.TRANSPARENT);
-        option4.setText(questions.get(questionPosition).getOption4());
+        TranslateUtils.setTranslatedText(progressDialog, TranslateLanguage.HINDI, languagePreference, null, option4, questions.get(questionPosition).getOption4());
         option4.setBackgroundColor(Color.TRANSPARENT);
     }
 
     private void updateProgress(Context context) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        SharedPreferences preferences = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
+        String name = preferences.getString(User.USER_NAME, null);
         String userId = preferences.getString(User.USER_CONTACT_NUMBER, null);
         Map<String, Object> newProgress = new HashMap<>();
         newProgress.put(User.ACCESS_MODULE, User.accessModule);
@@ -428,6 +448,18 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
 
         if (userId != null) {
             firestore.collection("users").document(userId).update(newProgress);
+        }
+
+        if (name != null && name.equals(Constants.GUEST_USER_NAME)) {
+            SharedPreferences guestPreferences = context.getSharedPreferences(Constants.GUEST_USER_NAME, MODE_PRIVATE);
+            SharedPreferences.Editor progressEditor = guestPreferences.edit();
+
+            progressEditor.putInt(User.ACCESS_MODULE, User.accessModule);
+            progressEditor.putInt(User.ACCESS_QUESTION, User.accessQuestion);
+            progressEditor.putBoolean(User.PROGRESS_LECTURE, User.progressLecture);
+            progressEditor.putBoolean(User.PROGRESS_LINK, User.progressLink);
+            progressEditor.putBoolean(User.PROGRESS_PDF, User.progressPdf);
+            progressEditor.apply();
         }
     }
 
@@ -454,7 +486,7 @@ public class LearningAdapter extends RecyclerView.Adapter<LearningAdapter.Learni
         }
     }
 
-    class SortbyQuestionNumber implements Comparator<Question> {
+    static class SortbyQuestionNumber implements Comparator<Question> {
         @Override
         public int compare(Question a, Question b) {
             return a.getQuestionNumber() - b.getQuestionNumber();

@@ -46,8 +46,8 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bhoomik.Vardaan.Constants;
 import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.utils.Constants;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -64,7 +64,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.bhoomik.Vardaan.Constants.Forms;
+import static com.bhoomik.Vardaan.utils.Constants.Forms;
 
 public class Form extends AppCompatActivity {
 

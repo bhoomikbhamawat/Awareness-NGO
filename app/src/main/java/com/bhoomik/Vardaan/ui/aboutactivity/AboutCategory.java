@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bhoomik.Vardaan.AboutIndividual;
 import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.model.AboutIndividual;
 
 import java.util.List;
 

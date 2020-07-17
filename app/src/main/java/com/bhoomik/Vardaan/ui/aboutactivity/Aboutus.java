@@ -8,8 +8,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bhoomik.Vardaan.Constants.Organisation;
 import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.utils.Constants.Organisation;
 
 public class Aboutus extends AppCompatActivity {
 

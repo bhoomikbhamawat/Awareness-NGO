@@ -28,9 +28,9 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bhoomik.Vardaan.Constants;
 import com.bhoomik.Vardaan.R;
 import com.bhoomik.Vardaan.ui.learningactivity.LearningActivity;
+import com.bhoomik.Vardaan.utils.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,8 +44,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.bhoomik.Vardaan.Constants.Register.Register_Url;
-import static com.bhoomik.Vardaan.Constants.User;
+import static com.bhoomik.Vardaan.utils.Constants.Register.Register_Url;
+import static com.bhoomik.Vardaan.utils.Constants.User;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText RegName, RegGaav, RegMobile, RegRajasav, RegAge, RegFaala, RegGramPanch, RegCity, RegSamiti;

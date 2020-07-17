@@ -1,4 +1,4 @@
-package com.bhoomik.Vardaan;
+package com.bhoomik.Vardaan.model;
 
 import androidx.annotation.Nullable;
 

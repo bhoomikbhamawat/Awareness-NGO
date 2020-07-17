@@ -1,8 +1,5 @@
 package com.bhoomik.Vardaan.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,9 +10,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
-import com.bhoomik.Vardaan.Constants;
-import com.bhoomik.Vardaan.Constants.User;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.bhoomik.Vardaan.R;
+import com.bhoomik.Vardaan.utils.Constants;
+import com.bhoomik.Vardaan.utils.Constants.User;
 
 public class MainActivity extends AppCompatActivity {
 

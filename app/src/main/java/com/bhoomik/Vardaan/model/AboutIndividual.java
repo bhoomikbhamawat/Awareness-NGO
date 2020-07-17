@@ -1,4 +1,4 @@
-package com.bhoomik.Vardaan;
+package com.bhoomik.Vardaan.model;
 
 public class AboutIndividual {
     private String id;

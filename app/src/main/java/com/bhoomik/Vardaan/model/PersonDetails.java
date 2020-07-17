@@ -1,4 +1,4 @@
-package com.bhoomik.Vardaan;
+package com.bhoomik.Vardaan.model;
 
 /**
  * Created by Shreyash on 26-03-2018.

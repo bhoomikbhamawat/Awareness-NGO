@@ -44,6 +44,7 @@
                 android:padding="4dp">
 
                 <TextView
+                    android:id="@+id/extra_information"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

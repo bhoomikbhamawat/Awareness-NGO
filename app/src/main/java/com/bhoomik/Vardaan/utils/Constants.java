@@ -1,4 +1,4 @@
-package com.bhoomik.Vardaan;
+package com.bhoomik.Vardaan.utils;
 
 public class Constants {
     public static final String MY_PREFERENCE = "myPref";
@@ -8,9 +8,12 @@ public class Constants {
     public static final String isactive = "isactiveKey";
     public static final String PREF_NAME = "LoggedInPref";
     public static String name_all = "nameKey";
+    public static final String QUIZ_LANGUAGE_PREFERENCE = "quizLanguagePreference";
+    public static final String GUEST_USER_NAME = "Guest user";
+    public static final String GUEST_USER_PREF = "guestUSerPref";
 
 
-    public static class Register{
+    public static class Register {
 
         public static String Register_Url = "https://script.google.com/macros/s/AKfycbyplmgmCGEXvd7rs8jVnJozsOHRRrmXQyR4RApGI_pz5ysRH_oV/exec";
         public static final String ADD_USER_URL = Register_Url;
@@ -77,4 +80,5 @@ public class Constants {
         public static final int SHRUSHTI = 0;
         public static final int JUMIO = 1;
     }
+
 }
