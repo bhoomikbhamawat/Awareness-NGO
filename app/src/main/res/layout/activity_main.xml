@@ -23,5 +23,6 @@
         android:textAllCaps="true"
         android:gravity="center_horizontal"
         android:textStyle="bold"
-        android:text="Loading..."/>
+        android:text="Loading...">
+    </TextView>
 </LinearLayout>
